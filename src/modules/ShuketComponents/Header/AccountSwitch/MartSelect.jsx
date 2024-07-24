@@ -3,13 +3,15 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useDispatch, useSelector } from "react-redux";
-import { getListAccountSwitch, switchAccount } from "../../store/auth/thunk";
+import { getListAccountSwitch, switchAccount } from "../../../store/auth/thunk";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 export default function AccountSelect() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const { user, token, isAuthenticated } = useSelector((state) => state.auth);
+  const isChange = jwtDecode(user.token)?.is_change;
   const [accounts, setAccounts] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
@@ -26,15 +28,15 @@ export default function AccountSelect() {
 
   //reset selectBox when reset account
   useEffect(()=>{
-    if(!user?.martid){
+    if(isChange != 1){
       setInputValue('')
     }
-  },[user?.martid])
+  },[isChange])
 
   const handleSwitchAccount = async (code, name) =>{
      setInputValue(name)
      await dispatch(switchAccount(code)).then(()=>{
-        // navigate(0)
+        navigate('/app-management/app-builder')
      })
   }
 

@@ -9,7 +9,7 @@ import IntlMessages from "@crema/helpers/IntlMessages";
 import { LayoutType } from "@crema/constants/AppEnums";
 import { useLayoutContext } from "@crema/context/AppContextProvider/LayoutContextProvider";
 import AppScrollbar from "../AppScrollbar";
-import { orange } from "@mui/material/colors";
+import { green } from "@mui/material/colors";
 import ThemeColors from "./ThemeColors";
 import ThemeFooter from "./ThemeFooter";
 import ThemeModes from "./ThemeModes";
@@ -37,9 +37,9 @@ const AppThemeSetting = () => {
         sx={{
           borderRadius: "30px 0 0 30px",
           mb: 1,
-          backgroundColor: orange[500],
+          backgroundColor: green[500],
           "&:hover": {
-            backgroundColor: orange[700],
+            backgroundColor: green[700],
           },
           "& button": {
             borderRadius: "30px 0 0 30px",
@@ -62,9 +62,9 @@ const AppThemeSetting = () => {
       <Box
         sx={{
           borderRadius: "30px 0 0 30px",
-          backgroundColor: orange[500],
+          backgroundColor: green[500],
           "&:hover": {
-            backgroundColor: orange[700],
+            backgroundColor: green[700],
           },
           "& button": {
             borderRadius: "30px 0 0 30px",

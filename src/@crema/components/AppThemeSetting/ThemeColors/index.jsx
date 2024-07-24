@@ -16,6 +16,7 @@ const ThemeColors = () => {
   const { updateTheme, updateThemeMode } = useThemeActionsContext();
 
   const updateThemeColors = (colorSet) => {
+    console.log(colorSet)
     theme.palette.primary.main = colorSet.primary.main;
     theme.palette.secondary.main = colorSet.secondary.main;
     theme.palette.background = colorSet.background;

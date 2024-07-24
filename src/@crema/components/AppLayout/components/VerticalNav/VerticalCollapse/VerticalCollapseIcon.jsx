@@ -19,7 +19,7 @@ const VerticalCollapseIcon = ({item}) => {
         : item.messageId == "Notice" ? <FaRegBell/> 
         : item.messageId == "Catalogs" ? <PiImageSquareBold/>
         : item.messageId == "Manage_Order" ? <RiBillLine/>
-         :<RiDashboardLine />}
+        : item.icon}
       </Icon>
     </Box>
   );

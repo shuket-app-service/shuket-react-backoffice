@@ -3,8 +3,8 @@ import { Highlight, themes } from "prism-react-renderer";
 import PropTypes from "prop-types";
 import Collapse from "@mui/material/Collapse";
 import Box from "@mui/material/Box";
-import AppScrollbar from "../../../@crema/components/AppScrollbar";
-import AppAnimate from "../../../@crema/components/AppAnimate";
+import AppScrollbar from "../../../../@crema/components/AppScrollbar";
+import AppAnimate from "../../../../@crema/components/AppAnimate";
 
 const AccountComponentCard = ({
   title,

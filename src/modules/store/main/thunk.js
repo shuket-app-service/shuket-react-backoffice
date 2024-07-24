@@ -2,47 +2,26 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import apiAuth from "../../../@crema/services/axios/ApiConfig";
 import routesConfig from "../../../@crema/core/AppRoutes/routeConfig";
+import { remakeMenuLevel1 } from "../helper";
 
 const LEFT_MEMU_BAR = "/main/get_left_menu_bar";
+const GET_CITY_OPTIONS = "/main/get_city_options";
+const GET_DISTRICT_OPTIONS = "/main/get_district_options?ct_code="
+const GET_SALES_TEAM_OPTION = "/main/get_partner_sales_team_options?sp_code="
 
-const remakeMenuLevel1 = (object) =>{
-  return {
-    id: object.group_code,
-    title: object.group_names.kr,
-    messageId: "" + object.group_names.en.replaceAll(" ","_"),
-    type: "group",
-    children: object.hasOwnProperty('group_items') ?  object.group_items.map((menu) => {
-      return remakeMenuLevel2(menu)
-    }) : []
-  };
-}
 
-const remakeMenuLevel2 = (object) =>{
-  return {
-    id: object.code,
-    title: object.name.kr,
-    messageId: "" + object.name.en.replaceAll(" ","_"),
-    permittedRole: object.hasOwnProperty('sub_items') ? [] : ['admin','user'],
-    type: object.hasOwnProperty('sub_items') ? "collapse" : "item",
-    permittedRole:['admin','user'],
-    icon: null,
-    url: object.hasOwnProperty('sub_items') ? "" : object.route,
-    children: object.hasOwnProperty('sub_items') ? object.sub_items.map((menu) => {
-      return remakeMenuLevel3(menu)
-    }) : []
-  };
-}
 
-const remakeMenuLevel3 = (object) =>{
-  return {
-    id: object.code,
-    title: object.name.kr,
-    messageId: "" + object.name.en.replaceAll(" ","_"),
-    type: "item",
-    permittedRole:['admin','user'],
-    url:  object.route,
-  };
-}
+export const getSalesTeamOption = createAsyncThunk(
+  GET_SALES_TEAM_OPTION,
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await apiAuth.get(GET_SALES_TEAM_OPTION + data);
+      return response.data.data.list_sales_team;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
 
 
 export const getLeftMenuBar = createAsyncThunk(
@@ -62,3 +41,28 @@ export const getLeftMenuBar = createAsyncThunk(
 );
 
 
+export const getCityOptions = createAsyncThunk(
+  GET_CITY_OPTIONS,
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await apiAuth.get(GET_CITY_OPTIONS);
+      return response.data.data.list_cities;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+
+
+export const getDistrictOptions = createAsyncThunk(
+  GET_DISTRICT_OPTIONS,
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await apiAuth.get(GET_DISTRICT_OPTIONS + data);
+      return response.data.data.list_districts;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);

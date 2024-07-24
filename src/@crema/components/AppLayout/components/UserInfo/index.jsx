@@ -1,5 +1,5 @@
 import React from "react";
-import orange from "@mui/material/colors/orange";
+import green from "@mui/material/colors/green";
 import { Box } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -62,7 +62,7 @@ const UserInfo = ({ color }) => {
                 height: 40,
                 width: 40,
                 fontSize: 24,
-                backgroundColor: orange[500],
+                backgroundColor: green[500],
               }}
               src={user.photoURL}
             />
@@ -72,7 +72,7 @@ const UserInfo = ({ color }) => {
                 height: 40,
                 width: 40,
                 fontSize: 24,
-                backgroundColor: orange[500],
+                backgroundColor: green[500],
               }}
             >
               {getUserAvatar()}

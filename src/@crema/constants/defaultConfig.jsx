@@ -228,6 +228,6 @@ const defaultConfig = {
     name: 'English',
     icon: 'us',
   },
-  rtlLocale: ['ar'],
+  rtlLocale: [''],
 };
 export default defaultConfig;

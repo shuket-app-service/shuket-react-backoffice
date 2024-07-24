@@ -33,7 +33,9 @@ const AppLayout = () => {
   const [params] = useUrlSearchParams();
 
   const initURL = params?.redirect ? params?.redirect : initialUrl;
-  const loginUrl = `/signin?redirect=${window.location.pathname}`;
+  // const loginUrl = `/signin?redirect=${window.location.pathname}`;
+  const loginUrl = `/signin`;
+
   const generatedRoutes = generateRoutes({
     isAuthenticated: isAuthenticated,
     userRole: user?.role_list,

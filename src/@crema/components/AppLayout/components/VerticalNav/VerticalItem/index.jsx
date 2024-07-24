@@ -13,8 +13,11 @@ import AppBadge from '../../../../AppBadge';
 import AppNavLink from '../../../../AppNavLink';
 import { useSelector } from 'react-redux';
 import VerticalNavItemIcon from './VerticalNavItemIcon';
+import { useLocaleContext } from '../../../../../context/AppContextProvider/LocaleContextProvider';
 
 const VerticalItem = ({ level, item }) => {
+  const { locale } = useLocaleContext();
+
   // const { user } = useAuthUser();
   const user = useSelector((state) => state.auth.user);
   const hasPermission = useMemo(
@@ -51,7 +54,14 @@ const VerticalItem = ({ level, item }) => {
       <ListItemText
         className='nav-item-content'
         primary={
-          allowMultiLanguage ? <IntlMessages id={item.messageId} /> : item.title
+          // allowMultiLanguage ? <IntlMessages id={item.messageId} /> : item.title
+          item.icon ? (
+            <IntlMessages id={item.messageId} />
+          ) : typeof item.title === "object" && locale.locale == "ko"  ? (
+            item.title.kr
+          ) : typeof item.title === "object" && locale.locale == "en" ? (
+            item.title.en
+          ) :  item.title
         }
         classes={{ primary: 'nav-item-text' }}
       />

@@ -14,3 +14,4 @@ export const allowMultiLanguage = import.meta.env.VITE__MULTILINGUAL === 'true';
 export const fileStackKey = import.meta.env.VITE__FILESTACK_KEY;
 export const initialUrl = import.meta.env.VITE__INITIAL_URL; // this url will open after login
 export const initialBackend = import.meta.env.VITE_LAYOUT_BACKEND; // this url will open after login
+export const initialBackendNode = import.meta.env.VITE_LAYOUT_BACKEND_NODEJS; // this url will open after login

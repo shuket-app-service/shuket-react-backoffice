@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { useThemeContext } from '@crema/context/AppContextProvider/ThemeContextProvider';
 import { alpha } from '@mui/material/styles';
-import  Logo  from '../../../../../assets/icon/logo.svg';
+import  Logo  from '../../../../../assets/icon/logo.jpg';
 import LogoText  from '../../../../../assets/icon/logo_text.svg';
 
 const AppLogo = () => {
@@ -10,7 +10,7 @@ const AppLogo = () => {
   return (
     <Box
       sx={{
-        height: { xs: 56, sm: 70 },
+        height: { xs: 56, sm: 70, md: 70 },
         padding: 2.5,
         display: 'flex',
         flexDirection: 'row',
@@ -18,13 +18,13 @@ const AppLogo = () => {
         alignItems: 'center',
         justifyContent: 'center',
         '& img': {
-          height: { xs: 40, sm: 45 },
+          height: { xs: 40, sm: 45, md: 70 },
         },
       }}
       className='app-logo'
     >
       <img src={Logo} alt={Logo}/>
-      <Box
+      {/* <Box
         sx={{
           mt: 1,
           display: { xs: 'none', md: 'block' },
@@ -34,7 +34,7 @@ const AppLogo = () => {
         }}
       >
           <img src={LogoText} alt={LogoText}/>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

@@ -16,6 +16,7 @@ import AppTooltip from '../AppTooltip';
 
 const AppLngSwitcher = ({ iconOnly, tooltipPosition }) => {
   const { locale } = useLocaleContext();
+  console.log('AppLngSwitcher-- locale:', locale)
   const { updateLocale } = useLocaleActionsContext();
   const [anchorElLng, setAnchorElLng] = React.useState(null);
 

@@ -15,17 +15,10 @@ import { alpha } from "@mui/material/styles";
 import AppLogo from "../../components/AppLogo";
 import PropTypes from "prop-types";
 import AppLngSwitcher from "../../../AppLngSwitcher";
-import { GrPowerReset } from "react-icons/gr";
 import { allowMultiLanguage } from "../../../../constants/AppConst";
-import AccountSwitch from "../../../../../modules/ShuketComponents/AccountSwitch";
-import { useDispatch, useSelector } from "react-redux";
-import { resetAccount } from "../../../../../modules/store/auth/thunk";
+import AccountSwitchHeader from "../../../../../modules/ShuketComponents/Header/AccountSwitch";
 
 const AppHeader = ({ toggleNavCollapsed }) => {
-  const user = useSelector((state) => state.auth.user);
-  console.log('AppHeader--',user)
-
-  const dispatch = useDispatch()
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -37,9 +30,6 @@ const AppHeader = ({ toggleNavCollapsed }) => {
     setAnchorEl(null);
   };
 
-  const handleResetAccount = () =>{
-    dispatch(resetAccount())
-  }
 
   return (
     <AppBar
@@ -83,11 +73,8 @@ const AppHeader = ({ toggleNavCollapsed }) => {
         </Hidden>
         <AppLogo /> 
         {/* <AppSearchBar iconPosition="right" placeholder="Search…" /> */}
-        <AccountSwitch></AccountSwitch>
-        {user && user.martid 
-        && (<IconButton sx={{m:2}} onClick={handleResetAccount}>
-                <GrPowerReset/>
-           </IconButton> )}
+        <AccountSwitchHeader></AccountSwitchHeader>
+ 
         
         <Box
           sx={{
