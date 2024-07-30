@@ -9,12 +9,14 @@ import { useLocaleContext } from "@crema/context/AppContextProvider/LocaleContex
 import { translate } from "../../../../@crema/services/localization/translate";
 import { indexLocate } from "./locate";
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const AppDisplay = () => {
    const [loading, setLoading] = useState(true);
    const [mainMenu, setMainMenu] = useState([]);
    const [subMenu, setSubMenu] = useState([]);
    const { locale } = useLocaleContext();
+   const navigate = useNavigate();
 
    const dispatch = useDispatch();
 
@@ -66,7 +68,10 @@ const AppDisplay = () => {
        );
        setMainMenu(updatedMenu);
    }
-   console.log(mainMenu)
+
+   const gotoAdd = () =>{
+      navigate("action?type=add")
+   }
 
    return (
       <>
@@ -80,7 +85,7 @@ const AppDisplay = () => {
                   <Button type="button" color="primary" variant="outlined" onClick={handleSaveSortPosition}>
                         {translate(locale, indexLocate.btnPosition)}
                      </Button>
-                     <Button type="button" color="primary" variant="outlined">
+                     <Button type="button" color="primary" variant="outlined" onClick={gotoAdd}>
                         {translate(locale, indexLocate.btnAdd)}
                      </Button>
                   </Stack>

@@ -4,6 +4,7 @@ import apiAuth from "../../../@crema/services/axios/ApiConfig";
 const GET_SCREEN_BUILDER = "/appbuilder/get_screen_builder";
 const UPDATE_APP_SCREEN_STATUS = "/appbuilder/upd_app_screen_status"
 const SAVE_SORT_SCREEN = "/appbuilder/save_sort_screen"
+const GET_APP_SCREEN_DETAIL = "/appbuilder/get_app_screen_detail?sc_code="
 
 export const getScreenBuilder = createAsyncThunk(
     GET_SCREEN_BUILDER,
@@ -15,6 +16,19 @@ export const getScreenBuilder = createAsyncThunk(
       return rejectWithValue(err.message);
     }
   }
+);
+
+
+export const getAppScreenDetail = createAsyncThunk(
+  GET_APP_SCREEN_DETAIL,
+async (data, { rejectWithValue }) => {
+  try {
+    const response = await apiAuth.get(GET_APP_SCREEN_DETAIL+data);
+    return response.data.data;
+  } catch (err) {
+    return rejectWithValue(err.message);
+  }
+}
 );
 
 

@@ -49,10 +49,10 @@ export const anonymousStructure = (initialUrl) => {
         path: '/',
         element: <Navigate to={initialUrl} />,
       },
-      {
-        path: '*',
-        element: <Navigate to='/error-pages/error-404' />,
-      },
+      // {
+      //   path: '*',
+      //   element: <Navigate to='/error-pages/error-404' />,
+      // },
     ]),
   };
 };

@@ -4,10 +4,14 @@ import { translate } from "../../../../@crema/services/localization/translate";
 import { indexLocate } from "./locate";
 import SwitchStatus from "../../Common/SwitchStatus";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const MainMenu = ({ locale, mainMenu, handleChangeStatus, handleChangeSortPosition }) => {
-   console.log(mainMenu);
-   const dispatch = useDispatch();
+   const navigate = useNavigate();
+
+   const gotoDetail = (scCode) =>{
+      navigate(`action?type=edit&sc_code=${scCode}`);
+   }
 
    return (
       <Card sx={{ borderRadius: 0 }}>
@@ -25,8 +29,8 @@ const MainMenu = ({ locale, mainMenu, handleChangeStatus, handleChangeSortPositi
                               <TextField onChange={(e) => handleChangeSortPosition(ele.sc_code, e.target.value)} type="number" size="small" sx={{width:"50%"}} value={ele.sort_option}></TextField>
                               <Typography>{translate(locale, indexLocate.numberOfTemplate)} {ele.sc_count}</Typography>
                               <Stack direction="row" alignItems="center" gap={5}>
-                                 <Button variant="outlined" >Edit</Button>
-                                 <Button variant="outlined" color="error">Delete</Button>
+                                 <Button variant="outlined" onClick={()=>gotoDetail(ele.sc_code)}>{translate(locale, indexLocate.btnEdit)}</Button>
+                                 <Button variant="outlined" color="error">{translate(locale, indexLocate.btnDelete)}</Button>
                               </Stack>
                               <SwitchStatus status={ele.sc_status} handleChangeStatus={()=>handleChangeStatus(ele.sc_code, ele.sc_status)}></SwitchStatus>
                            </Stack>
