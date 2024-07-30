@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Signin = React.lazy(() => import('../../../modules/auth/Signin'));
+// const Signin = React.lazy(() => import('../../../modules/auth/Signin'));
+const Signin = React.lazy(() => import('../../../modules/ShuketComponents/auth/signIn'));
 const Signup = React.lazy(() => import('../../../modules/auth/Signup'));
 const ForgotPassword = React.lazy(() =>
   import('../../../modules/auth/ForgetPassword'),

@@ -75,8 +75,8 @@ const TaskDetailBody = (props) => {
     let task = selectedTask;
     task.comments = task.comments.concat({
       comment: comment,
-      name: user.displayName ? user.displayName : 'User',
-      image: user.photoURL,
+      name: user?.displayName ? user?.displayName : 'User',
+      image: user?.photoURL,
       date: getDateObject().format('ll'),
     });
     putDataApi('/api/calendar/task/', infoViewActionsContext, {

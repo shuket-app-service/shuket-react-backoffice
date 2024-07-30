@@ -1,5 +1,6 @@
 import React from 'react';
 import { RoutePermittedRole } from '@crema/constants/AppEnums';
+import AppDisplayEdit from '../../../modules/ShuketComponents/MartComponents/AppDisplay/edit';
 
 const SalesCollection = React.lazy(() => import('../../../modules/ShuketComponents/SalesCollection'));
 
@@ -29,5 +30,10 @@ export const shuketConfigs = [
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/app-management/app-builder',
     element: <AppDisplay />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/app-management/app-builder?action?type=edi',
+    element: <AppDisplayEdit />,
   },
 ];

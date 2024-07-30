@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getListAccountSwitch, switchAccount } from "../../../store/auth/thunk";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { useLocaleContext } from "@crema/context/AppContextProvider/LocaleContextProvider";
+import { translate } from "../../../../@crema/services/localization/translate";
+import { indexLocate } from "./locate";
 
 export default function AccountSelect() {
   const dispatch = useDispatch();
@@ -14,6 +17,7 @@ export default function AccountSelect() {
   const isChange = jwtDecode(user.token)?.is_change;
   const [accounts, setAccounts] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const { locale } = useLocaleContext();
 
   useEffect(() => {
     async function fetchData() {
@@ -61,7 +65,7 @@ export default function AccountSelect() {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Choose a account"
+          label={translate(locale, indexLocate.titleSelectBoxSwitch)}
           inputProps={{
             ...params.inputProps,
             autoComplete: "", // disable autocomplete and autofill

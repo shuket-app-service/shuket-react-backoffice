@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import apiAuthNode from "../../../@crema/services/axios/ApiConfig_Node";
+import apiAuthNode from "../../../@crema/services/axios/ApiConfigNode";
 
 const IMPORT_PRODUCT = "/import/upload_file";
 const CONFIRM_IMPORT = "/import/confirm_import";

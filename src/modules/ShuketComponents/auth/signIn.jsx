@@ -8,32 +8,32 @@ import Box from '@mui/material/Box';
 import AppTextField from '@crema/components/AppFormComponents/AppTextField';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import AppInfoView from '@crema/components/AppInfoView';
-import { useAuthMethod } from '@crema/hooks/AuthHooks';
 import { Fonts } from '@crema/constants/AppEnums';
-import { AiOutlineGoogle, AiOutlineTwitter } from 'react-icons/ai';
-import { FaFacebookF } from 'react-icons/fa';
-import { BsGithub } from 'react-icons/bs';
-import AuthWrapper from '../AuthWrapper';
+import { useDispatch } from 'react-redux';
+import { Login } from '../../store/auth/thunk';
+import AuthWrapper from '../../auth/AuthWrapper';
 
 const validationSchema = yup.object({
   email: yup
     .string()
-    .email(<IntlMessages id='validation.emailFormat' />)
+    // .email(<IntlMessages id='validation.emailFormat' />)
     .required(<IntlMessages id='validation.emailRequired' />),
   password: yup
     .string()
     .required(<IntlMessages id='validation.passwordRequired' />),
 });
 
-const SigninFirebase = () => {
-  const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
+const SigninShuket = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const onGoToForgetPassword = () => {
     navigate('/forget-password', { tab: 'firebase' });
   };
+  const logInWithEmailAndPasswordThunk = (data) =>{
+    dispatch(Login(data))
+  }
 
   const { messages } = useIntl();
 
@@ -44,13 +44,13 @@ const SigninFirebase = () => {
           <Formik
             validateOnChange={true}
             initialValues={{
-              email: 'crema.demo@gmail.com',
-              password: 'Pass@1!@all',
+              email: 'duyhuu.dev',
+              password: 'IT1234!@#$',
             }}
             validationSchema={validationSchema}
             onSubmit={(data, { setSubmitting }) => {
               setSubmitting(true);
-              logInWithEmailAndPassword(data);
+              logInWithEmailAndPasswordThunk(data);
               setSubmitting(false);
             }}
           >
@@ -171,83 +171,10 @@ const SigninFirebase = () => {
           </Box>
         </Box>
 
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: (theme) => theme.palette.background.default,
-            mx: { xs: -5, lg: -10 },
-            mb: { xs: -6, lg: -11 },
-            mt: 'auto',
-            py: 2,
-            px: { xs: 5, lg: 10 },
-          }}
-        >
-          <Box
-            sx={{
-              color: (theme) => theme.palette.text.secondary,
-            }}
-          >
-            <IntlMessages id='common.orLoginWith' />
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <IconButton
-              aria-label='Google'
-              sx={{
-                p: 2,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('google')}
-            >
-              <AiOutlineGoogle />
-            </IconButton>
-            <IconButton
-              aria-label='Facebook'
-              sx={{
-                p: 1.5,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('facebook')}
-            >
-              <FaFacebookF />
-            </IconButton>
-            <IconButton
-              aria-label='Github'
-              sx={{
-                p: 1.5,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('github')}
-            >
-              <BsGithub />
-            </IconButton>
-            <IconButton
-              aria-label='Twitter'
-              sx={{
-                p: 1.5,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('twitter')}
-            >
-              <AiOutlineTwitter />
-            </IconButton>
-          </Box>
-        </Box>
-
         <AppInfoView />
       </Box>
     </AuthWrapper>
   );
 };
 
-export default SigninFirebase;
+export default SigninShuket;

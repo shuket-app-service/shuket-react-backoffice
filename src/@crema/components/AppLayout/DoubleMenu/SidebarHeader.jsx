@@ -115,11 +115,11 @@ const SidebarHeader = () => {
   const { user } = useAuthUser();
   const { logout } = useAuthMethod();
   const getUserAvatar = () => {
-    if (user.displayName) {
-      return user.displayName.charAt(0).toUpperCase();
+    if (user?.displayName) {
+      return user?.displayName.charAt(0).toUpperCase();
     }
-    if (user.email) {
-      return user.email.charAt(0).toUpperCase();
+    if (user?.email) {
+      return user?.email.charAt(0).toUpperCase();
     }
   };
 
@@ -129,9 +129,9 @@ const SidebarHeader = () => {
     <Box className={classes.sidebarHeaderRoot}>
       <AppLogo />
       <Box className={classes.hsUserRoot}>
-        {user.photoURL ? (
+        {user?.photoURL ? (
           <Box className={classes.profilePic}>
-            <Avatar className={classes.avatarPic} src={user.photoURL} />
+            <Avatar className={classes.avatarPic} src={user?.photoURL} />
             <Box className={classes.userStatusRoot} />
           </Box>
         ) : (
@@ -141,7 +141,7 @@ const SidebarHeader = () => {
         )}
         <Box className={classes.hsUserInfo}>
           <Typography component='h3' variant='h3' className={classes.userName}>
-            {user.displayName ? user.displayName : 'Admin User '}
+            {user?.displayName ? user?.displayName : 'Admin User '}
             <KeyboardArrowDownIcon
               className='arrowIcon'
               onClick={handleClick}

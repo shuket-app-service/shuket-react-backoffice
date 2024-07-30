@@ -78,7 +78,7 @@ const AuthWrapper = ({ children }) => {
                 mb: 4,
               }}
             >
-              Welcome to Crema!
+              Welcome to SHUKET!
             </Typography>
             <Typography>
               Crema is purely based on Material ui components and follows

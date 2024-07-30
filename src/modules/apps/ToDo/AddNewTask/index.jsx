@@ -52,8 +52,8 @@ const AddNewTask = ({ isAddTaskOpen, onCloseAddTask, selectedDate }) => {
             isRead: true,
             folderValue: 120,
             createdBy: {
-              name: user.displayName ? user.displayName : 'User',
-              image: user.photoURL,
+              name: user?.displayName ? user?.displayName : 'User',
+              image: user?.photoURL,
             },
             image: '/assets/images/dummy2.jpg',
             status: 1,

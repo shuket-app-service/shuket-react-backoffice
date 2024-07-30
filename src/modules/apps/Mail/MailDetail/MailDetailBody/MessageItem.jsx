@@ -159,7 +159,7 @@ const MessageItem = ({
               placement='bottom'
             >
               <>
-                {`to ${message.to.map((user) => user.email).toString()}`}
+                {`to ${message.to.map((user) => user?.email).toString()}`}
                 <span style={{ marginTop: 0, fontSize: 18 }}>
                   <BiChevronDown />
                 </span>

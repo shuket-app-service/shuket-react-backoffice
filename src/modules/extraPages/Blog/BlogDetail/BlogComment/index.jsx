@@ -30,7 +30,7 @@ const BlogComment = ({ comment }) => {
     const item = {
       id: generateRandomUniqueNumber(),
       name: data.name,
-      image: user.photoURL,
+      image: user?.photoURL,
       duration: dayjs().format('ll'),
       comment: data.comment,
     };

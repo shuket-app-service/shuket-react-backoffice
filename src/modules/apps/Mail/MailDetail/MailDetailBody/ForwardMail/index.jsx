@@ -135,9 +135,9 @@ const ForwardMail = ({ onSubmitForwardedMail }) => {
             messageId: generateRandomUniqueNumber(),
             sender: {
               id: user.id,
-              name: user.displayName ? user.displayName : user.username,
-              email: user.email,
-              profilePic: user.photoURL ? user.photoURL : '',
+              name: user?.displayName ? user?.displayName : user.username,
+              email: user?.email,
+              profilePic: user?.photoURL ? user?.photoURL : '',
             },
             to: [
               {

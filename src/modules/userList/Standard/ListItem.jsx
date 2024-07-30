@@ -118,7 +118,7 @@ const ListItem = (props) => {
                       ml: 2,
                     }}
                   >
-                    {user.email}
+                    {user?.email}
                   </Box>
                 </Box>
 

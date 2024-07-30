@@ -4,10 +4,11 @@ import MainMenu from "./MainMenu";
 import SubMenu from "./SubMenu";
 import { useDispatch } from "react-redux";
 import AppLoader from "@crema/components/AppLoader";
-import { getScreenBuilder, updateAppScreenStatus } from "../../../store/appBuilder/thunk";
+import { getScreenBuilder, saveSortScreen, updateAppScreenStatus } from "../../../store/appBuilder/thunk";
 import { useLocaleContext } from "@crema/context/AppContextProvider/LocaleContextProvider";
 import { translate } from "../../../../@crema/services/localization/translate";
 import { indexLocate } from "./locate";
+import { toast } from 'react-toastify';
 
 const AppDisplay = () => {
    const [loading, setLoading] = useState(true);
@@ -40,13 +41,23 @@ const AppDisplay = () => {
       })
       .catch(()=>{
          setLoading(false);
-
       })
    }
 
    const handleSaveSortPosition = async () =>{
       console.log(mainMenu)
-      // await dispatch(saveSortScreen(mainMenu))
+      await dispatch(saveSortScreen(mainMenu))
+      .then(async ()=>{
+         const res = await dispatch(getScreenBuilder());
+         setMainMenu(res.payload.ms_list_data);
+         setSubMenu(res.payload.ss_list_data);
+          toast.success(translate(locale, indexLocate.alertSavePosition))
+         setLoading(false);
+      })
+      .catch(()=>{
+         setLoading(false);
+
+      })
    }
 
    const handleChangeSortPosition = (scCode, value) =>{

@@ -9,12 +9,12 @@ import { Fonts } from '@crema/constants/AppEnums';
 
 const UserInfo = ({ user, showStatus }) => {
   const getUserAvatar = () => {
-    const name = user.displayName || user.name;
+    const name = user?.displayName || user.name;
     if (name) {
       return name.charAt(0).toUpperCase();
     }
-    if (user.email) {
-      return user.email.charAt(0).toUpperCase();
+    if (user?.email) {
+      return user?.email.charAt(0).toUpperCase();
     }
   };
 
@@ -34,7 +34,7 @@ const UserInfo = ({ user, showStatus }) => {
           position: 'relative',
         }}
       >
-        {user.photoURL || user.image ? (
+        {user?.photoURL || user.image ? (
           <Avatar
             sx={{
               height: 44,
@@ -42,7 +42,7 @@ const UserInfo = ({ user, showStatus }) => {
               fontSize: 24,
               backgroundColor: orange[500],
             }}
-            src={user.photoURL || user.image}
+            src={user?.photoURL || user.image}
           />
         ) : (
           <Avatar
@@ -90,9 +90,9 @@ const UserInfo = ({ user, showStatus }) => {
             fontWeight: Fonts.MEDIUM,
           }}
         >
-          {user.displayName || user.name
-            ? user.displayName || user.name
-            : user.email}
+          {user?.displayName || user.name
+            ? user?.displayName || user.name
+            : user?.email}
         </Typography>
         <Typography
           sx={{

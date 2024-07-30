@@ -37,8 +37,8 @@ const UserInfo = ({ color }) => {
     if (user.name) {
       return user.name.charAt(0).toUpperCase();
     }
-    if (user.email) {
-      return user.email.charAt(0).toUpperCase();
+    if (user?.email) {
+      return user?.email.charAt(0).toUpperCase();
     }
   };
 
@@ -56,7 +56,7 @@ const UserInfo = ({ color }) => {
         className="user-info-view"
       >
         <Box sx={{ py: 0.5 }}>
-          {user.photoURL ? (
+          {user?.photoURL ? (
             <Avatar
               sx={{
                 height: 40,
@@ -64,14 +64,14 @@ const UserInfo = ({ color }) => {
                 fontSize: 24,
                 backgroundColor: green[500],
               }}
-              src={user.photoURL}
+              src={user?.photoURL}
             />
           ) : (
             <Avatar
               sx={{
                 height: 40,
                 width: 40,
-                fontSize: 24,
+                fontSize: 24,             
                 backgroundColor: green[500],
               }}
             >
