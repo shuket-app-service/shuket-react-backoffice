@@ -1,3 +1,3 @@
-# React + Vite
-npm install
+# React + Redux + Vite
+npm install ==> 
 npm run dev
