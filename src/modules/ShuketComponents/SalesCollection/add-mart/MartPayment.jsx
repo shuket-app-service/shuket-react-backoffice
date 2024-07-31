@@ -1,6 +1,6 @@
 import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Radio, RadioGroup, Stack, Typography } from "@mui/material";
 import React from "react";
-import { paymentMethodType, paymentOnsiteType } from "../../Common/types";
+import { paymentMethodType, paymentOnsiteType } from "../Helper/types";
 import { translate } from "../../../../@crema/services/localization/translate";
 
 const MartPayment = ({ locale, values, setFieldValue, errors }) => {

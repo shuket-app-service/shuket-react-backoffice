@@ -15,11 +15,11 @@ import {
    Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { appType, martType, statusType } from "../Common/types";
+import { appType, martType, statusType } from "./Helper/types";
 import { useNavigate } from "react-router-dom";
 import SalesCollectionReportExcel from "./SalesCollectionReportExcel";
 import { translate } from "../../../@crema/services/localization/translate";
-import { filterLocate } from "./locate";
+import { filterLocate } from "./Helper/locate";
 
 const SalesCollectionFilter = ({ dataFilter, changeDataFilter, handleSearch, handleReset, locale }) => {
    const navigate = useNavigate();

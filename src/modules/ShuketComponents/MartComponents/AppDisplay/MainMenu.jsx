@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, CardContent, CardHeader, Stack, TextField, Typography } from "@mui/material";
 import { translate } from "../../../../@crema/services/localization/translate";
-import { indexLocate } from "./locate";
+import { indexLocate } from "./helper/locate";
 import SwitchStatus from "../../Common/SwitchStatus";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, CardContent, CardHeader, Stack, Typography } from "@mui/material";
 import { translate } from "../../../../@crema/services/localization/translate";
-import { indexLocate } from "./locate";
+import { indexLocate } from "./helper/locate";
 
 const SubMenu = ({ locale, subMenu }) => {
    console.log(subMenu);

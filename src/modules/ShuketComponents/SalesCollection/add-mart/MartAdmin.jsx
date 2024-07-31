@@ -3,7 +3,7 @@ import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, 
 import { translate } from "../../../../@crema/services/localization/translate";
 import { useDispatch } from "react-redux";
 import { getGroupOption, getLevelOption } from "../../../store/users/thunk";
-import { defaultSelect } from "../../Common/types";
+import { defaultSelect } from "../Helper/types";
 import { checkUserAdminId } from "../../../store/salesCollection/thunk";
 import TextValidate from "../../Common/TextValidate";
 import { stateIDInvalid, stateIDValid } from "../Helper/state";

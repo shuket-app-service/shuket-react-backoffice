@@ -2,7 +2,7 @@ import { Box, Button, Card, CardContent, CardHeader, Divider, Paper, Stack, Text
 import React, { useEffect, useState } from "react";
 import { useLocaleContext } from "@crema/context/AppContextProvider/LocaleContextProvider";
 import { translate } from "../../../../../@crema/services/localization/translate";
-import { indexLocate } from "../locate";
+import { indexLocate } from "../helper/locate";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAppScreenDetail } from "../../../../store/appBuilder/thunk";
 import { useDispatch } from "react-redux";

@@ -7,9 +7,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, Button, Card, CardContent, Divider, FormControl, MenuItem, Pagination, Select, Stack, styled, TableFooter, TablePagination, Typography } from "@mui/material";
-import { filterLocate, headersLocate } from "./locate";
-import { orderType, limitType } from "../Common/types";
+import { filterLocate, headersLocate } from "./Helper/locate";
 import { translate } from "../../../@crema/services/localization/translate";
+import { limitType } from "./Helper/types";
 
 export default function ManagerImageTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
    const [headers, setHeaders] = useState([]);
@@ -28,38 +28,14 @@ export default function ManagerImageTable({ rows, dataFilter, changeDataFilterDi
             <TableContainer component={Paper}>
                <Stack sx={{ p: 5 }} direction="row" justifyContent="space-between" alignItems="center">
                   <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
-                     <Typography>
-                        Total: <b>{searchCount}</b>
-                     </Typography>
-
-                     <Typography> {translate(locale, filterLocate.orderBy)} </Typography>
                      <FormControl sx={{ m: 1, minWidth: 100 }}>
                         <Select
                            size="small"
-                           value={dataFilter.order_by}
+                           value={dataFilter.per_page}
                            onChange={(e) =>
                               changeDataFilterDirectly({
                                  ...dataFilter,
-                                 order_by: e.target.value,
-                              })
-                           }
-                        >
-                           {orderType.map((ele) => (
-                              <MenuItem key={ele.value} value={ele.value}>
-                                 {translate(locale, ele.text)}
-                              </MenuItem>
-                           ))}
-                        </Select>
-                     </FormControl>
-                     <Typography>{translate(locale, filterLocate.limit)} </Typography>
-                     <FormControl sx={{ m: 1, minWidth: 100 }}>
-                        <Select
-                           size="small"
-                           value={dataFilter.limit}
-                           onChange={(e) =>
-                              changeDataFilterDirectly({
-                                 ...dataFilter,
-                                 limit: e.target.value,
+                                 per_page: e.target.value,
                               })
                            }
                         >
@@ -70,10 +46,11 @@ export default function ManagerImageTable({ rows, dataFilter, changeDataFilterDi
                            ))}
                         </Select>
                      </FormControl>
+                     <Typography>{translate(locale, filterLocate.per_page)} </Typography>
                   </Stack>
 
                   <Stack direction="row" alignItems="center" spacing={2}>
-                     <Pagination count={pageCount} page={dataFilter.page} onChange={handleChangePage} color="primary" variant="outlined" shape="rounded" />
+                     <Pagination count={5} page={dataFilter.page} onChange={handleChangePage} color="primary" variant="outlined" shape="rounded" />
                   </Stack>
                </Stack>
                <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -105,12 +82,6 @@ export default function ManagerImageTable({ rows, dataFilter, changeDataFilterDi
                               <p>{row?.m_time}</p>
                               <small>Last updated by: {row?.m_admin}</small>
                            </TableCell>
-
-                           <TableCell align="center">
-                              <Button color="primary" variant="outlined">
-                                 {translate(locale, filterLocate.btnEdit)}
-                              </Button>
-                           </TableCell>
                         </TableRow>
                      ))}
                   </TableBody>
@@ -119,7 +90,7 @@ export default function ManagerImageTable({ rows, dataFilter, changeDataFilterDi
                <Card sx={{ borderRadius: 0 }}>
                   <CardContent>
                      <Stack sx={{ mt: 5 }} direction="row" justifyContent="end" alignItems="center" spacing={2}>
-                        <Pagination count={pageCount} page={dataFilter.page} onChange={handleChangePage} color="primary" variant="outlined" shape="rounded" />
+                        <Pagination count={5} page={dataFilter.page} onChange={handleChangePage} color="primary" variant="outlined" shape="rounded" />
                      </Stack>
                   </CardContent>
                </Card>

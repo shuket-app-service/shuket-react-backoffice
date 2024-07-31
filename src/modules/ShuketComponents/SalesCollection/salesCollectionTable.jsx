@@ -7,8 +7,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, Button, Card, CardContent, Divider, FormControl, MenuItem, Pagination, Select, Stack, styled, TableFooter, TablePagination, Typography } from "@mui/material";
-import { filterLocate, headersLocate } from "./locate";
-import { orderType, limitType } from "../Common/types";
+import { filterLocate, headersLocate } from "./Helper/locate";
+import { orderType, limitType } from "./Helper/types";
 import { translate } from "../../../@crema/services/localization/translate";
 
 export default function SalesCollectionTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {

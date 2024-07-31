@@ -5,7 +5,7 @@ import { IoMdMenu } from "react-icons/io";
 import SwitchStatus from "../../../Common/SwitchStatus";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { TiDeleteOutline } from "react-icons/ti";
-import { headersEditLocate } from "../locate";
+import { headersEditLocate } from "../helper/locate";
 
 const AppDisplayEditTable = ({ locale, detail, handleDragEndCallback}) => {
    const [headers, setHeaders] = useState([]);

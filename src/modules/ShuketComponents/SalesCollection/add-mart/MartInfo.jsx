@@ -1,6 +1,6 @@
 import { Box, Button, Card, Checkbox, Divider, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { appType, businessMartType, businessType, commomMartType, defaultSelect, martDisplayStatus, posType } from "../../Common/types";
+import { appType, businessMartType, businessType, commomMartType, defaultSelect, martDisplayStatus, posType } from "../Helper/types";
 import { translate } from "../../../../@crema/services/localization/translate";
 import { useDispatch } from "react-redux";
 import { getCityOptions, getDistrictOptions } from "../../../store/main/thunk";

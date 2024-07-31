@@ -3,17 +3,16 @@ import { Box } from "@mui/material";
 import AppLoader from "@crema/components/AppLoader";
 import { useDispatch } from "react-redux";
 import { useLocaleContext } from "@crema/context/AppContextProvider/LocaleContextProvider";
-import ManagerImageTable from "./ManagerImageTable";
-import ManagerImageFilter from "./ManagerImageFilter";
-import { getManagementImageList } from "../../store/managerImage/thunk";
-import { initialStateFilter } from "./Helper/state";
+import ManagerImageTableWithBarcode from "./ManagerImageTableWithBarcode";
+import ManagerImageFilterWithBarcode from "./ManagerImageFilterWithBarcode";
+import { getImageWithBarcode } from "../../../store/managerImage/thunk";
+import { initialStateFilterWithBarcode } from "../Helper/state";
 
-export default function ManagerImage() {
+export default function ManagerImageWithBarcode() {
    const { locale } = useLocaleContext();
-   const [dataFilter, setDataFilter] = useState(initialStateFilter);
+   const [dataFilter, setDataFilter] = useState(initialStateFilterWithBarcode);
    const [loading, setLoading] = useState(false);
    const [rows, setRows] = useState([]);
-   const [cateType, setCateType] = useState([]);
 
    const [pageCount, setPageCount] = useState(1); // page_count
    const [searchCount, setSearchCount] = useState(0); //search_count
@@ -22,23 +21,21 @@ export default function ManagerImage() {
 
    async function fetchData(params) {
       setLoading(true)
-      const response = await dispatch(getManagementImageList(params));
-      setRows(response.payload.list_data);
-      setCateType(response.payload.cate_images_list)
+      const response = await dispatch(getImageWithBarcode(params));
+      setRows(response.payload.list_img);
       if (response.payload.cur_page != 1) {
-         setDataFilter({ ...dataFilter, page: response.payload.cur_page, ln: locale.locale });
+         setDataFilter({ ...dataFilter, page: response.payload.cur_page });
       }
-      setPageCount(response.payload.cur_per_page);
-      setSearchCount(response.payload.total_list_cnt);
+      setPageCount(response.payload.per_page);
+      setSearchCount(response.payload.total);
 
       setLoading(false);
    }
 
    useEffect(() => {
-      setDataFilter({ ...dataFilter, ln: locale.locale === "en" ? "en" :"kr" });
-      fetchData({ ...dataFilter, ln: locale.locale  === "en" ? "en" :"kr" });
+      fetchData(dataFilter);
       return () => {};
-   }, [locale.locale]);
+   }, []);
 
    const changeDataFilter = (value) => {
       setDataFilter(value);
@@ -68,15 +65,14 @@ export default function ManagerImage() {
             <AppLoader />
          ) : (
             <Box>
-               <ManagerImageFilter
-                  cateType={cateType}
+               <ManagerImageFilterWithBarcode
                   dataFilter={dataFilter}
                   changeDataFilter={changeDataFilter}
                   handleSearch={handleSearch}
                   handleReset={handleReset}
                   locale={locale}
-               ></ManagerImageFilter>
-               <ManagerImageTable
+               ></ManagerImageFilterWithBarcode>
+               <ManagerImageTableWithBarcode
                   rows={rows}
                   dataFilter={dataFilter}
                   changeDataFilterDirectly={changeDataFilterDirectly}
@@ -84,7 +80,7 @@ export default function ManagerImage() {
                   searchCount={searchCount}
                   handleChangePage={handleChangePage}
                   locale={locale}
-               ></ManagerImageTable>
+               ></ManagerImageTableWithBarcode>
             </Box>
          )}
       </>

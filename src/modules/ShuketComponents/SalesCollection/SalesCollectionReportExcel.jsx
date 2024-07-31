@@ -6,7 +6,7 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { exportExcelSalesCollection } from "../../store/salesCollection/thunk";
 import { translate } from "../../../@crema/services/localization/translate";
-import { filterLocate } from "./locate";
+import { filterLocate } from "./Helper/locate";
 
 const SalesCollectionReportExcel = ({ dataFilter, locale }) => {
    const Heading = [["ID", "앱 유형", "마트", "D2코드/포스코드", "재고연동", "주문연동", "도시", "구역", "날짜 등록", "상태"]];
