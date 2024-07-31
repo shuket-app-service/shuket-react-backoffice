@@ -11,7 +11,7 @@ import { filterLocate, headersLocate } from "./locate";
 import { orderType, limitType } from "../Common/types";
 import { translate } from "../../../@crema/services/localization/translate";
 
-export default function SalesCollectionTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
+export default function ManagerImageTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
    const [headers, setHeaders] = useState([]);
 
    useEffect(() => {
@@ -87,21 +87,25 @@ export default function SalesCollectionTable({ rows, dataFilter, changeDataFilte
                   <TableBody>
                      {rows.map((row) => (
                         <TableRow key={row.mart_code} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                           <TableCell align="center">{row.number_order}</TableCell>
-                           <TableCell align="center">{row.mart_type_name.kr}</TableCell>
-                           <TableCell align="center">{row.mart_type}</TableCell>
+                           <TableCell align="center">{row?.bnr_code}</TableCell>
                            <TableCell align="center">
-                              {row.mart_name} <br />({row.mart_code})
+                              <img style={{ width: 120 }} alt="" src={row?.bnr_image} />
                            </TableCell>
+
                            <TableCell align="center">
-                              {row.pos_regcode} / {row.tposcode}
+                              이미지명 : {row?.bnr_name}
+                              <br />
+                              파일명 : {row?.bnr_file_nm}
                            </TableCell>
-                           <TableCell align="center">{row.is_tdc}</TableCell>
-                           <TableCell align="center">{row.is_order_sync}</TableCell>
-                           <TableCell align="center">{row.city_name.kr}</TableCell>
-                           <TableCell align="center">{row.district_name.kr}</TableCell>
-                           <TableCell align="center">{row.register_date}</TableCell>
-                           <TableCell align="center">{row.status === "A" ? "활성화" : ""}</TableCell>
+                           <TableCell align="center">{row?.bnr_type}</TableCell>
+                           <TableCell align="center">{row?.bnr_cate}</TableCell>
+                           <TableCell align="center">
+                              <p>{row?.c_time}</p>
+                              <small>Created by: {row?.c_admin}</small>
+                              <p>{row?.m_time}</p>
+                              <small>Last updated by: {row?.m_admin}</small>
+                           </TableCell>
+
                            <TableCell align="center">
                               <Button color="primary" variant="outlined">
                                  {translate(locale, filterLocate.btnEdit)}

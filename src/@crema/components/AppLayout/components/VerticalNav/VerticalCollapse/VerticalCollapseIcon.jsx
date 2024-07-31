@@ -1,8 +1,7 @@
 import { Box, Icon } from "@mui/material";
 import clsx from "clsx";
 import React, { useState } from "react";
-import { RiDashboardLine } from "react-icons/ri";
-import { IoCashOutline } from "react-icons/io5";
+import { PiMoneyThin } from "react-icons/pi";
 import { PiImageSquareBold } from "react-icons/pi";
 import { RiBillLine } from "react-icons/ri";
 import { FaRegBell } from "react-icons/fa";
@@ -13,7 +12,7 @@ const VerticalCollapseIcon = ({item}) => {
   return (
     <Box component="span">
       <Icon sx={{ mr: 4 }} color="action" className={clsx("nav-item-icon")}>
-        {item.messageId == "CASH_MANAGEMENT" ? <IoCashOutline />  
+        {item.messageId == "CASH_MANAGEMENT" ? <PiMoneyThin />  
         : item.messageId == "MANAGE_ADMIN" ? <FaRegUser/> 
         : item.messageId == "MANAGE_IMAGES" ? <PiImagesSquareLight/> 
         : item.messageId == "Notice" ? <FaRegBell/> 

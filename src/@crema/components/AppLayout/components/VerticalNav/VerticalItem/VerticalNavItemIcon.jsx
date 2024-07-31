@@ -2,9 +2,8 @@ import { Icon } from '@mui/material';
 import { Box } from '@mui/system';
 import clsx from 'clsx';
 import React from 'react'
-import { RiBillFill } from 'react-icons/ri';
 import { IoSettingsOutline } from "react-icons/io5";
-import { MdOutlineAppSettingsAlt } from "react-icons/md";
+import { PiDeviceMobileLight } from "react-icons/pi";
 import { GrLocation } from "react-icons/gr";
 import { IoKeyOutline } from "react-icons/io5";
 import { TbBrandProducthunt } from "react-icons/tb";
@@ -20,7 +19,7 @@ const VerticalNavItemIcon = ({item}) => {
         : item.messageId == "Setting_Site" ? <IoSettingsOutline/>
         : item.messageId == "FCM_MANAGEMENT" ? <IoKeyOutline/>
         : item.messageId == "Import_Product" ? <TbBrandProducthunt/>
-        : item.messageId == "APP_VERSION" ? <MdOutlineAppSettingsAlt/>
+        : item.messageId == "APP_VERSION" ? <PiDeviceMobileLight/>
         : item.messageId == "Delivery_Address" ? <GrLocation/>
         : item.messageId == "Banner_Muti_Mart" ? <TfiImage/>
         : item.icon}

@@ -1,6 +1,6 @@
 import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, MenuItem, Radio, RadioGroup, Select, Stack, Typography } from "@mui/material";
 import React from "react";
-import { paymentMethodType, paymentOnsiteType, pickupTime } from "../../Helper/types";
+import { paymentMethodType, paymentOnsiteType, pickupTime } from "../../Common/types";
 import { translate } from "../../../../@crema/services/localization/translate";
 import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

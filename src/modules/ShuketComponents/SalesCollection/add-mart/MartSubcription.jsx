@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from "@mui/material";
-import { subscriptionType } from "../../Helper/types";
+import { subscriptionType } from "../../Common/types";
 import { translate } from "../../../../@crema/services/localization/translate";
 
 const MartSubcription = ({ locale, values, setFieldValue, errors }) => {

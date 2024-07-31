@@ -1,6 +1,6 @@
 import React from "react";
 import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Radio, RadioGroup, Stack, Typography } from "@mui/material";
-import { optionalServiceType } from "../../Helper/types";
+import { optionalServiceType } from "../../Common/types";
 import { translate } from "../../../../@crema/services/localization/translate";
 
 const MartOptional = ({ locale, values, setFieldValue, errors }) => {

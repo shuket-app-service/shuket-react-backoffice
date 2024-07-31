@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import MartPayment from "./MartPayment";
-import { initialStateAdd } from "../../Helper/state";
+import { initialStateAdd } from "../Helper/state";
 import MartDelivery from "./MartDelivery";
 import MartContact from "./MartContact";
 import MartAdmin from "./MartAdmin";

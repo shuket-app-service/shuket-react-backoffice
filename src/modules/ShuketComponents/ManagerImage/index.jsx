@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import SalesCollectionTable from "./SalesCollectionTable";
-import SalesCollectionFilter from "./SalesCollectionFilter";
 import AppLoader from "@crema/components/AppLoader";
 import { useDispatch } from "react-redux";
-import { getSalesCollectionList } from "../../store/salesCollection/thunk";
 import { useLocaleContext } from "@crema/context/AppContextProvider/LocaleContextProvider";
+import ManagerImageTable from "./ManagerImageTable";
+import ManagerImageFilter from "./ManagerImageFilter";
+import { getManagementImageList } from "../../store/managerImage/thunk";
 import { initialStateFilter } from "./Helper/state";
 
-export default function SalesCollection() {
+export default function ManagerImage() {
    const { locale } = useLocaleContext();
    const [dataFilter, setDataFilter] = useState(initialStateFilter);
    const [loading, setLoading] = useState(true);
@@ -19,13 +19,13 @@ export default function SalesCollection() {
    const dispatch = useDispatch();
 
    async function fetchData(params) {
-      const response = await dispatch(getSalesCollectionList(params));
-      setRows(response.payload.list_marts);
-      if (response.payload.page_index != 1) {
-         setDataFilter({ ...dataFilter, page: response.payload.page_index });
+      const response = await dispatch(getManagementImageList(params));
+      setRows(response.payload.list_data);
+      if (response.payload.cur_page != 1) {
+         setDataFilter({ ...dataFilter, page: response.payload.cur_page });
       }
-      setPageCount(response.payload.page_count);
-      setSearchCount(response.payload.search_count);
+      setPageCount(response.payload.cur_per_page);
+      setSearchCount(response.payload.total_list_cnt);
 
       setLoading(false);
    }
@@ -63,14 +63,14 @@ export default function SalesCollection() {
             <AppLoader />
          ) : (
             <Box>
-               <SalesCollectionFilter
+               <ManagerImageFilter
                   dataFilter={dataFilter}
                   changeDataFilter={changeDataFilter}
                   handleSearch={handleSearch}
                   handleReset={handleReset}
                   locale={locale}
-               ></SalesCollectionFilter>
-               <SalesCollectionTable
+               ></ManagerImageFilter>
+               <ManagerImageTable
                   rows={rows}
                   dataFilter={dataFilter}
                   changeDataFilterDirectly={changeDataFilterDirectly}
@@ -78,7 +78,7 @@ export default function SalesCollection() {
                   searchCount={searchCount}
                   handleChangePage={handleChangePage}
                   locale={locale}
-               ></SalesCollectionTable>
+               ></ManagerImageTable>
             </Box>
          )}
       </>

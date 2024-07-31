@@ -2,6 +2,7 @@ import React from 'react';
 import { RoutePermittedRole } from '@crema/constants/AppEnums';
 import AppDisplayEdit from '../../../modules/ShuketComponents/MartComponents/AppDisplay/edit';
 import AppDisplayEditAdd from '../../../modules/ShuketComponents/MartComponents/AppDisplay/AppDisplayEditAdd';
+import ManagerImage from '../../../modules/ShuketComponents/ManagerImage';
 
 const SalesCollection = React.lazy(() => import('../../../modules/ShuketComponents/SalesCollection'));
 
@@ -19,6 +20,11 @@ export const shuketConfigs = [
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/service/sales-collection/add-mart',
     element: <SalesCollectionAddMart />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/marts/general-images/list',
+    element: <ManagerImage />,
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
