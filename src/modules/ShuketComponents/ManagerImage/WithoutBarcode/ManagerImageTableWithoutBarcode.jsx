@@ -7,23 +7,23 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, Button, Card, CardContent, Checkbox, Divider, FormControl, MenuItem, Pagination, Select, Stack, styled, TableFooter, TablePagination, Typography } from "@mui/material";
-import { filterLocaleWithoutBarcode, filterLocate, headersLocateWithBarcode } from "../Helper/locate";
+import { filterLocaleWithBarcode, filterLocate, headersLocateWithoutBarcode } from "../Helper/locate";
 import { translate } from "../../../../@crema/services/localization/translate";
 import { limitType, orderEstType, orderType, statusType } from "../Helper/types";
 import SwitchStatus from "../../Common/SwitchStatus";
 import { MdOutlineModeEdit } from "react-icons/md";
-import ManagerImageEditWithBarcode from "./ManagerImageEditWithBarcode";
+import ManagerImageEditWithoutBarcode from "./ManagerImageEditWithoutBarcode";
 
-export default function ManagerImageTableWithBarcode({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
+export default function ManagerImageTableWithoutBarcode({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
    const [headers, setHeaders] = useState([]);
    const [collapseData, setCollapseData] = useState(null);
    const [dataChecked, setDataChecked] = useState([]);
 
    useEffect(() => {
       if (locale.locale == "ko") {
-         setHeaders(headersLocateWithBarcode.kr);
+         setHeaders(headersLocateWithoutBarcode.kr);
       } else {
-         setHeaders(headersLocateWithBarcode.en);
+         setHeaders(headersLocateWithoutBarcode.en);
       }
    }, [locale]);
 
@@ -59,8 +59,8 @@ export default function ManagerImageTableWithBarcode({ rows, dataFilter, changeD
                            ))}
                         </Select>
                      </FormControl>
-                     <Button variant="outlined">{translate(locale, filterLocaleWithoutBarcode.btnChangeStatus)}</Button>
-                     <Button variant="outlined">{translate(locale, filterLocaleWithoutBarcode.btnSyncImage)}</Button>
+                     <Button variant="outlined">{translate(locale, filterLocaleWithBarcode.btnChangeStatus)}</Button>
+                     <Button variant="outlined">{translate(locale, filterLocaleWithBarcode.btnSyncImage)}</Button>
 
                   </Stack>
                <Stack sx={{ p: 5 }} direction="row" justifyContent="space-between" alignItems="center">
@@ -159,7 +159,7 @@ export default function ManagerImageTableWithBarcode({ rows, dataFilter, changeD
                            <TableRow sx={{ display: collapseData === row?.prd_img_code ? "table-row" : " none" }}>
                               <TableCell colSpan={8}>
                                  {" "}
-                                 <ManagerImageEditWithBarcode row={row} closeCollapse={() => setCollapseData(null)}></ManagerImageEditWithBarcode>
+                                 <ManagerImageEditWithoutBarcode row={row} closeCollapse={() => setCollapseData(null)}></ManagerImageEditWithoutBarcode>
                               </TableCell>
                            </TableRow>
                         </Fragment>

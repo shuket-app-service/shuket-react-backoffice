@@ -4,6 +4,14 @@ import AppDisplayEdit from '../../../modules/ShuketComponents/MartComponents/App
 import AppDisplayEditAdd from '../../../modules/ShuketComponents/MartComponents/AppDisplay/AppDisplayEditAdd';
 import ManagerImage from '../../../modules/ShuketComponents/ManagerImage';
 import ManagerImageWithBarcode from '../../../modules/ShuketComponents/ManagerImage/WithBarcode';
+import ManagerImageWithoutBarcode from '../../../modules/ShuketComponents/ManagerImage/WithoutBarcode';
+import Catalogs from '../../../modules/ShuketComponents/Catalogs';
+import NoticeAdmin from '../../../modules/ShuketComponents/Notice/admin';
+import NoticeApp from '../../../modules/ShuketComponents/Notice/app';
+import SettingSite from '../../../modules/ShuketComponents/SettingSite';
+import Fcm from '../../../modules/ShuketComponents/Fcm';
+import AppVersion from '../../../modules/ShuketComponents/AppVersion';
+import ImportProduct from '../../../modules/ShuketComponents/ImportProduct';
 
 const SalesCollection = React.lazy(() => import('../../../modules/ShuketComponents/SalesCollection'));
 
@@ -24,6 +32,16 @@ export const shuketConfigs = [
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/sys-site/config-option',
+    element: <SettingSite />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/service/fcm-management',
+    element: <Fcm />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/marts/general-images/list',
     element: <ManagerImage />,
   },
@@ -34,6 +52,31 @@ export const shuketConfigs = [
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/marts/product-images-without-barcode/list',
+    element: <ManagerImageWithoutBarcode />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/service/import-product',
+    element: <ImportProduct />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/moa-notice',
+    element: <NoticeAdmin />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/moa-notice-messages',
+    element: <NoticeApp />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/admin/catalogs/list',
+    element: <Catalogs />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/app-management/app-builder',
     element: <AppDisplay />,
   },
@@ -41,5 +84,10 @@ export const shuketConfigs = [
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/app-management/app-builder/action',
     element: <AppDisplayEditAdd />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/app-management/app-version',
+    element: <AppVersion />,
   },
 ];

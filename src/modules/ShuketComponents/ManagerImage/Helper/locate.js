@@ -6,7 +6,39 @@ export const headersLocateWithBarcode = {
    kr: ["No", "사진", "이미지 정보",   "로그 정보","상태","수정" ],
    en: ["No", "Image", "Image info",  "Log info", "Status", "Method" ],
 };
+export const headersLocateWithoutBarcode = {
+   kr: ["No", "사진", "이미지 정보",   "로그 정보","상태","수정" ],
+   en: ["No", "Image", "Image info",  "Log info", "Status", "Method" ],
+};
 
+export const filterLocaleWithoutBarcode = {
+   dateReg: {
+      kr: "등록일",
+      en: "Date",
+   },
+   btnChangeStatus:{
+      kr:"상태 변경",
+      en:"Change status"
+   },
+   btnSyncImage:{
+      kr:"선택상품 이미지 연동하기",
+      en:"Sync image to product"
+   }
+}
+export const filterLocaleWithBarcode = {
+   dateReg: {
+      kr: "등록일",
+      en: "Date",
+   },
+   btnChangeStatus:{
+      kr:"상태 변경",
+      en:"Change status"
+   },
+   btnSyncImage:{
+      kr:"선택상품 이미지 연동하기",
+      en:"Sync image to product"
+   }
+}
 export const filterLocate = {
    title: {
     kr:"공통 이미지",

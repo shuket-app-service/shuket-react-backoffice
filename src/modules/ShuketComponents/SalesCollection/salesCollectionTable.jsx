@@ -86,22 +86,22 @@ export default function SalesCollectionTable({ rows, dataFilter, changeDataFilte
                   </TableHead>
                   <TableBody>
                      {rows.map((row) => (
-                        <TableRow key={row.mart_code} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                           <TableCell align="center">{row.number_order}</TableCell>
-                           <TableCell align="center">{row.mart_type_name.kr}</TableCell>
-                           <TableCell align="center">{row.mart_type}</TableCell>
+                        <TableRow key={row?.mart_code} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                           <TableCell align="center">{row?.number_order}</TableCell>
+                           <TableCell align="center">{row?.mart_type_name.kr}</TableCell>
+                           <TableCell align="center">{row?.mart_type}</TableCell>
                            <TableCell align="center">
-                              {row.mart_name} <br />({row.mart_code})
+                              {row?.mart_name} <br />({row?.mart_code})
                            </TableCell>
                            <TableCell align="center">
-                              {row.pos_regcode} / {row.tposcode}
+                              {row?.pos_regcode} / {row?.tposcode}
                            </TableCell>
-                           <TableCell align="center">{row.is_tdc}</TableCell>
-                           <TableCell align="center">{row.is_order_sync}</TableCell>
-                           <TableCell align="center">{row.city_name.kr}</TableCell>
-                           <TableCell align="center">{row.district_name.kr}</TableCell>
-                           <TableCell align="center">{row.register_date}</TableCell>
-                           <TableCell align="center">{row.status === "A" ? "활성화" : ""}</TableCell>
+                           <TableCell align="center">{row?.is_tdc}</TableCell>
+                           <TableCell align="center">{row?.is_order_sync}</TableCell>
+                           <TableCell align="center">{row?.city_name.kr}</TableCell>
+                           <TableCell align="center">{row?.district_name.kr}</TableCell>
+                           <TableCell align="center">{row?.register_date}</TableCell>
+                           <TableCell align="center">{row?.status === "A" ? "활성화" : ""}</TableCell>
                            <TableCell align="center">
                               <Button color="primary" variant="outlined">
                                  {translate(locale, filterLocate.btnEdit)}

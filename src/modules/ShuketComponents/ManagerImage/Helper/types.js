@@ -2,14 +2,14 @@ export const imageSearchType = [
    {
       value: "br_name",
       text: {
-         kr: "Image Name",
+         kr: "이미지명",
          en: "Image Name",
       },
    },
    {
       value: "ig_name",
       text: {
-         kr: "File name",
+         kr: "파일명",
          en: "File name",
       },
    },
@@ -18,21 +18,21 @@ export const imageWithBarcodeSearchType = [
    {
       value: "img_tags",
       text: {
-         kr: "Tag",
+         kr: "태그",
          en: "Tag",
       },
    },
    {
       value: "img_code",
       text: {
-         kr: "Code",
+         kr: "상품 코드",
          en: "Code",
       },
    },
    {
       value: "img_name",
       text: {
-         kr: "Name",
+         kr: "상품명",
          en: "Name",
       },
    },
@@ -43,14 +43,14 @@ export const imageType = [
    {
       value: "B",
       text: {
-         kr: "Banner",
+         kr: "배너",
          en: "Banner",
       },
    },
    {
       value: "C",
       text: {
-         kr: "Coupon",
+         kr: "쿠폰",
          en: "Coupon",
       },
    },
@@ -60,14 +60,14 @@ export const statusType = [
    {
       value: "A",
       text: {
-         kr: "Yes",
+         kr: "사용",
          en: "Yes",
       },
    },
    {
       value: "C",
       text: {
-         kr: "No",
+         kr: "미사용",
          en: "No",
       },
    },
@@ -100,14 +100,14 @@ export const orderEstType = [
    {
       value: "newest",
       text: {
-         kr: "Newest",
+         kr: "새로운순",
          en: "Newest",
       },
    },
    {
       value: "oldest",
       text: {
-         kr: "Oldest",
+         kr: "오래된순",
          en: "Oldest",
       },
    },
@@ -116,14 +116,14 @@ export const orderType = [
    {
       value: "RD",
       text: {
-         kr: "Desc",
+         kr: "새로운순",
          en: "Desc",
       },
    },
    {
       value: "RA",
       text: {
-         kr: "Asc",
+         kr: "오래된순",
          en: "Asc",
       },
    },

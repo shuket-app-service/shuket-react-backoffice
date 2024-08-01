@@ -13,7 +13,19 @@ export const initialStateFilter = {
 };
 export const initialStateFilterWithBarcode = {
    date_end: "",
-   date_start: "",
+   date_start:"",
+   keyword_type: "img_tags",
+   keyword_value: "",
+   per_page: 20,
+   limit_page: 20,
+   order_by:"newest",
+   page: 1,
+   status: "all",
+};
+
+export const initialStateFilterWithoutBarcode = {
+   date_end: "",
+   date_start:"",
    keyword_type: "img_tags",
    keyword_value: "",
    per_page: 20,

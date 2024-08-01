@@ -1,19 +1,4 @@
-import {
-   Box,
-   Button,
-   Card,
-   CardContent,
-   CardHeader,
-   Checkbox,
-   Divider,
-   FormControl,
-   FormControlLabel,
-   MenuItem,
-   Select,
-   Stack,
-   TextField,
-   Typography,
-} from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, Checkbox, Divider, FormControl, FormControlLabel, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { appType, martType, statusType } from "./Helper/types";
 import { useNavigate } from "react-router-dom";
@@ -75,11 +60,7 @@ const SalesCollectionFilter = ({ dataFilter, changeDataFilter, handleSearch, han
                <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
                   <Typography>{translate(locale, filterLocate.status)}</Typography>
                   <FormControl sx={{ m: 1, minWidth: 200 }}>
-                     <Select
-                        displayEmpty={true}
-                        value={dataFilter.status}
-                        onChange={(e) => changeDataFilter({ ...dataFilter, status: e.target.value })}
-                     >
+                     <Select displayEmpty={true} value={dataFilter.status} onChange={(e) => changeDataFilter({ ...dataFilter, status: e.target.value })}>
                         {statusType.map((ele) => (
                            <MenuItem key={ele.value} value={ele.value}>
                               {translate(locale, ele.text)}
@@ -91,11 +72,7 @@ const SalesCollectionFilter = ({ dataFilter, changeDataFilter, handleSearch, han
                <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
                   <Typography>{translate(locale, filterLocate.typeApp)}</Typography>
                   <FormControl sx={{ m: 1, minWidth: 200 }}>
-                     <Select
-                        displayEmpty={true}
-                        value={dataFilter.app_type}
-                        onChange={(e) => changeDataFilter({ ...dataFilter, app_type: e.target.value })}
-                     >
+                     <Select displayEmpty={true} value={dataFilter.app_type} onChange={(e) => changeDataFilter({ ...dataFilter, app_type: e.target.value })}>
                         {appType.map((ele) => (
                            <MenuItem key={ele.value} value={ele.value}>
                               {translate(locale, ele.text)}
@@ -121,12 +98,12 @@ const SalesCollectionFilter = ({ dataFilter, changeDataFilter, handleSearch, han
                         />
                      }
                      label={`${translate(locale, filterLocate.UseTdcOrder)}`}
-                     />
-                        <FormControlLabel
+                  />
+                  <FormControlLabel
                      control={
                         <Checkbox
-                        name={`${translate(locale, filterLocate.UseStock)}`}
-                        checked={dataFilter.mart_with_stock}
+                           name={`${translate(locale, filterLocate.UseStock)}`}
+                           checked={dataFilter.mart_with_stock}
                            onChange={(e) =>
                               changeDataFilter({
                                  ...dataFilter,
@@ -136,15 +113,15 @@ const SalesCollectionFilter = ({ dataFilter, changeDataFilter, handleSearch, han
                         />
                      }
                      label={`${translate(locale, filterLocate.UseStock)}`}
-                     />
+                  />
                </Box>
-                <div></div>
+               <div></div>
                <Stack direction="row" alignItems="center" spacing={5}>
                   <Button variant="contained" onClick={handleSearch}>
                      {translate(locale, filterLocate.btnSearch)}
                   </Button>
                   <Button variant="outlined" color="inherit" onClick={handleReset}>
-                  {translate(locale, filterLocate.btnCancel)}
+                     {translate(locale, filterLocate.btnCancel)}
                   </Button>
                </Stack>
             </Stack>

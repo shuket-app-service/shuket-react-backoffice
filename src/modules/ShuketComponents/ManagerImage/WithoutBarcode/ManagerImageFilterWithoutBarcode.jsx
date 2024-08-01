@@ -1,7 +1,7 @@
 import { Box, Button, Card, CardContent, CardHeader, Checkbox, Divider, FormControl, FormControlLabel, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { filterLocaleWithoutBarcode, filterLocate } from "../Helper/locate";
+import { filterLocaleWithBarcode, filterLocate } from "../Helper/locate";
 import { allSelect, imageSearchType, imageType, imageWithBarcodeSearchType, orderType, statusType, statusWithBarcodeType } from "../Helper/types";
 import { translate } from "../../../../@crema/services/localization/translate";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
@@ -9,7 +9,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import moment from "moment";
 
-const ManagerImageFilterWithBarcode = ({ dataFilter, changeDataFilter, handleSearch, handleReset, locale }) => {
+const ManagerImageFilterWithoutBarcode = ({ dataFilter, changeDataFilter, handleSearch, handleReset, locale }) => {
    const navigate = useNavigate();
    const gotoAddMartPage = () => {
       navigate("add-mart");
@@ -61,7 +61,7 @@ const ManagerImageFilterWithBarcode = ({ dataFilter, changeDataFilter, handleSea
                </Stack>
 
                <Stack direction="row" alignItems="center" gap={3}>
-                  <Typography sx={{ width: 50 }}>{translate(locale, filterLocaleWithoutBarcode.dateReg)}</Typography>
+                  <Typography sx={{ width: 50 }}>{translate(locale, filterLocaleWithBarcode.dateReg)}</Typography>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                      <DatePicker
                         name="date_start"
@@ -109,4 +109,4 @@ const ManagerImageFilterWithBarcode = ({ dataFilter, changeDataFilter, handleSea
    );
 };
 
-export default ManagerImageFilterWithBarcode;
+export default ManagerImageFilterWithoutBarcode;

@@ -3,6 +3,7 @@ import apiAuth from "../../../@crema/services/axios/ApiConfig";
 
 const GET_MANAGEMENT_IMAGE_LIST = "/admin/management_imges/list";
 const GET_IMAGE_WITH_BARCODE = "/product_images/get_list_images_with_barcode";
+const GET_IMAGE_WITHOUT_BARCODE = "/product_images/get_list_images_without_barcode";
 
 
 export const getManagementImageList = createAsyncThunk(
@@ -23,6 +24,19 @@ export const getManagementImageList = createAsyncThunk(
     async (data, { rejectWithValue }) => {
       try {
         const response = await apiAuth.post(GET_IMAGE_WITH_BARCODE, data);
+        return response.data.data;
+      } catch (err) {
+        return rejectWithValue(err.message);
+      }
+    }
+  );
+
+  
+  export const getImageWithoutBarcode = createAsyncThunk(
+    GET_IMAGE_WITHOUT_BARCODE,
+    async (data, { rejectWithValue }) => {
+      try {
+        const response = await apiAuth.post(GET_IMAGE_WITHOUT_BARCODE, data);
         return response.data.data;
       } catch (err) {
         return rejectWithValue(err.message);

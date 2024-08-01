@@ -63,7 +63,7 @@ export default function ManagerImageTable({ rows, dataFilter, changeDataFilterDi
                   </TableHead>
                   <TableBody>
                      {rows.map((row) => (
-                        <TableRow key={row.mart_code} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                        <TableRow key={row?.mart_code} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                            <TableCell align="center">{row?.bnr_code}</TableCell>
                            <TableCell align="center">
                               <img style={{ width: 120 }} alt="" src={row?.bnr_image} />
