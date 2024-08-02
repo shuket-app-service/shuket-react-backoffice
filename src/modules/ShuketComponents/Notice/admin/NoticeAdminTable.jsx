@@ -74,7 +74,7 @@ export default function NoticeAdminTable({ rows, dataFilter, changeDataFilterDir
                            <TableCell align="center">{row?.notice_etime} </TableCell>
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <Button variant="outlined"> {translate(locale, filterLocate.btnEdit)}</Button>
+                                 <Button variant="outlined"  color="warning"> {translate(locale, filterLocate.btnEdit)}</Button>
                                  <Button variant="outlined" color="error">
                                     {" "}
                                     {translate(locale, filterLocate.btnDelete)}

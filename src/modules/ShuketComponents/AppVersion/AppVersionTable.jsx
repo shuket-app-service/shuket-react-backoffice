@@ -100,7 +100,7 @@ export default function AppVersionTable({ rows, dataFilter, changeDataFilter, pa
 
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <Button variant="outlined"> {translate(locale, filterLocate.btnEdit)}</Button>
+                                 <Button variant="outlined"   color="warning"> {translate(locale, filterLocate.btnEdit)}</Button>
                               </Stack>
                            </TableCell>
                         </TableRow>

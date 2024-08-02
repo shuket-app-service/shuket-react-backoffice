@@ -103,7 +103,7 @@ export default function SalesCollectionTable({ rows, dataFilter, changeDataFilte
                            <TableCell align="center">{row?.register_date}</TableCell>
                            <TableCell align="center">{row?.status === "A" ? "활성화" : ""}</TableCell>
                            <TableCell align="center">
-                              <Button color="primary" variant="outlined">
+                              <Button color="warning" variant="outlined">
                                  {translate(locale, filterLocate.btnEdit)}
                               </Button>
                            </TableCell>

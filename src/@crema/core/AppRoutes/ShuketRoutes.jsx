@@ -12,6 +12,8 @@ import SettingSite from '../../../modules/ShuketComponents/SettingSite';
 import Fcm from '../../../modules/ShuketComponents/Fcm';
 import AppVersion from '../../../modules/ShuketComponents/AppVersion';
 import ImportProduct from '../../../modules/ShuketComponents/ImportProduct';
+import ManagerAdminLevel from '../../../modules/ShuketComponents/ManagerAdmin/Level';
+import ManagerAdminAccount from '../../../modules/ShuketComponents/ManagerAdmin/Account';
 
 const SalesCollection = React.lazy(() => import('../../../modules/ShuketComponents/SalesCollection'));
 
@@ -39,6 +41,16 @@ export const shuketConfigs = [
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/service/fcm-management',
     element: <Fcm />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/admin/account/list',
+    element: <ManagerAdminAccount />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/admin/account/level',
+    element: <ManagerAdminLevel />,
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],

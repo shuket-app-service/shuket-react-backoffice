@@ -55,7 +55,8 @@ export const defaultTheme = {
         light: '#D9F5E5',
       },
       warning: {
-        main: '#FF5252',
+        main: '#F38734',
+        contrastText: '#fff',
         light: '#FFECDC',
       },
       text: textLight,

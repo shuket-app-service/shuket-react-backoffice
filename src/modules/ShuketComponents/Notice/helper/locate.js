@@ -33,6 +33,18 @@ export const headersLocateApp = {
        kr: "취소",
        en: "Cancel",
     },
+    btnShowMarts:{
+      kr:"마트 보기",
+      en:"마트 보기"
+    },
+    btnEdit: {
+      kr: "설정",
+      en: "Edit",
+   },
+   btnDelete: {
+      kr: "삭제",
+      en: "Delete",
+   },
  };
  
 

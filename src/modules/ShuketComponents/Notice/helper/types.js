@@ -23,3 +23,6 @@ export const noticeAppType = [
   ]
 
   export const limitType = [10, 15, 20, 25, 30, 50, 100];
+
+
+  export const martType = ["ALL", "GSK", "YSK", "SK", "SG"]
