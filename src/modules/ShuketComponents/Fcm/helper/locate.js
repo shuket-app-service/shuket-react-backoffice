@@ -3,6 +3,36 @@ export const headersLocate = {
    en: ["No", "FCM Code", "FCM Name", "Register date", "Method"],
 };
 
+export const filterLocateEdit = {
+   title: {
+      kr: "FCM 수정",
+      en: "Edit FCM",
+   },
+   btnBack: {
+      kr: " 뒤로",
+      en: "Back",
+   },
+   btnUpload: {
+      kr: "Json 파일 업로두",
+      en: "Upload File Json",
+   },
+   btnSave: {
+      kr: " 뒤로",
+      en: "Save",
+   },
+   fcmName: {
+      kr: "FCM 이름(*)",
+      en: "FCM NAME",
+   },
+   fcmKey: {
+      kr: "FCM 키(*)",
+      en: "FCM KEY",
+   },
+   fcmJson: {
+      kr: "Json 파일(*)",
+      en: "FCM JSON",
+   },
+};
 
 export const filterLocate = {
    title: {

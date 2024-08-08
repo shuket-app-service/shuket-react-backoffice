@@ -150,16 +150,17 @@ const ManagerAdminAccountFilter = ({ dataFilter, levels, groups, handleSearch, h
                         horizontal: "left",
                      }}
                   >
-
                      <Stack sx={{ p: 5 }} gap={5}>
-                        {dateType.map((ele) => {
-                           return (
-                              <Button variant="outlined" color="primary"  onClick={() => handleSetDate(ele)}>
-                                 {" "}
-                                 {translate(locale, ele.text)}
-                              </Button>
-                           );
-                        })}
+                        <Stack sx={{ width: 500 }} gap={5} justifyContent={"center"} direction="row" useFlexGap flexWrap="wrap">
+                           {dateType.map((ele) => {
+                              return (
+                                 <Button variant="outlined" color="primary" onClick={() => handleSetDate(ele)}>
+                                    {translate(locale, ele.text)}
+                                 </Button>
+                              );
+                           })}
+                        </Stack>
+
                         {choseDateType === "custom" && <DateRangePickerValue dataCustom={dataCustom} changeDateCustom={changeDateCustom}></DateRangePickerValue>}
                         <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
                            <Button variant="contained" onClick={handleSetCustomDate}>

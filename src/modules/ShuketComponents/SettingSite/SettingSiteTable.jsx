@@ -10,7 +10,7 @@ import { Box, Button, Card, CardContent, Checkbox, Divider, FormControl, MenuIte
 import { filterLocate, headersLocate } from "./helper/locate";
 import { translate } from "../../../@crema/services/localization/translate";
 
-export default function SettingSiteTable({ rows, dataFilter, pageCount, searchCount, handleChangePage, locale }) {
+export default function SettingSiteTable({ rows, dataFilter, pageCount, searchCount, handleChangePage, handleOpenEdit, locale }) {
    const [headers, setHeaders] = useState([]);
 
    useEffect(() => {
@@ -52,7 +52,7 @@ export default function SettingSiteTable({ rows, dataFilter, pageCount, searchCo
                            </TableCell>
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <Button variant="outlined" color="warning"> {translate(locale, filterLocate.btnEdit)}</Button>
+                                 <Button variant="outlined" color="warning" onClick={()=>handleOpenEdit(row)}> {translate(locale, filterLocate.btnEdit)}</Button>
                               </Stack>
                            </TableCell>
                         </TableRow>

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import apiAuth from "../../../@crema/services/axios/ApiConfig";
+import apiAuth from "../../../../@crema/services/axios/ApiConfig";
 
 const GET_PARTNER_OPTIONS = "/partner/get_partner_options";
 

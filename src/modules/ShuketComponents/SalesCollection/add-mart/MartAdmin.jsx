@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from "@mui/material";
 import { translate } from "../../../../@crema/services/localization/translate";
 import { useDispatch } from "react-redux";
-import { getGroupOption, getLevelOption } from "../../../store/users/thunk";
 import { defaultSelect } from "../Helper/types";
 import { checkUserAdminId } from "../../../store/salesCollection/thunk";
 import TextValidate from "../../Common/TextValidate";
 import { stateIDInvalid, stateIDValid } from "../Helper/state";
 import TextCorrect from "../../Common/TextCorrect";
+import { getGroupOption, getLevelOption } from "../../../store/managerAdmin/thunk";
 
 const MartAdmin = ({ locale, values, setFieldValue, errors }) => {
    const dispatch = useDispatch();

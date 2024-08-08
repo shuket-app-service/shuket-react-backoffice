@@ -6,16 +6,23 @@ import { useLocaleContext } from "@crema/context/AppContextProvider/LocaleContex
 import { getSettingSite } from "../../store/settingSite/thunk";
 import { initialStateFilter } from "./helper/state";
 import SettingSiteTable from "./SettingSiteTable";
+import SettingSiteEditModal from "./SettingSiteEditModal";
 
 export default function SettingSite() {
    const { locale } = useLocaleContext();
+   const dispatch = useDispatch();
+
    const [loading, setLoading] = useState(false);
    const [rows, setRows] = useState([]);
    const [pageCount, setPageCount] = useState(1); // page_count
    const [searchCount, setSearchCount] = useState(0); //search_count
    const [dataFilter, setDataFilter] = useState(initialStateFilter);
 
-   const dispatch = useDispatch();
+   const [dataEdit, setDataOpen] = useState(null); // setting modal
+
+   const handleOpenEdit = (value) => { // open, close setting modal
+      setDataOpen(value)
+   }
 
    async function fetchData(params) {
       setLoading(true);
@@ -46,7 +53,8 @@ export default function SettingSite() {
             <AppLoader />
          ) : (
             <Box>
-               <SettingSiteTable rows={rows} dataFilter={dataFilter} pageCount={pageCount} searchCount={searchCount} handleChangePage={handleChangePage} locale={locale}></SettingSiteTable>
+               <SettingSiteEditModal dataEdit={dataEdit} handleOpenEdit={handleOpenEdit} locale={locale}></SettingSiteEditModal>
+               <SettingSiteTable rows={rows} dataFilter={dataFilter} pageCount={pageCount} searchCount={searchCount} handleChangePage={handleChangePage} handleOpenEdit={handleOpenEdit} locale={locale}></SettingSiteTable>
             </Box>
          )}
       </>

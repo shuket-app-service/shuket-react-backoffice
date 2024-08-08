@@ -6,6 +6,28 @@ const GET_LEVEL_LIST = "/users/search_level_list";
 const GET_GROUP_OPTION = "/users/group_options";
 const GET_LEVEL_OPTION = "/users/level_options";
 const GET_USER_LIST = "/users/search_list";
+const GET_PERMISSION_LEVEL = "/users/get_progs_role_by_lv";
+const GET_PERMISSION_USER = "/users/get_progs_role_by_id";
+
+
+
+export const getPermissionUser = createAsyncThunk(GET_PERMISSION_USER, async (data, { rejectWithValue }) => {
+   try {
+      const response = await apiAuth.get(`${GET_PERMISSION_USER}?user_id=${data}`);
+      return response.data.data.list_progs;
+   } catch (err) {
+      return rejectWithValue(err.message);
+   }
+});
+
+export const getPermissionLevel = createAsyncThunk(GET_PERMISSION_LEVEL, async (data, { rejectWithValue }) => {
+   try {
+      const response = await apiAuth.get(`${GET_PERMISSION_LEVEL}?level_cd=${data}`);
+      return response.data.data.list_progs;
+   } catch (err) {
+      return rejectWithValue(err.message);
+   }
+});
 
 export const getGroupOption = createAsyncThunk(GET_GROUP_OPTION, async (data, { rejectWithValue }) => {
    try {

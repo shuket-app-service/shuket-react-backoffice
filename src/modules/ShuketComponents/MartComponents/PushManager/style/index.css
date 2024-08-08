@@ -1,0 +1,7 @@
+.ck-editor__editable{
+    min-height: 450px;
+}
+.ck-my-icon-custom{
+    width: 50px !important;
+    height: 50px !important;
+}

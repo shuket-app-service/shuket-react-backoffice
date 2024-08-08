@@ -6,8 +6,8 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
-import { getPartnerOption } from "../../../store/partner/thunk";
 import { getSalesTeamOption } from "../../../store/main/thunk";
+import { getPartnerOption } from "../../../store/main/partner/thunk";
 
 const MartBilling = ({ locale, values, setFieldValue, errors }) => {
    const [partnerType, setPartnerType] = useState([]);

@@ -9,9 +9,11 @@ import Paper from "@mui/material/Paper";
 import { Box, Button, Card, CardContent, Checkbox, Divider, FormControl, MenuItem, Pagination, Select, Stack, styled, TableFooter, TablePagination, Typography } from "@mui/material";
 import { filterLocate, headersLocate } from "./helper/locate";
 import { translate } from "../../../@crema/services/localization/translate";
+import { useNavigate } from "react-router-dom";
 
 export default function FcmTable({ rows, dataFilter, pageCount, searchCount, handleChangePage, locale }) {
    const [headers, setHeaders] = useState([]);
+   const navigate = useNavigate()
 
    useEffect(() => {
       if (locale.locale == "ko") {
@@ -21,6 +23,10 @@ export default function FcmTable({ rows, dataFilter, pageCount, searchCount, han
       }
    }, [locale]);
 
+
+   const gotoDetail = (fcmCode) =>{
+      navigate(`edit-fcm?fcm_code=${fcmCode}`)
+   }
    return (
       <>
          <Box>
@@ -52,7 +58,7 @@ export default function FcmTable({ rows, dataFilter, pageCount, searchCount, han
 
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <Button variant="outlined" color="warning"> {translate(locale, filterLocate.btnEdit)}</Button>
+                                 <Button variant="outlined" color="warning" onClick={()=>gotoDetail(row?.fcm_code)}> {translate(locale, filterLocate.btnEdit)}</Button>
                               </Stack>
                            </TableCell>
                         </TableRow>

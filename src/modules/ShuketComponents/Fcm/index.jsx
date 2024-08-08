@@ -7,6 +7,7 @@ import { getSettingSite } from "../../store/settingSite/thunk";
 import { initialStateFilter } from "./helper/state";
 import FcmTable from "./FcmTable";
 import { getFcmList } from "../../store/fcm/thunk";
+import { useLocation } from "react-router-dom";
 
 export default function Fcm() {
    const { locale } = useLocaleContext();
@@ -15,6 +16,7 @@ export default function Fcm() {
    const [pageCount, setPageCount] = useState(1); // page_count
    const [searchCount, setSearchCount] = useState(0); //search_count
    const [dataFilter, setDataFilter] = useState(initialStateFilter);
+   const location = useLocation()
 
    const dispatch = useDispatch();
 
@@ -41,6 +43,7 @@ export default function Fcm() {
       fetchData({ per_page: dataFilter.per_page, page: value });
    };
 
+   console.log(location)
    return (
       <>
          {loading ? (

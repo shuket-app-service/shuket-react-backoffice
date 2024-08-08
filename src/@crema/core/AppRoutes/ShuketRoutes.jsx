@@ -14,6 +14,9 @@ import AppVersion from '../../../modules/ShuketComponents/AppVersion';
 import ImportProduct from '../../../modules/ShuketComponents/ImportProduct';
 import ManagerAdminLevel from '../../../modules/ShuketComponents/ManagerAdmin/Level';
 import ManagerAdminAccount from '../../../modules/ShuketComponents/ManagerAdmin/Account';
+import FcmEdit from '../../../modules/ShuketComponents/Fcm/edit';
+import PushManagerEditAdd from '../../../modules/ShuketComponents/MartComponents/PushManager/PushManagerEditAdd';
+import PushManager from '../../../modules/ShuketComponents/MartComponents/PushManager';
 
 const SalesCollection = React.lazy(() => import('../../../modules/ShuketComponents/SalesCollection'));
 
@@ -41,6 +44,11 @@ export const shuketConfigs = [
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/service/fcm-management',
     element: <Fcm />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/service/fcm-management/edit-fcm',
+    element: <FcmEdit />,
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
@@ -96,6 +104,16 @@ export const shuketConfigs = [
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/app-management/app-builder/action',
     element: <AppDisplayEditAdd />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/app-management/app-push',
+    element: <PushManager />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/app-management/app-push/action',
+    element: <PushManagerEditAdd />,
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],

@@ -7,6 +7,7 @@ import { getGroupOption, getLevelOption, getUserList } from "../../../store/mana
 import ManagerAdminAccountTable from "./ManagerAdminAccountTable";
 import ManagerAdminAccountFilter from "./ManagerAdminAccountFilter";
 import { initialStateFilter } from "../helper/state";
+import ManagerAdminAccountPermission from "./ManagerAdminAccountPermission";
 
 export default function ManagerAdminAccount() {
    const { locale } = useLocaleContext();
@@ -15,6 +16,9 @@ export default function ManagerAdminAccount() {
    const [levels, setLevels] = useState([]);
    const [groups, setGroups] = useState([]);
    const [dataFilter, setDataFilter] = useState(initialStateFilter);
+
+   //modal
+   const [dataOpenPermission, setDataOpenPermission] = useState(null);
 
    const [pageCount, setPageCount] = useState(1); // page_count
    const [searchCount, setSearchCount] = useState(0); //search_count
@@ -65,12 +69,19 @@ export default function ManagerAdminAccount() {
       fetchData(initialStateFilter);
    };
 
+   //modal
+
+   const handleSetDataOpenPermission = (value) => {
+      setDataOpenPermission(value);
+   };
    return (
       <>
          {loading ? (
             <AppLoader />
          ) : (
             <Box>
+               <ManagerAdminAccountPermission dataOpenPermission={dataOpenPermission} handleSetDataOpenPermission={handleSetDataOpenPermission} locale={locale}></ManagerAdminAccountPermission>
+
                <ManagerAdminAccountFilter
                   dataFilter={dataFilter}
                   levels={levels}
@@ -87,6 +98,7 @@ export default function ManagerAdminAccount() {
                   pageCount={pageCount}
                   searchCount={searchCount}
                   handleChangePage={handleChangePage}
+                  handleSetDataOpenPermission={handleSetDataOpenPermission}
                   locale={locale}
                ></ManagerAdminAccountTable>
             </Box>

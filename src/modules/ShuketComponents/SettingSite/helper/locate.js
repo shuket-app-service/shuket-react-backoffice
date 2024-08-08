@@ -3,7 +3,12 @@ export const headersLocate = {
    en: ["No", "Name", "Status", "Method"],
 };
 
-
+export const modalLocate = {
+   title:{
+      kr:"Edit config setting",
+      en:"Edit config setting"
+   }
+}
 export const filterLocate = {
    title: {
       kr: "사이트 세팅 설정",

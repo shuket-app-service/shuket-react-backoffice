@@ -11,7 +11,7 @@ import { filterLocateAccount, headersLocateAccount } from "../helper/locate";
 import { translate } from "../../../../@crema/services/localization/translate";
 import { limitType, orderType } from "../helper/types";
 
-export default function ManagerAdminAccountTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
+export default function ManagerAdminAccountTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, handleSetDataOpenPermission, locale }) {
    const [headers, setHeaders] = useState([]);
 
    useEffect(() => {
@@ -93,7 +93,7 @@ export default function ManagerAdminAccountTable({ rows, dataFilter, changeDataF
                            <TableCell align="center">{row?.level_name} </TableCell>
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <Button variant="outlined" color="info">
+                                 <Button variant="outlined" color="info"  onClick={()=>handleSetDataOpenPermission(row?.id)}>
                                     {translate(locale, filterLocateAccount.btnPermission)}
                                  </Button>
                                  <Button variant="outlined" color="warning">

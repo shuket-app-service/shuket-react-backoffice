@@ -10,7 +10,7 @@ import { Box, Button, Card, CardContent, Stack, styled, Typography } from "@mui/
 import { filterLocate, headersLocate } from "../helper/locate";
 import { translate } from "../../../../@crema/services/localization/translate";
 
-export default function ManagerAdminLevelTable({ rows, locale }) {
+export default function ManagerAdminLevelTable({ rows, locale, handleSetDataOpen }) {
    const [headers, setHeaders] = useState([]);
 
    useEffect(() => {
@@ -49,7 +49,7 @@ export default function ManagerAdminLevelTable({ rows, locale }) {
                            <TableCell align="center">{row?.name} </TableCell>
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <Button variant="outlined" color="warning">
+                                 <Button variant="outlined" color="info" onClick={()=>handleSetDataOpen(row?.code)}>
                                     {" "}
                                     {translate(locale, filterLocate.btnEdit)}
                                  </Button>

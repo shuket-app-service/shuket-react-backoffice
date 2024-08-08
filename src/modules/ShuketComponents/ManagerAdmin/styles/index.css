@@ -1,0 +1,4 @@
+/* override react-collapse library*/
+.ReactCollapse--collapse {
+    transition: height 250ms;
+}
