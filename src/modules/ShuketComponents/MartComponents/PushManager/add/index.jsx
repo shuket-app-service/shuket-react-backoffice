@@ -1,29 +1,30 @@
-import { Button, Card, CardContent, Stack, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Paper, Stack, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PushManagerAddEditor from "./editor";
+import PushManagerAddEditor from "./PushManagerAddEditor";
+import PushManagerAddFilter from "./PushManagerAddFilter";
+import { useLocaleContext } from "@crema/context/AppContextProvider/LocaleContextProvider";
+import PushManagerAddForm from "./PushManagerAddForm";
 
 const PushManagerAdd = () => {
-   const navigate = useNavigate();
-
-   const gotoBack = () => {
-      navigate("/app-management/app-push");
-   };
+   const { locale } = useLocaleContext();
+   const [dataSelect, setDataSelect] = useState("");
 
 
-
+   const handleSelect = (row) =>{
+      setDataSelect(row)
+   }
    return (
-      <Card sx={{ borderRadius: 0 }}>
-         <CardContent >
-            <Stack direction={"row"} justifyContent={"space-between"} sx={{ mb: 5 }}>
-               <Typography></Typography>
-               <Button variant="contained" onClick={gotoBack}>
-                  Back
-               </Button>
+      <Box>
+         <PushManagerAddFilter locale={locale} />
+         <Paper sx={{ p: 5 }}>
+            <Stack gap={5}>
+               <PushManagerAddForm locale={locale} dataSelect={dataSelect} handleSelect={handleSelect}  />
+
+               <PushManagerAddEditor dataSelect={dataSelect}/>
             </Stack>
-            <PushManagerAddEditor/>
-         </CardContent>
-      </Card>
+         </Paper>
+      </Box>
    );
 };
 

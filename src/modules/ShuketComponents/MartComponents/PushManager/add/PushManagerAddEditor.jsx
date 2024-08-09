@@ -25,13 +25,17 @@ import {
 } from "ckeditor5";
 import "../style/index.css";
 import "ckeditor5/ckeditor5.css";
-import { MyIconDialog } from "./dialog";
-import RawHtml from "./raw";
+import { MyIconDialog } from "./iconDialog";
 import { initialBackendNode } from "../../../../../@crema/constants/AppConst";
+import PushManagerRaw from "./PushManagerRaw";
 
-function PushManagerAddEditor() {
-   const [dataDefault, setData] = useState("<p>Hello from the first editor working with the context!</p>");
-   const editorRef = useRef();
+function PushManagerAddEditor({dataSelect}) {
+   const [dataEditor, setDataEditor] = useState("");
+   useEffect(()=>{
+      if(dataSelect){
+         setDataEditor(dataSelect?.push_content)
+      }
+   },[dataSelect])
 
    return (
       <CKEditorContext context={Context} contextWatchdog={ContextWatchdog}>
@@ -83,7 +87,7 @@ function PushManagerAddEditor() {
                   },
                },
             }}
-            data={dataDefault}
+            data={dataEditor}
             onReady={(editor) => {
                editor.editing.view.document.on("clipboardInput", (evt, data) => {
                   let divContentContainer = document.createElement("div");
@@ -125,7 +129,6 @@ function PushManagerAddEditor() {
                   divContentContainer.innerHTML = newHTML;
                   if (newHTML) {
                      evt.stop(); // preven insert default
-                     // setData(divContentContainer.innerHTML);
                      editor.model.change((writer) => {
                         const content = divContentContainer.innerHTML;
                         const viewFragment = editor.data.processor.toView(content);
@@ -138,10 +141,10 @@ function PushManagerAddEditor() {
             onChange={(event, editor) => {
                const data = editor.getData();
                // console.log({ event, editor, data });
-               setData(data);
+               setDataEditor(data);
             }}
          />
-         <RawHtml dataDefault={dataDefault} />
+         <PushManagerRaw dataEditor={dataEditor} />
       </CKEditorContext>
    );
 }

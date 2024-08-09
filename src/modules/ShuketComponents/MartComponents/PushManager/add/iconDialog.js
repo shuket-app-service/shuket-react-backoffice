@@ -1,5 +1,5 @@
 import { ButtonView, Dialog, View, Plugin } from "ckeditor5";
-import { icon, imageData } from "../helper/types";
+import { icon, iconTypes } from "../helper/types";
 import { width } from "@mui/system";
 
 
@@ -37,7 +37,7 @@ export class MyIconDialog extends Plugin {
             // Tell the plugin to display a dialog with the title, content, and one action button.
             const ListImg = new View(locale);
 
-            let ImageChildren = imageData.map((image) => {
+            let ImageChildren = iconTypes.map((image) => {
                let ImgButton = new ButtonView(locale);
 
                ImgButton.set({
@@ -49,7 +49,7 @@ export class MyIconDialog extends Plugin {
                ImgButton.on("execute", () => {
                   dialog.hide(); // close the dialog
                   const imageUtils = editor.plugins.get( 'ImageUtils' );
-                  imageUtils.insertImage( { src: image.url, width: 25, height: 25, alt: image.title },  );
+                  imageUtils.insertImage( { src: image.url, width: 23, height: 23, alt: image.title },  );
                });
 
                ImgButton.labelView.setTemplate({
