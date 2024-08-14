@@ -10,7 +10,7 @@ import CatalogFilter from "./CatalogFilter";
 
 export default function Catalogs() {
    const { locale } = useLocaleContext();
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [rows, setRows] = useState([]);
    const [pageCount, setPageCount] = useState(1); // page_count
    const [searchCount, setSearchCount] = useState(0); //search_count
@@ -19,7 +19,6 @@ export default function Catalogs() {
    const dispatch = useDispatch();
 
    async function fetchData(params) {
-      setLoading(true);
       const response = await dispatch(getCatalogList(params));
       setRows(response.payload?.list_data);
       if (response.payload?.cur_page != 1) {

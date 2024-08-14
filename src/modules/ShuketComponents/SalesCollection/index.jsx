@@ -11,7 +11,7 @@ import { initialStateFilter } from "./Helper/state";
 export default function SalesCollection() {
    const { locale } = useLocaleContext();
    const [dataFilter, setDataFilter] = useState(initialStateFilter);
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [rows, setRows] = useState([]);
    const [pageCount, setPageCount] = useState(1); // page_count
    const [searchCount, setSearchCount] = useState(0); //search_count
@@ -19,7 +19,6 @@ export default function SalesCollection() {
    const dispatch = useDispatch();
 
    async function fetchData(params) {
-      setLoading(true)
       const response = await dispatch(getSalesCollectionList(params));
       setRows(response.payload.list_marts);
       if (response.payload.page_index != 1) {

@@ -51,7 +51,7 @@ const PushManagerAddForm = ({ locale, dataSelect, handleSelect }) => {
    };
 
    async function fetchDataDetail(code, isSelect) {
-      setBackdropLoading(true);
+      // setBackdropLoading(true);
 
       const response = await dispatch(getPushDetail(code));
       if (isSelect) {
@@ -61,7 +61,7 @@ const PushManagerAddForm = ({ locale, dataSelect, handleSelect }) => {
          setDataDetail(response.payload); // data
       }
 
-      setBackdropLoading(false);
+      // setBackdropLoading(false);
    }
 
    const handleViewDetail = (code) => {

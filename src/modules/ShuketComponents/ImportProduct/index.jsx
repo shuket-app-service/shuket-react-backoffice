@@ -10,7 +10,7 @@ import { getMartsImport } from "../../store/importProduct/thunk";
 
 export default function ImportProduct() {
    const { locale } = useLocaleContext();
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [martList, setMartList] = useState([]);
    const [mart, setMart] = useState("");
 
@@ -19,13 +19,10 @@ export default function ImportProduct() {
    const dispatch = useDispatch();
 
    async function fetchData() {
-      setLoading(true);
       const response = await dispatch(getMartsImport());
       setMartList(response?.payload);
       setLoading(false);
    }
-
-   console.log(mart);
    useEffect(() => {
       fetchData();
       return () => {};
@@ -36,6 +33,7 @@ export default function ImportProduct() {
          {loading ? (
             <AppLoader />
          ) : (
+            martList && (
             <Box>
                <Card sx={{ borderRadius: 0 }}>
                   <CardContent>
@@ -81,6 +79,7 @@ export default function ImportProduct() {
                   </CardContent>
                </Card>
             </Box>
+            )
          )}
       </>
    );

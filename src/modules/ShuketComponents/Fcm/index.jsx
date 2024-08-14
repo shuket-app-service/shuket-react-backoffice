@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 
 export default function Fcm() {
    const { locale } = useLocaleContext();
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [rows, setRows] = useState([]);
    const [pageCount, setPageCount] = useState(1); // page_count
    const [searchCount, setSearchCount] = useState(0); //search_count
@@ -21,7 +21,6 @@ export default function Fcm() {
    const dispatch = useDispatch();
 
    async function fetchData(params) {
-      setLoading(true);
       const response = await dispatch(getFcmList(params));
       setRows(response.payload?.fcm_list); // data
       if (response.payload?.cur_page != 1) {

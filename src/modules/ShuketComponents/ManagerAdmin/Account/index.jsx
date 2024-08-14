@@ -11,7 +11,7 @@ import ManagerAdminAccountPermission from "./ManagerAdminAccountPermission";
 
 export default function ManagerAdminAccount() {
    const { locale } = useLocaleContext();
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [rows, setRows] = useState([]);
    const [levels, setLevels] = useState([]);
    const [groups, setGroups] = useState([]);
@@ -26,7 +26,6 @@ export default function ManagerAdminAccount() {
    const dispatch = useDispatch();
 
    async function fetchData(params) {
-      setLoading(true);
       const resUser = await dispatch(getUserList(params));
       setRows(resUser.payload?.rows_users); // data
       setPageCount(resUser.payload?.page_count);

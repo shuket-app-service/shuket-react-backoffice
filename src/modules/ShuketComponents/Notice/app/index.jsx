@@ -12,7 +12,7 @@ import BackdropLoad from "../../Common/BackdropLoad";
 
 export default function NoticeApp() {
    const { locale } = useLocaleContext();
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [backdropLoading, setBackdropLoading] = useState(false);
 
    const [rows, setRows] = useState([]);
@@ -30,7 +30,6 @@ export default function NoticeApp() {
    const dispatch = useDispatch();
 
    async function fetchData(params) {
-      setLoading(true);
       const response = await dispatch(getAppNoticeList(params));
       setRows(response.payload?.list_notice); // data
       if (response.payload?.page_index != 1) {

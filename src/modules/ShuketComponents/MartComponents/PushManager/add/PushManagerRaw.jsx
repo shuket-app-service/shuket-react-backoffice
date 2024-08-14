@@ -5,6 +5,7 @@ import { darcula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import * as prettier from "prettier/standalone";
 import * as htmlParser from "prettier/parser-html";
 const PushManagerRaw = ({ dataEditor }) => {
+   console.log("dataEditor", dataEditor)
    const [dataCoder, setDataCoder] = useState(null);
 
    const fetchData = async (data) => {

@@ -11,7 +11,7 @@ import { initialStateFilterWithoutBarcode } from "../Helper/state";
 export default function ManagerImageWithoutBarcode() {
    const { locale } = useLocaleContext();
    const [dataFilter, setDataFilter] = useState(initialStateFilterWithoutBarcode);
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [rows, setRows] = useState([]);
 
    const [pageCount, setPageCount] = useState(1); // page_count
@@ -20,7 +20,6 @@ export default function ManagerImageWithoutBarcode() {
    const dispatch = useDispatch();
 
    async function fetchData(params) {
-      setLoading(true)
       const response = await dispatch(getImageWithoutBarcode(params));
       setRows(response.payload.list_img);
       if (response.payload.cur_page != 1) {

@@ -8,20 +8,21 @@ import { initialStateFilter } from "./helper/state";
 import { useDispatch } from "react-redux";
 import ProductRegisterFilter from "./ProductRegisterFilter";
 import ProductRegisterDetail from "./ProductRegisterDetail";
+import ProductRegisterMinMax from "./ProductRegisterMinMax";
 
 const ProductManagerRegister = () => {
    const { locale } = useLocaleContext();
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [rows, setRows] = useState([]);
    const [pageCount, setPageCount] = useState(1); // page_count
    const [searchCount, setSearchCount] = useState(0); //search_count
    const [dataFilter, setDataFilter] = useState(initialStateFilter);
    const [dataDetail, setDataDetail] = useState(null);
+   const [dataMinMax, setDataMinMax] = useState(null);
 
    const dispatch = useDispatch();
 
    async function fetchData(params) {
-      setLoading(true);
       const response = await dispatch(getProductRegister(params));
       setRows(response.payload?.list_product); // data
       if (response.payload?.page_count != 1) {
@@ -44,6 +45,10 @@ const ProductManagerRegister = () => {
       fetchData(value);
    };
 
+   const changeDataFilter = (value) => {
+      setDataFilter(value);
+   };
+
    const handleChangePage = (event, value) => {
       setDataFilter({ ...dataFilter, page: value });
       fetchData({ ...dataFilter, page: value });
@@ -56,14 +61,23 @@ const ProductManagerRegister = () => {
    const handleCloseDetail = () => {
       setDataDetail(null);
    };
+
+   const handleEditMinMax = (row) =>{
+      setDataMinMax(row)
+   }
+   const handleCloseMinMax = () =>{
+      setDataMinMax(null)
+   }
    return (
       <>
          {loading ? (
             <AppLoader />
          ) : (
             <Box>
-               <ProductRegisterFilter />
-               {dataDetail && <ProductRegisterDetail dataDetail={dataDetail} handleCloseDetail={handleCloseDetail} />}
+               <ProductRegisterFilter dataFilter={dataFilter} changeDataFilter={changeDataFilter} locale={locale} />
+               {dataDetail && <ProductRegisterDetail dataDetail={dataDetail} handleCloseDetail={handleCloseDetail} locale={locale} />}
+               {dataMinMax && <ProductRegisterMinMax dataMinMax={dataMinMax} handleCloseMinMax={handleCloseMinMax} locale={locale} />}
+
                <ProductRegisterTable
                   rows={rows}
                   dataFilter={dataFilter}
@@ -72,6 +86,7 @@ const ProductManagerRegister = () => {
                   searchCount={searchCount}
                   handleChangePage={handleChangePage}
                   handleSetDetail={handleSetDetail}
+                  handleEditMinMax={handleEditMinMax}
                   locale={locale}
                ></ProductRegisterTable>
             </Box>

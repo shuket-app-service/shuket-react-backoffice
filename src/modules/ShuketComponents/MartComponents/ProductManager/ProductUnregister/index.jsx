@@ -10,7 +10,7 @@ import ProductUnregisterTable from "./ProductUnregisterTable";
 
 const ProductManagerUnregister = () => {
    const { locale } = useLocaleContext();
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [rows, setRows] = useState([]);
    const [pageCount, setPageCount] = useState(1); // page_count
    const [searchCount, setSearchCount] = useState(0); //search_count
@@ -19,7 +19,6 @@ const ProductManagerUnregister = () => {
    const dispatch = useDispatch();
 
    async function fetchData(params) {
-      setLoading(true);
       const response = await dispatch(getProductUnregister(params));
       setRows(response.payload?.list_product); // data
       if (response.payload?.page_count != 1) {
@@ -42,10 +41,16 @@ const ProductManagerUnregister = () => {
       fetchData(value);
    };
 
+   
+   const changeDataFilter = (value) => {
+      setDataFilter(value);
+   };
+
    const handleChangePage = (event, value) => {
       setDataFilter({ ...dataFilter, page: value });
       fetchData({ ...dataFilter, page: value });
    };
+   
 
    return (
       <>
@@ -53,7 +58,7 @@ const ProductManagerUnregister = () => {
             <AppLoader />
          ) : (
             <Box>
-                <ProductUnregisterFilter/>
+                <ProductUnregisterFilter dataFilter={dataFilter} changeDataFilter={changeDataFilter} changeDataFilterDirectly={changeDataFilterDirectly} locale={locale}/>
                <ProductUnregisterTable
                   rows={rows}
                   dataFilter={dataFilter}

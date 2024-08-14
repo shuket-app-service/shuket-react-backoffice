@@ -9,7 +9,7 @@ import ManagerAdminLevelPermission from "./ManagerAdminLevelPermission";
 
 export default function ManagerAdminLevel() {
    const { locale } = useLocaleContext();
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [rows, setRows] = useState([]);
    const [dataOpen, setDataOpen] = useState(null); // CODE  
 
@@ -20,7 +20,6 @@ export default function ManagerAdminLevel() {
    }
 
    async function fetchData() {
-      setLoading(true);
       const response = await dispatch(getLevelList());
       setRows(response?.payload); // data
       setLoading(false);

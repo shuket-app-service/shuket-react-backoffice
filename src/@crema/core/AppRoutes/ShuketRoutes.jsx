@@ -19,6 +19,7 @@ import PushManagerEditAdd from '../../../modules/ShuketComponents/MartComponents
 import PushManager from '../../../modules/ShuketComponents/MartComponents/PushManager';
 import ProductManagerRegister from '../../../modules/ShuketComponents/MartComponents/ProductManager/ProductRegister';
 import ProductManagerUnregister from '../../../modules/ShuketComponents/MartComponents/ProductManager/ProductUnregister';
+import ManagerOrder from '../../../modules/ShuketComponents/ManagerOrder';
 
 const SalesCollection = React.lazy(() => import('../../../modules/ShuketComponents/SalesCollection'));
 
@@ -96,6 +97,11 @@ export const shuketConfigs = [
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/admin/catalogs/list',
     element: <Catalogs />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/marts/manage-order-moa-service/list',
+    element: <ManagerOrder />,
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],

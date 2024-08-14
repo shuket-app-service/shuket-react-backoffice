@@ -40,3 +40,6 @@ export const icon = `<svg width="800px" height="800px" viewBox="0 0 24 24"  xmln
  <path d="M16 10.5C16 11.3284 15.5523 12 15 12C14.4477 12 14 11.3284 14 10.5C14 9.67157 14.4477 9 15 9C15.5523 9 16 9.67157 16 10.5Z"/>
  <ellipse cx="9" cy="10.5" rx="1" ry="1.5" />
  </svg>`;
+
+
+ export const limitType = [10, 15, 20, 25, 30, 50, 100];

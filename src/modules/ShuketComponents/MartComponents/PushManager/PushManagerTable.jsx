@@ -9,8 +9,9 @@ import Paper from "@mui/material/Paper";
 import { Box, Button, Card, CardContent, Checkbox, Divider, FormControl, MenuItem, Pagination, Select, Stack, styled, TableFooter, TablePagination, Typography } from "@mui/material";
 import { filterLocate, headersLocate } from "./helper/locate";
 import { translate } from "../../../../@crema/services/localization/translate";
+import { limitType } from "./helper/types";
 
-export default function PushManagerTable({ rows, dataFilter, pageCount, searchCount, handleChangePage, handleViewDetail, handleSelect, locale, isModal }) {
+export default function PushManagerTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, handleViewDetail, handleSelect, locale, isModal }) {
    const [headers, setHeaders] = useState([]);
 
    useEffect(() => {
@@ -29,7 +30,27 @@ export default function PushManagerTable({ rows, dataFilter, pageCount, searchCo
                   <Card sx={{ borderRadius: 0 }}>
                      <CardContent>
                         <Stack sx={{ mt: 1 }} direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-                           <Typography> {translate(locale, filterLocate.title)}</Typography>
+                           <Stack direction="row" alignItems={"center"} gap={2}>
+                              <FormControl sx={{ m: 1, minWidth: 100 }}>
+                                 <Select
+                                    size="small"
+                                    value={dataFilter.per_page}
+                                    onChange={(e) =>
+                                       changeDataFilterDirectly({
+                                          ...dataFilter,
+                                          per_page: e.target.value,
+                                       })
+                                    }
+                                 >
+                                    {limitType.map((ele) => (
+                                       <MenuItem key={ele} value={ele}>
+                                          {ele}
+                                       </MenuItem>
+                                    ))}
+                                 </Select>
+                              </FormControl>
+                              <Typography>{translate(locale, filterLocate.limit)} </Typography>
+                           </Stack>
 
                            <Pagination count={pageCount} page={dataFilter.page} onChange={handleChangePage} color="primary" variant="outlined" shape="rounded" />
                         </Stack>
@@ -59,15 +80,15 @@ export default function PushManagerTable({ rows, dataFilter, pageCount, searchCo
 
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <Button variant="outlined" color="info" onClick={()=>handleViewDetail(row?.push_msg_code)}>
+                                 <Button variant="outlined" color="info" onClick={() => handleViewDetail(row?.push_msg_code)}>
                                     {" "}
                                     {translate(locale, filterLocate.btnDetail)}
                                  </Button>
-                                 {
-                                    isModal &&  <Button variant="outlined" color="info" onClick={()=>handleSelect(row?.push_msg_code)}>
-                                    {translate(locale, filterLocate.btnSelect)}
-                                 </Button>
-                                 }
+                                 {isModal && (
+                                    <Button variant="outlined" color="info" onClick={() => handleSelect(row?.push_msg_code)}>
+                                       {translate(locale, filterLocate.btnSelect)}
+                                    </Button>
+                                 )}
                               </Stack>
                            </TableCell>
                         </TableRow>

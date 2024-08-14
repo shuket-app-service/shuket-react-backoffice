@@ -29,10 +29,13 @@ export const filterLocate = {
       kr: "앱 푸시 관리",
       en: "App push management",
    },
-
    searchBy: {
       kr: "푸시메세지 검색",
       en: "Search By",
+   },
+   regDate: {
+      kr: "등록일",
+      en: "Reg Date",
    },
    btnAdd: {
       kr: "추가",
@@ -53,5 +56,9 @@ export const filterLocate = {
    btnCancel: {
       kr: "취소",
       en: "Cancel",
+   },
+   limit:{
+      kr:"아이템 / 페이지",
+      en:"Item/ page"
    },
 };

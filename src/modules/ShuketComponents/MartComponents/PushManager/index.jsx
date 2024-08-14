@@ -15,7 +15,7 @@ const PushManager = () => {
    const { locale } = useLocaleContext();
    const dispatch = useDispatch();
 
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [backdropLoading, setBackdropLoading] = useState(false);
 
    const [rows, setRows] = useState([]);
@@ -25,7 +25,6 @@ const PushManager = () => {
    const [dataDetail, setDataDetail] = useState(null);
 
    async function fetchData(params) {
-      setLoading(true);
       const response = await dispatch(getPushList(params));
       setRows(response.payload?.list_data); // data
       if (response.payload?.cur_page != 1) {
@@ -38,18 +37,29 @@ const PushManager = () => {
    }
 
    async function fetchDataDetail(code) {
-      setBackdropLoading(true);
-      
+      // setBackdropLoading(true);
+
       const response = await dispatch(getPushDetail(code));
       setDataDetail(response.payload); // data
 
-      setBackdropLoading(false);
+      // setBackdropLoading(false);
    }
 
    useEffect(() => {
       fetchData(dataFilter);
       return () => {};
    }, []);
+
+   
+   const handleSearch = () => {
+      fetchData(dataFilter);
+   };
+
+   //call API directly when change
+   const changeDataFilterDirectly = (value) => {
+      setDataFilter(value);
+      fetchData(value);
+   };
 
    const handleChangePage = (event, value) => {
       setDataFilter({ ...dataFilter, page: value });
@@ -77,16 +87,17 @@ const PushManager = () => {
                   <BackdropLoad backdropLoading={backdropLoading}></BackdropLoad>
                ) : (
                   <>
-                     <PushManagerFilter dataFilter={dataFilter} changeDataFilter={changeDataFilter} locale={locale}></PushManagerFilter>
+                     <PushManagerFilter dataFilter={dataFilter} changeDataFilter={changeDataFilter} handleSearch={handleSearch} locale={locale}></PushManagerFilter>
                      {dataDetail && <PushManagerDetail dataDetail={dataDetail} handleCloseDetail={handleCloseDetail} />}
                      <PushManagerTable
                         rows={rows}
                         dataFilter={dataFilter}
+                        changeDataFilterDirectly={changeDataFilterDirectly}
                         pageCount={pageCount}
                         searchCount={searchCount}
                         handleChangePage={handleChangePage}
                         handleViewDetail={handleViewDetail}
-                        handleSelect={()=>{}}
+                        handleSelect={() => {}}
                         locale={locale}
                         isModal={false}
                      ></PushManagerTable>

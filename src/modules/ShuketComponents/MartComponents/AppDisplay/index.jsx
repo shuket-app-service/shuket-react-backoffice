@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
 const AppDisplay = () => {
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [mainMenu, setMainMenu] = useState([]);
    const [subMenu, setSubMenu] = useState([]);
    const { locale } = useLocaleContext();
@@ -21,7 +21,6 @@ const AppDisplay = () => {
    const dispatch = useDispatch();
 
    async function fetchData() {
-      setLoading(true)
       const res = await dispatch(getScreenBuilder());
       setMainMenu(res.payload.ms_list_data);
       setSubMenu(res.payload.ss_list_data);

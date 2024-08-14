@@ -13,7 +13,7 @@ const FcmEdit = () => {
    const { locale } = useLocaleContext();
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [dataEdit, setDataEdit] = useState(null);
 
    const gotoBack = () => {
@@ -21,7 +21,6 @@ const FcmEdit = () => {
    };
 
    async function fetchData() {
-      setLoading(true);
       const fcmCode = UseParams("fcm_code");
       const response = await dispatch(getFcmDetail(fcmCode));
       console.log(response);

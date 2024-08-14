@@ -3,5 +3,7 @@ export const initialStateFilter = {
     page: 1,
     s_type: "title",
     search_keyword: "",
+    search_sdate:"",
+    search_edate:""
  };
  

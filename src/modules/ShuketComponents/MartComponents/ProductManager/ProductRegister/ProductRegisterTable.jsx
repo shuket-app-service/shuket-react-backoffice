@@ -6,17 +6,36 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Box, Button, Card, CardContent, Divider, FormControl, IconButton, MenuItem, Pagination, Select, Stack, styled, TableFooter, TablePagination, Typography } from "@mui/material";
+import {
+   Box,
+   Button,
+   Card,
+   CardContent,
+   Checkbox,
+   Divider,
+   FormControl,
+   FormControlLabel,
+   IconButton,
+   MenuItem,
+   Pagination,
+   Select,
+   Stack,
+   styled,
+   TableFooter,
+   TablePagination,
+   Typography,
+} from "@mui/material";
 import { filterLocate, headersLocate, tableLocate } from "./helper/locate";
-import { limitType } from "./helper/types";
+import { limitType, orderType } from "./helper/types";
 import { translate } from "../../../../../@crema/services/localization/translate";
 import { IoMdArrowDown, IoMdArrowUp } from "react-icons/io";
 import SwitchStatus from "../../../Common/SwitchStatus";
 import { RiSubtractFill } from "react-icons/ri";
 import { HiOutlinePlusSm } from "react-icons/hi";
 
-export default function ProductRegisterTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, handleSetDetail, locale }) {
+export default function ProductRegisterTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, handleSetDetail, handleEditMinMax, locale }) {
    const [headers, setHeaders] = useState([]);
+   const [dataChecked, setDataChecked] = useState([]);
 
    useEffect(() => {
       if (locale.locale == "ko") {
@@ -26,6 +45,23 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
       }
    }, [locale]);
 
+   const handleClickAll = () => {
+      if (!dataChecked.length) {
+         const data = rows.map((r) => r?.seq);
+         setDataChecked(data);
+      } else {
+         setDataChecked([]);
+      }
+   };
+   const handleChecked = (seq) => {
+      if (dataChecked.findIndex((ele) => ele === seq) == -1) {
+         setDataChecked([...dataChecked, seq]);
+      } else {
+         let temp = dataChecked.filter((ele) => ele !== seq);
+         setDataChecked(temp);
+      }
+   };
+
    return (
       <>
          <Box>
@@ -33,7 +69,31 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                <Card sx={{ borderRadius: 0 }}>
                   <CardContent>
                      <Stack sx={{ mt: 1 }} direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-                        <Stack direction="row" alignItems={"center"} gap={2}>
+                        <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
+                           <Typography>
+                              Total: <b>{searchCount}</b>
+                           </Typography>
+
+                           <Typography> {translate(locale, filterLocate.orderBy)} </Typography>
+                           <FormControl sx={{ m: 1, minWidth: 100 }}>
+                              <Select
+                                 size="small"
+                                 value={dataFilter.order_by}
+                                 onChange={(e) =>
+                                    changeDataFilterDirectly({
+                                       ...dataFilter,
+                                       order_by: e.target.value,
+                                    })
+                                 }
+                              >
+                                 {orderType.map((ele) => (
+                                    <MenuItem key={ele.value} value={ele.value}>
+                                       {translate(locale, ele.text)}
+                                    </MenuItem>
+                                 ))}
+                              </Select>
+                           </FormControl>
+                           <Typography>{translate(locale, filterLocate.limit)} </Typography>
                            <FormControl sx={{ m: 1, minWidth: 100 }}>
                               <Select
                                  size="small"
@@ -52,7 +112,10 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                                  ))}
                               </Select>
                            </FormControl>
-                           <Typography>{translate(locale, filterLocate.limit)} </Typography>
+                           <FormControlLabel
+                              control={<Checkbox defaultChecked={dataFilter.product_only_brgn} onChange={(e) => changeDataFilterDirectly({ ...dataFilter, product_only_brgn: e.target.checked })} />}
+                              label={translate(locale, filterLocate.titleBrgn)}
+                           />
                         </Stack>
 
                         <Pagination count={pageCount} page={dataFilter.page} onChange={handleChangePage} color="primary" variant="outlined" shape="rounded" />
@@ -61,6 +124,9 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                </Card>
                <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableHead>
+                     <StyledTableCell>
+                        <Checkbox color="default" onClick={handleClickAll} />
+                     </StyledTableCell>
                      {headers.map((head) => (
                         <StyledTableCell key={head} align="center">
                            {head}
@@ -70,9 +136,12 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                   <TableBody>
                      {rows.map((row, index) => (
                         <TableRow key={row?.seq} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                           <TableCell>
+                              <Checkbox onClick={() => handleChecked(row?.seq)} checked={dataChecked.findIndex((ele) => ele === row?.seq) !== -1 ? true : false}></Checkbox>
+                           </TableCell>
                            <TableCell align="left">{index + 1}</TableCell>
                            <TableCell align="left">
-                              <img src={row?.images?.[0]?.thumb} style={{ width: 150, cursor:"pointer" }} onClick={()=>handleSetDetail(row)} />
+                              <img src={row?.images?.[0]?.thumb} style={{ width: 150, cursor: "pointer" }} onClick={() => handleSetDetail(row)} />
                            </TableCell>
                            <TableCell align="left" sx={{ width: 300 }}>
                               <Typography>
@@ -135,7 +204,7 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                                  {row?.is_pro_stock && row?.min_stock >= row?.value_stock ? "OUT OF STOCK" : ""}
                               </Typography>
                            </TableCell>
-                           <TableCell align="center">
+                           <TableCell align="center" sx={{minWidth:180}}>
                               <Typography>{row?.date_sync_stock}</Typography>
                               <Typography>{row?.time_sync_stock ? row?.time_sync_stock : "--"}</Typography>
                            </TableCell>
@@ -153,37 +222,43 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                                  <SwitchStatus status={row?.is_pro_stock ? "A" : "C"} handleChangeStatus={() => {}}></SwitchStatus>
                               </Stack>
                            </TableCell>
-                           <TableCell align="center">
+                           <TableCell align="center" sx={{minWidth:180}}>
                               <Typography>
-                                 <text style={{ color: "#3A80D7" }}>IS MAX:</text> {row?.is_pro_maxqty}
+                                 <text style={{ color: "#3A80D7" }}>{translate(locale, tableLocate.isMax)}</text> {row?.is_pro_maxqty}
                               </Typography>
                               {row?.is_pro_maxqty === "Y" && (
                                  <Typography>
-                                    <text style={{ color: "#3A80D7" }}>VALUE OF MAX:</text> {row?.pro_max_qty}
+                                    <text style={{ color: "#3A80D7" }}>{translate(locale, tableLocate.valueMax)}</text> {row?.pro_max_qty}
                                  </Typography>
                               )}
 
                               <Typography>
-                                 <text style={{ color: "#3A80D7" }}>IS MIN:</text> {row?.is_pro_minqty}
+                                 <text style={{ color: "#3A80D7" }}>{translate(locale, tableLocate.isMin)}</text> {row?.is_pro_minqty}
                               </Typography>
                               {row?.is_pro_minqty === "Y" && (
                                  <Typography>
                                     {" "}
-                                    <text style={{ color: "#3A80D7" }}>VALUE OF MAX:</text>
+                                    <text style={{ color: "#3A80D7" }}>{translate(locale, tableLocate.valueMin)}</text>
                                     {row?.pro_min_qty}
                                  </Typography>
                               )}
 
-                              <Button variant="outlined" sx={{ mt: 2 }}>
+                              <Button variant="outlined" size="small" sx={{ mt: 2 }} onClick={() => handleEditMinMax(row)}>
                                  Edit Min/Max
                               </Button>
                            </TableCell>
                            <TableCell align="center">
                               <Typography> {row?.create_time}</Typography>
-                              <small> (Created by: {row?.create_name} )</small>
+                              <small>
+                                 {" "}
+                                 ({translate(locale, tableLocate.createBy)} {row?.create_name} )
+                              </small>
                               <Divider sx={{ my: 2 }} />
                               <Typography>{row?.update_time}</Typography>
-                              <small> (Last updated by:{row?.update_name})</small>
+                              <small>
+                                 ( {translate(locale, tableLocate.updateBy)}
+                                 {row?.update_name})
+                              </small>
                            </TableCell>
 
                            <TableCell align="center">

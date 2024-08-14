@@ -11,7 +11,7 @@ import { initialStateFilter } from "./Helper/state";
 export default function ManagerImage() {
    const { locale } = useLocaleContext();
    const [dataFilter, setDataFilter] = useState(initialStateFilter);
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
    const [rows, setRows] = useState([]);
    const [cateType, setCateType] = useState([]);
 
@@ -21,7 +21,6 @@ export default function ManagerImage() {
    const dispatch = useDispatch();
 
    async function fetchData(params) {
-      setLoading(true)
       const response = await dispatch(getManagementImageList(params));
       setRows(response.payload.list_data);
       setCateType(response.payload.cate_images_list)
