@@ -168,4 +168,8 @@ export const filterLocate = {
       kr: "View Detail",
       en: "View Detail",
    },
+   btnPrint: {
+      kr: "Print",
+      en: "Print",
+   },
 };

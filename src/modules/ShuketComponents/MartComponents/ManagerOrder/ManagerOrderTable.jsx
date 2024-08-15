@@ -29,6 +29,9 @@ export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDi
       navigate(`/marts/manage-order-moa-service/detail?ord_code=${code}&mart_code=${dataFilter.search_mart}`)
    }
 
+   const gotoPrint = (code) => {
+      navigate(`/marts/order/print?orderlist_ids=${code}`)
+   }
    return (
       <>
          <Box>
@@ -110,7 +113,9 @@ export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDi
                                  <Button variant="outlined" size="small" onClick={()=>gotoDetail(row?.od_code)}>
                                     {translate(locale, filterLocate.btnView)}
                                  </Button>
-                                 
+                                 <Button variant="outlined" color="warning" size="small" onClick={()=>gotoPrint(row?.od_code)}>
+                                    {translate(locale, filterLocate.btnPrint)}
+                                 </Button>
                               </Stack>
                            </TableCell>
                         </TableRow>

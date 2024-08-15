@@ -20,6 +20,9 @@ import PushManager from '../../../modules/ShuketComponents/MartComponents/PushMa
 import ProductManagerRegister from '../../../modules/ShuketComponents/MartComponents/ProductManager/ProductRegister';
 import ProductManagerUnregister from '../../../modules/ShuketComponents/MartComponents/ProductManager/ProductUnregister';
 import ManagerOrder from '../../../modules/ShuketComponents/ManagerOrder';
+import ManagerOrderDetail from '../../../modules/ShuketComponents/ManagerOrder/detail';
+import ManagerOrderMart from '../../../modules/ShuketComponents/MartComponents/ManagerOrder';
+import ManagerOrderPrint from '../../../modules/ShuketComponents/MartComponents/ManagerOrder/print';
 
 const SalesCollection = React.lazy(() => import('../../../modules/ShuketComponents/SalesCollection'));
 
@@ -102,6 +105,21 @@ export const shuketConfigs = [
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/marts/manage-order-moa-service/list',
     element: <ManagerOrder />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/marts/order/list',
+    element: <ManagerOrderMart />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/marts/order/print',
+    element: <ManagerOrderPrint />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/marts/manage-order-moa-service/detail',
+    element: <ManagerOrderDetail />,
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
