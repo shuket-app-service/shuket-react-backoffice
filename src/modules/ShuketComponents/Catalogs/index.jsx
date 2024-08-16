@@ -21,9 +21,7 @@ export default function Catalogs() {
    async function fetchData(params) {
       const response = await dispatch(getCatalogList(params));
       setRows(response.payload?.list_data);
-      if (response.payload?.cur_page != 1) {
-         setDataFilter({ per_page: response.payload?.cur_per_page, page: response.payload?.cur_page });
-      }
+
       setPageCount(Math.ceil(response.payload?.total_list_cnt / response.payload?.cur_per_page));
       setSearchCount(response.payload?.total_list_cnt);
 

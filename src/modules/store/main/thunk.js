@@ -8,8 +8,19 @@ const LEFT_MEMU_BAR = "/main/get_left_menu_bar";
 const GET_CITY_OPTIONS = "/main/get_city_options";
 const GET_DISTRICT_OPTIONS = "/main/get_district_options?ct_code="
 const GET_SALES_TEAM_OPTION = "/main/get_partner_sales_team_options?sp_code="
+const GET_USER_PROFILE = "/main/get_user_profile"
 
-
+export const getUserProfile = createAsyncThunk(
+  GET_USER_PROFILE,
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await apiAuth.get(GET_USER_PROFILE);
+      return response.data.data;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
 
 export const getSalesTeamOption = createAsyncThunk(
   GET_SALES_TEAM_OPTION,

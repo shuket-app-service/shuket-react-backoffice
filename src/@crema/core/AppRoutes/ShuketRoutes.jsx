@@ -23,6 +23,7 @@ import ManagerOrder from '../../../modules/ShuketComponents/ManagerOrder';
 import ManagerOrderDetail from '../../../modules/ShuketComponents/ManagerOrder/detail';
 import ManagerOrderMart from '../../../modules/ShuketComponents/MartComponents/ManagerOrder';
 import ManagerOrderPrint from '../../../modules/ShuketComponents/MartComponents/ManagerOrder/print';
+import CashManagerNicepay from '../../../modules/ShuketComponents/CashManager/nicepay';
 
 const SalesCollection = React.lazy(() => import('../../../modules/ShuketComponents/SalesCollection'));
 
@@ -80,6 +81,11 @@ export const shuketConfigs = [
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/marts/product-images-without-barcode/list',
     element: <ManagerImageWithoutBarcode />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/service/cashback/order-list',
+    element: <CashManagerNicepay />,
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],

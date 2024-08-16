@@ -12,13 +12,10 @@ import moment from "moment";
 
 const ManagerOrderFilter = ({ dataFilter, changeDataFilter, handleSearch, locale }) => {
    const dispatch = useDispatch();
-   const [martTypes, setMartTypes] = useState([]);
    const [paymentTypes, setPaymentTypes] = useState([]);
    const [statusTypes, setStatusTypes] = useState([]);
 
    async function fetchData() {
-      const resMart = await dispatch(getListMartOrder());
-      setMartTypes(resMart?.payload);
 
       const resPayment = await dispatch(getListPaymentOrder());
       setPaymentTypes(resPayment?.payload);
@@ -39,22 +36,7 @@ const ManagerOrderFilter = ({ dataFilter, changeDataFilter, handleSearch, locale
          <Divider />
          <CardContent sx={{ mt: 5 }}>
             <Stack direction="row" justifyContent="center" alignItems="center" spacing={12} sx={{ mb: 5 }} useFlexGap flexWrap="wrap">
-               <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
-                  <Typography>{translate(locale, filterLocate.mart)}</Typography>
-                  <FormControl sx={{ m: 1, minWidth: 200 }}>
-                     <Select displayEmpty={true} value={dataFilter.search_mart} onChange={(e) => changeDataFilter({ ...dataFilter, search_mart: e.target.value })}>
-                        <MenuItem key={allSelect.value} value={allSelect.value}>
-                           {translate(locale, allSelect.text)}
-                        </MenuItem>
-                        {martTypes &&
-                           martTypes?.map((ele) => (
-                              <MenuItem key={ele.mart_id} value={ele.mart_id}>
-                                 {ele.mart_name}
-                              </MenuItem>
-                           ))}
-                     </Select>
-                  </FormControl>
-               </Stack>
+        
                <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
                   <Typography>{translate(locale, filterLocate.payment)}</Typography>
                   <FormControl sx={{ m: 1, minWidth: 200 }}>

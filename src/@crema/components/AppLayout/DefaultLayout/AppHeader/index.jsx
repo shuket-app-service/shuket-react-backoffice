@@ -17,6 +17,7 @@ import PropTypes from "prop-types";
 import AppLngSwitcher from "../../../AppLngSwitcher";
 import { allowMultiLanguage } from "../../../../constants/AppConst";
 import AccountSwitchHeader from "../../../../../modules/ShuketComponents/Header/AccountSwitch";
+import ShuketNotifications from "../../../../../modules/ShuketComponents/Header/Notifications";
 
 const AppHeader = ({ toggleNavCollapsed }) => {
 
@@ -100,7 +101,9 @@ const AppHeader = ({ toggleNavCollapsed }) => {
                   px: 1.85,
                 }}
               >
-                <AppNotifications />
+                <ShuketNotifications />
+                {/* <AppNotifications /> */}
+
               </Box>
               <Box
                 sx={{
@@ -163,7 +166,7 @@ const AppHeader = ({ toggleNavCollapsed }) => {
             onClose={handleClose}
           >
             <MenuItem>
-              <AppNotifications isMenu />
+              <ShuketNotifications isMenu />
             </MenuItem>
             <MenuItem>
               <AppMessages isMenu />

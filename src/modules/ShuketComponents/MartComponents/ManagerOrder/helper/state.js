@@ -6,4 +6,6 @@ export const initialStateFilter = {
    search_status: "",
    search_sdate: "",
    search_edate: "",
+   sort_by_area:true,
+   type_order:""
 };

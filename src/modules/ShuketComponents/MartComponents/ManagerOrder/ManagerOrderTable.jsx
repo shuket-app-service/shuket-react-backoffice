@@ -6,7 +6,25 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Box, Button, Card, CardContent, Divider, FormControl, MenuItem, Pagination, Select, Stack, styled, TableFooter, TablePagination, Typography } from "@mui/material";
+import {
+   Box,
+   Button,
+   Card,
+   CardContent,
+   Divider,
+   FormControl,
+   FormControlLabel,
+   FormGroup,
+   MenuItem,
+   Pagination,
+   Select,
+   Stack,
+   styled,
+   Switch,
+   TableFooter,
+   TablePagination,
+   Typography,
+} from "@mui/material";
 import { translate } from "@crema/services/localization/translate";
 import { filterLocate, headersLocate } from "./helper/locate";
 import { limitType } from "./helper/types";
@@ -15,7 +33,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
    const [headers, setHeaders] = useState([]);
-   const navigate = useNavigate()
+   const navigate = useNavigate();
 
    useEffect(() => {
       if (locale.locale == "ko") {
@@ -25,13 +43,13 @@ export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDi
       }
    }, [locale]);
 
-   const gotoDetail = (code) =>{
-      navigate(`/marts/manage-order-moa-service/detail?ord_code=${code}&mart_code=${dataFilter.search_mart}`)
-   }
+   const gotoDetail = (code) => {
+      navigate(`/marts/manage-order-moa-service/detail?ord_code=${code}&mart_code=${dataFilter.search_mart}`);
+   };
 
    const gotoPrint = (code) => {
-      navigate(`/marts/order/print?orderlist_ids=${code}`)
-   }
+      navigate(`/marts/order/print?orderlist_ids=${code}`);
+   };
    return (
       <>
          <Box>
@@ -39,10 +57,10 @@ export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDi
                <Card sx={{ borderRadius: 0 }}>
                   <CardContent>
                      <Stack sx={{ mt: 1 }} direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-                        <Stack direction="row" alignItems={"center"} gap={2}>
-                        <Typography>
-                        Total: <b>{searchCount}</b>
-                     </Typography>
+                        <Stack direction="row" alignItems={"center"} gap={5}>
+                           <Typography>
+                              Total: <b>{searchCount}</b>
+                           </Typography>
                            <FormControl sx={{ m: 1, minWidth: 100 }}>
                               <Select
                                  size="small"
@@ -62,7 +80,16 @@ export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDi
                               </Select>
                            </FormControl>
                            <Typography>{translate(locale, filterLocate.limit)} </Typography>
+                           <FormGroup>
+                           <FormControlLabel control={<Switch defaultChecked={dataFilter.sort_by_area}  onChange={(e) =>
+                                    changeDataFilterDirectly({
+                                       ...dataFilter,
+                                       sort_by_area: e.target.checked,
+                                    })
+                                 } />} label={translate(locale, filterLocate.sortAddress)} />
+                        </FormGroup>
                         </Stack>
+                       
 
                         <Pagination count={pageCount} page={dataFilter.page} onChange={handleChangePage} color="primary" variant="outlined" shape="rounded" />
                      </Stack>
@@ -110,10 +137,10 @@ export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDi
 
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <Button variant="outlined" size="small" onClick={()=>gotoDetail(row?.od_code)}>
+                                 <Button variant="outlined" size="small" onClick={() => gotoDetail(row?.od_code)}>
                                     {translate(locale, filterLocate.btnView)}
                                  </Button>
-                                 <Button variant="outlined" color="warning" size="small" onClick={()=>gotoPrint(row?.od_code)}>
+                                 <Button variant="outlined" color="warning" size="small" onClick={() => gotoPrint(row?.od_code)}>
                                     {translate(locale, filterLocate.btnPrint)}
                                  </Button>
                               </Stack>

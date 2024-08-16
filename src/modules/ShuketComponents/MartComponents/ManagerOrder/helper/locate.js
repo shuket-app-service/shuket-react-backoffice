@@ -1,8 +1,9 @@
 export const headersLocate = {
-   kr: ["No", "주문번호", "주문자", "주소", "상품 수량", "상품 가격", "배송비", "배송(픽업)예상시간	", "할인(쿠폰)", "할인(포인트)", "총 가격", "결제 방법", "상태", "등록"],
+   kr: ["No", "주문번호", "주문일", "주문자", "주소", "상품 수량", "상품 가격", "배송비", "배송(픽업)예상시간	", "할인(쿠폰)", "할인(포인트)", "총 가격", "결제 방법", "상태", "등록"],
    en: [
       "No",
       "Order No",
+      "Order date",
       "Ordered by",
       "Address",
       "Quantity product",
@@ -17,6 +18,11 @@ export const headersLocate = {
       "Method",
    ],
 };
+
+export const headerCancelLocate = {
+   kr:["Order No.", "TID","Total price","Product code","Barcode","Quantity product"],
+   en:["Order No.", "TID","Total price","Product code","Barcode","Quantity product"]
+}
 
 export const filterLocateInfo = {
    paymentDetail: {
@@ -136,6 +142,22 @@ export const filterLocate = {
       kr: "상품 주문 목록",
       en: "Product order list",
    },
+   sortAddress:{
+      kr:"주소지별 주문 정렬 ",
+      en:"Sort by address"
+   },
+   time:{
+      kr:"Can't set time",
+      en:"Can't set time"
+   },
+   selectTime:{
+      kr:" Select delivery time",
+      en:" Select delivery time"
+   },
+   customTime:{
+      kr:" Custom time",
+      en:" Custom time"
+   },
    limit: {
       kr: "아이템 / 페이지",
       en: "Item/ page",
@@ -163,6 +185,14 @@ export const filterLocate = {
    btnCancel: {
       kr: "취소",
       en: "Cancel",
+   },
+   btnCart:{
+      kr:"원주문번호",
+      en:"View Order"
+   },
+   btnTime:{
+      kr:"Set Time",
+      en:"Set Time"
    },
    btnView: {
       kr: "View Detail",
