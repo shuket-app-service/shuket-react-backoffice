@@ -23,10 +23,6 @@ export default function ManagerOrderCart({ rows, locale }) {
       }
    }, [locale]);
 
-   const gotoDetail = (code) =>{
-      navigate(`/marts/manage-order-moa-service/detail?ord_code=${code}&mart_code=${dataFilter.search_mart}`)
-   }
-
    return (
       <>
          <Box>

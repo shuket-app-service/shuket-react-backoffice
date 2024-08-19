@@ -28,11 +28,16 @@ export default function ManagerImageTableWithBarcode({ rows, dataFilter, changeD
    }, [locale]);
 
    const handleClickAll = () =>{
-      if(!dataChecked.length){
-         const data = rows.map( r => r?.prd_img_code)
-         setDataChecked(data)
-      }else{
-         setDataChecked([])
+      if (!dataChecked.length) {
+         const data = rows.map((r) => r?.prd_img_code);
+         setDataChecked(data);
+      } else {
+         if (dataChecked.length === rows.length) {
+            setDataChecked([]);
+         } else {
+            const data = rows.map((r) => r?.prd_img_code);
+            setDataChecked(data);
+         }
       }
    }
    const handleChecked = (code) =>{

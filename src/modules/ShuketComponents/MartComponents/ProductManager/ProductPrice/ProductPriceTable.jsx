@@ -28,14 +28,15 @@ import {
 import { filterLocate, headersLocate, tableLocate } from "./helper/locate";
 import { limitType, orderType } from "./helper/types";
 import { translate } from "../../../../../@crema/services/localization/translate";
-import { IoMdArrowDown, IoMdArrowUp } from "react-icons/io";
-import SwitchStatus from "../../../Common/SwitchStatus";
-import { RiSubtractFill } from "react-icons/ri";
-import { HiOutlinePlusSm } from "react-icons/hi";
+import { toast } from 'react-toastify';
 
-export default function ProductRegisterTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, handleSetDetail, handleEditMinMax, locale }) {
+import ProductPriceSet from "./ProductPriceSet";
+import { alertChooseProduct } from "./helper/alert";
+
+export default function ProductPriceTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
    const [headers, setHeaders] = useState([]);
    const [dataChecked, setDataChecked] = useState([]);
+   const [openSetPrice, setOpenSetPrice] = useState([]);
 
    useEffect(() => {
       if (locale.locale == "ko") {
@@ -67,9 +68,25 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
       }
    };
 
+   const handleSetPrice = (row) =>{
+      setOpenSetPrice([row])
+   }
+   const handleCloseSetPrice = () =>{
+      setOpenSetPrice([])
+   }
+   const handelSetPriceMulti = () =>{
+      if(dataChecked.length === 0){
+         toast.error(translate(locale, alertChooseProduct))
+      }else{
+         const arrWillSet = rows.filter((fi) => dataChecked.includes(fi.seq))
+         setOpenSetPrice(arrWillSet)
+      }
+   }
+
    return (
       <>
          <Box>
+            <ProductPriceSet openSetPrice={openSetPrice} handleCloseSetPrice={handleCloseSetPrice} locale={locale}></ProductPriceSet>
             <TableContainer component={Paper}>
                <Card sx={{ borderRadius: 0 }}>
                   <CardContent>
@@ -117,10 +134,7 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                                  ))}
                               </Select>
                            </FormControl>
-                           <FormControlLabel
-                              control={<Checkbox defaultChecked={dataFilter.product_only_brgn} onChange={(e) => changeDataFilterDirectly({ ...dataFilter, product_only_brgn: e.target.checked })} />}
-                              label={translate(locale, filterLocate.titleBrgn)}
-                           />
+                           <Button variant="outlined" onClick={handelSetPriceMulti}>{translate(locale, tableLocate.btnSetPriceMulti)} </Button>
                         </Stack>
 
                         <Pagination count={pageCount} page={dataFilter.page} onChange={handleChangePage} color="primary" variant="outlined" shape="rounded" />
@@ -174,106 +188,47 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                                  <span> {row?.tags}</span>
                               </Typography>
                            </TableCell>
-                           <TableCell align="center" sx={{minWidth:150}}>
-                              <Typography>{row?.sale_price ? <s style={{ color: "gray" }}>{row?.list_price} 원</s> : <p>{row?.list_price} 원</p>}</Typography>
-                              {row?.sale_price && (
-                                 <Typography>
-                                    {row?.sale_price} 원 <b style={{ color: "red" }}> {((row?.sale_price / row?.list_price) * 10).toFixed(0)}%</b>
-                                 </Typography>
-                              )}
+                           <TableCell align="center">
+                              <Typography>
+                                 {row?.sale_price != 0 ? <s> {row?.list_price}원</s> : <b> {row?.list_price}원</b>}
+                                 <br />
 
-                              {row?.sale_price && <Typography>({row?.sale_src})</Typography>}
-                              {row?.sale_price && <Typography>({row?.sale_title})</Typography>}
-
-                              {row?.price_updown === "U" ? (
-                                 <div style={{ color: "green", backgroundColor: "#DCF2F1", padding: 5 }}>
-                                    <Typography>{row?.price_show} 원</Typography>
-                                    <Typography>
-                                       <IoMdArrowUp />
-                                       {row?.price_number} {row?.price_type === "PC" ? "%" : row?.price_type === "AM" ? "원" : ""}
-                                    </Typography>
-                                 </div>
-                              ) : row?.price_updown === "D" ? (
-                                 <div style={{ color: "red", backgroundColor: "#DCF2F1", padding: 5 }}>
-                                    <Typography>{row?.price_show} 원</Typography>
-                                    <Typography>
-                                       <IoMdArrowDown />
-                                       {row?.price_number} {row?.price_type === "PC" ? "%" : row?.price_type === "AM" ? "원" : ""}
-                                    </Typography>
-                                 </div>
-                              ) : null}
+                                 {row?.sale_price != 0 && (
+                                    <div>
+                                       <b> {row?.sale_price}원</b>
+                                       <b style={{ color: "red" }}>(- {((row?.sale_price / row?.list_price) * 10).toFixed(0)}%)</b>
+                                    </div>
+                                 )}
+                              </Typography>
                            </TableCell>
                            <TableCell align="center">
-                              <Typography align="center">{row?.is_pro_stock ? row?.value_stock : "--"}</Typography>
-                              <Typography sx={{ color: "red" }} align="center">
-                                 {row?.is_pro_stock && row?.min_stock >= row?.value_stock ? "OUT OF STOCK" : ""}
-                              </Typography>
-                           </TableCell>
-                           <TableCell align="center" sx={{minWidth:180}}>
-                              <Typography>{row?.date_sync_stock}</Typography>
-                              <Typography>{row?.time_sync_stock ? row?.time_sync_stock : "--"}</Typography>
+                              <Typography>{row?.unit}</Typography>
                            </TableCell>
                            <TableCell align="center">
-                              <Stack gap={2} direction={"column"} alignItems={"center"}>
-                                 <Stack gap={2} direction={"row"} alignItems={"center"}>
-                                    <IconButton>
-                                       <RiSubtractFill />
-                                    </IconButton>
-                                    <Typography>{row?.min_stock}</Typography>
-                                    <IconButton>
-                                       <HiOutlinePlusSm />
-                                    </IconButton>
-                                 </Stack>
-                                 <SwitchStatus status={row?.is_pro_stock ? "A" : "C"} handleChangeStatus={() => {}}></SwitchStatus>
-                              </Stack>
-                           </TableCell>
-                           <TableCell align="center" sx={{minWidth:180}}>
                               <Typography>
-                                 <text style={{ color: "#3A80D7" }}>{translate(locale, tableLocate.isMax)}</text> {row?.is_pro_maxqty}
+                                 {row?.price_number}
+                                 <br />
+                                 <Button sx={{ mt: 2 }} variant="outlined" onClick={() => handleSetPrice(row)}>
+                                    {translate(locale, tableLocate.btnSetPrice)}
+                                 </Button>
                               </Typography>
-                              {row?.is_pro_maxqty === "Y" && (
-                                 <Typography>
-                                    <text style={{ color: "#3A80D7" }}>{translate(locale, tableLocate.valueMax)}</text> {row?.pro_max_qty}
-                                 </Typography>
-                              )}
-
-                              <Typography>
-                                 <text style={{ color: "#3A80D7" }}>{translate(locale, tableLocate.isMin)}</text> {row?.is_pro_minqty}
-                              </Typography>
-                              {row?.is_pro_minqty === "Y" && (
-                                 <Typography>
-                                    {" "}
-                                    <text style={{ color: "#3A80D7" }}>{translate(locale, tableLocate.valueMin)}</text>
-                                    {row?.pro_min_qty}
-                                 </Typography>
-                              )}
-
-                              <Button variant="outlined" size="small" sx={{ mt: 2 }} onClick={() => handleEditMinMax(row)}>
-                                 Edit Min/Max
-                              </Button>
                            </TableCell>
-                           <TableCell align="center" sx={{minWidth:150}}>
+                           <TableCell align="center" sx={{ minWidth: 150 }}>
                               <Typography> {row?.create_time}</Typography>
                               <small>
                                  {" "}
-                                 ({translate(locale, tableLocate.createBy)} {row?.create_name} )
+                                 {translate(locale, tableLocate.createBy)} {row?.create_name}
                               </small>
                               <Divider sx={{ my: 2 }} />
                               <Typography>{row?.update_time}</Typography>
                               <small>
-                                 ( {translate(locale, tableLocate.updateBy)}
-                                 {row?.update_name})
+                                 {translate(locale, tableLocate.updateBy)}
+                                 {row?.update_name}
                               </small>
                            </TableCell>
-
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <Button variant="outlined" color="warning">
-                                    {" "}
-                                    {translate(locale, filterLocate.btnEdit)}
-                                 </Button>
                                  <Button variant="outlined" color="error">
-                                    {" "}
                                     {translate(locale, filterLocate.btnDelete)}
                                  </Button>
                               </Stack>

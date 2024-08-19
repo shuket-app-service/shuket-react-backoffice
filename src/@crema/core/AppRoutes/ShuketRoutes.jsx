@@ -24,6 +24,11 @@ import ManagerOrderDetail from '../../../modules/ShuketComponents/ManagerOrder/d
 import ManagerOrderMart from '../../../modules/ShuketComponents/MartComponents/ManagerOrder';
 import ManagerOrderPrint from '../../../modules/ShuketComponents/MartComponents/ManagerOrder/print';
 import CashManagerNicepay from '../../../modules/ShuketComponents/CashManager/nicepay';
+import AppInfo from '../../../modules/ShuketComponents/MartComponents/AppInfo';
+import AppCategory from '../../../modules/ShuketComponents/MartComponents/AppCategory';
+import DeliveryArea from '../../../modules/ShuketComponents/MartComponents/DeliveryManagement/DeliveryArea';
+import ManagerOrderDetailMart from '../../../modules/ShuketComponents/MartComponents/ManagerOrder/detail';
+import ProductManagerPrice from '../../../modules/ShuketComponents/MartComponents/ProductManager/ProductPrice';
 
 const SalesCollection = React.lazy(() => import('../../../modules/ShuketComponents/SalesCollection'));
 
@@ -124,8 +129,18 @@ export const shuketConfigs = [
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/marts/order/detail',
+    element: <ManagerOrderDetailMart />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/marts/manage-order-moa-service/detail',
     element: <ManagerOrderDetail />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/app-management/app-mart-edit',
+    element: <AppInfo />,
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
@@ -136,6 +151,11 @@ export const shuketConfigs = [
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/app-management/app-builder/action',
     element: <AppDisplayEditAdd />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/app-management/app-category-list',
+    element: <AppCategory />,
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
@@ -162,4 +182,15 @@ export const shuketConfigs = [
     path: '/marts/product/unregister-list',
     element: <ProductManagerUnregister />,
   },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/marts/product/price-list',
+    element: <ProductManagerPrice />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/marts/delivery/list-address',
+    element: <DeliveryArea />,
+  },
+  
 ];

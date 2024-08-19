@@ -6,7 +6,7 @@ import { translate } from "@crema/services/localization/translate";
 const ManagerOrderFilter = ({ dataDetail, locale }) => {
    const navigate = useNavigate();
    const gotoBack = () => {
-      navigate("/marts/manage-order-moa-service/list");
+      navigate("/marts/order/list");
    };
    return (
       <Card sx={{ mb: 5, borderRadius: 1 }}>

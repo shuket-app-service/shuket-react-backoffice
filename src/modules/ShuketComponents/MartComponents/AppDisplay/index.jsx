@@ -10,6 +10,7 @@ import { translate } from "../../../../@crema/services/localization/translate";
 import { indexLocate } from "./helper/locate";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { alertSavePosition } from "./helper/alert";
 
 const AppDisplay = () => {
    const [loading, setLoading] = useState(true);
@@ -53,7 +54,7 @@ const AppDisplay = () => {
          const res = await dispatch(getScreenBuilder());
          setMainMenu(res.payload.ms_list_data);
          setSubMenu(res.payload.ss_list_data);
-          toast.success(translate(locale, indexLocate.alertSavePosition))
+          toast.success(translate(locale, alertSavePosition))
          setLoading(false);
       })
       .catch(()=>{

@@ -7,7 +7,21 @@ const GET_PRODUCT_UNREGISTER = "/product/search_product_unregistered_list";
 const SEARCH_PRODUCT_IMAGE = "/product/search_product_images"
 const VIEW_DETAIL_REGISTER = "/product/view_detail"
 const GET_PRODUCT_CATEGORY = "/product/get_product_categories"
+const GET_PRODUCT_PRICE = "/product_price/search_product"
 
+
+
+export const getProductPrice = createAsyncThunk(
+  GET_PRODUCT_PRICE,
+async (data, { rejectWithValue }) => {
+  try {
+    const response = await apiAuth.post(`${GET_PRODUCT_PRICE}`, data);
+    return response.data.data;
+  } catch (err) {
+    return rejectWithValue(err.message);
+  }
+}
+);
 
 export const getProductCategory = createAsyncThunk(
   GET_PRODUCT_CATEGORY,

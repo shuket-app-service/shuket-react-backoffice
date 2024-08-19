@@ -23,10 +23,6 @@ export const indexLocate = {
       kr: "템플릿 개수:",
       en: "Number of template:",
    },
-   alertSavePosition: {
-      kr: "저장되었습니다.",
-      en: "Saved successfully",
-   },
    btnBack: {
       kr: " 뒤로",
       en: "back",

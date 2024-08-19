@@ -6,34 +6,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import {
-   Box,
-   Button,
-   Card,
-   CardContent,
-   Divider,
-   FormControl,
-   FormControlLabel,
-   FormGroup,
-   MenuItem,
-   Pagination,
-   Select,
-   Stack,
-   styled,
-   Switch,
-   TableFooter,
-   TablePagination,
-   Typography,
-} from "@mui/material";
-import { translate } from "@crema/services/localization/translate";
+import { Box, Button, Card, CardContent, Divider, FormControl, MenuItem, Pagination, Select, Stack, styled, TableFooter, TablePagination, Typography } from "@mui/material";
+import { translate } from "../../../../@crema/services/localization/translate";
 import { filterLocate, headersLocate } from "./helper/locate";
 import { limitType } from "./helper/types";
-import CurrencyFormat from "react-currency-format";
-import { useNavigate } from "react-router-dom";
+import SwitchStatus from "../../Common/SwitchStatus";
+import "./style/index.css";
 
-export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
+export default function AppCategoryTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
    const [headers, setHeaders] = useState([]);
-   const navigate = useNavigate();
 
    useEffect(() => {
       if (locale.locale == "ko") {
@@ -43,13 +24,6 @@ export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDi
       }
    }, [locale]);
 
-   const gotoDetail = (code) => {
-      navigate(`/marts/order/detail?ord_code=${code}&mart_code=${dataFilter.search_mart}`);
-   };
-
-   const gotoPrint = (code) => {
-      navigate(`/marts/order/print?orderlist_ids=${code}`);
-   };
    return (
       <>
          <Box>
@@ -57,10 +31,7 @@ export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDi
                <Card sx={{ borderRadius: 0 }}>
                   <CardContent>
                      <Stack sx={{ mt: 1 }} direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-                        <Stack direction="row" alignItems={"center"} gap={5}>
-                           <Typography>
-                              Total: <b>{searchCount}</b>
-                           </Typography>
+                        <Stack direction="row" alignItems={"center"} gap={2}>
                            <FormControl sx={{ m: 1, minWidth: 100 }}>
                               <Select
                                  size="small"
@@ -80,16 +51,7 @@ export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDi
                               </Select>
                            </FormControl>
                            <Typography>{translate(locale, filterLocate.limit)} </Typography>
-                           <FormGroup>
-                           <FormControlLabel control={<Switch defaultChecked={dataFilter.sort_by_area}  onChange={(e) =>
-                                    changeDataFilterDirectly({
-                                       ...dataFilter,
-                                       sort_by_area: e.target.checked,
-                                    })
-                                 } />} label={translate(locale, filterLocate.sortAddress)} />
-                        </FormGroup>
                         </Stack>
-                       
 
                         <Pagination count={pageCount} page={dataFilter.page} onChange={handleChangePage} color="primary" variant="outlined" shape="rounded" />
                      </Stack>
@@ -105,43 +67,29 @@ export default function ManagerOrderTable({ rows, dataFilter, changeDataFilterDi
                   </TableHead>
                   <TableBody>
                      {rows.map((row, index) => (
-                        <TableRow key={row?.od_code} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                        <TableRow key={row?.mart_code} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                            <TableCell align="center">{index + 1}</TableCell>
                            <TableCell align="center">
-                              {row?.od_code}
-                              <hr />
-                              {row?.od_date}
-                              <br />
-                              {row?.od_time}
+                              {row?.ac_img_url ? (
+                                 <img src={row?.ac_img_url} style={{ width: 100 }} />
+                              ) : (
+                                 <div className="category-default">
+                                    <p>{row?.ac_prd_cate_nm}</p>
+                                 </div>
+                              )}
                            </TableCell>
-                           <TableCell align="center">{row?.od_customer}</TableCell>
-                           <TableCell align="center">{row?.od_address} </TableCell>
-                           <TableCell align="center">{row?.od_goods_cnt} </TableCell>
-                           <TableCell align="center">
-                              <CurrencyFormat value={row?.od_total_pr} displayType={"text"} thousandSeparator={true}></CurrencyFormat>
-                           </TableCell>
-                           <TableCell align="center">
-                              <CurrencyFormat value={row?.od_shipping} displayType={"text"} thousandSeparator={true}></CurrencyFormat>
-                           </TableCell>
-                           <TableCell align="center">{row?.delivery_text} </TableCell>
-                           <TableCell align="center">{row?.od_coupon_dc} </TableCell>
-                           <TableCell align="center">{row?.od_point_dc} </TableCell>
-                           <TableCell align="center">{row?.od_bill_pr} </TableCell>
-                           <TableCell align="center">{row?.od_pay_txt} </TableCell>
-                           <TableCell align="center" sx={{ minWidth: 150 }}>
-                              <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <div style={{ width: 25, backgroundColor: row?.od_cl_box }}>{""}</div>
-                                 <p style={{ color: row?.od_cl_text }}> {row?.od_status_txt}</p>
-                              </Stack>
-                           </TableCell>
+                           <TableCell align="center">{row?.ac_prd_cate_nm}</TableCell>
+                           <TableCell align="center">{row?.cate_type === "CM" ? "Square" : "Slider"} </TableCell>
+                           <TableCell align="center">{row?.ac_img_resol} </TableCell>
+                           <TableCell align="center">{row?.c_time} </TableCell>
 
+                           <TableCell>
+                              <SwitchStatus status={row?.ac_use_flg} handleChangeStatus={() => {}}></SwitchStatus>
+                           </TableCell>
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <Button variant="outlined" size="small" onClick={() => gotoDetail(row?.od_code)}>
-                                    {translate(locale, filterLocate.btnView)}
-                                 </Button>
-                                 <Button variant="outlined" color="warning" size="small" onClick={() => gotoPrint(row?.od_code)}>
-                                    {translate(locale, filterLocate.btnPrint)}
+                                 <Button variant="outlined" color="warning">
+                                    {translate(locale, filterLocate.btnEdit)}
                                  </Button>
                               </Stack>
                            </TableCell>

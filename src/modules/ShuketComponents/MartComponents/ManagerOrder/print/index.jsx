@@ -4,7 +4,7 @@ import { useReactToPrint } from "react-to-print";
 import { getOrdersPrint } from "../../../../store/managerOrder/thunk";
 import AppLoader from "@crema/components/AppLoader";
 import { useDispatch } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -12,6 +12,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 const ManagerOrderPrint = () => {
+   const navigate = useNavigate()
    const [loading, setLoading] = useState(true);
    const dispatch = useDispatch();
    const [dataPrint, setDataPrint] = useState(null);
@@ -33,6 +34,10 @@ const ManagerOrderPrint = () => {
       documentTitle: `invoice-${new Date().toJSON().slice(0, 10)}`,
    });
 
+   const gotoIndex = () =>{
+      navigate("/marts/order/list")
+   }
+
    return (
       <>
          {loading ? (
@@ -41,12 +46,17 @@ const ManagerOrderPrint = () => {
             dataPrint && (
                <Card sx={{ borderRadius: 1, p: 5 }}>
                   <CardContent>
-                     <Button variant="outlined" size="sm" onClick={handlePrint}>
-                        Print
-                     </Button>
+                     <Stack gap={2} direction={"row"} justifyContent={"space-between"}>
+                        <Button variant="outlined" size="sm" onClick={handlePrint}>
+                           Print
+                        </Button>
+                        <Button variant="outlined" size="sm" onClick={gotoIndex}>
+                           Back
+                        </Button>
+                     </Stack>
                   </CardContent>
                   <Divider />
-                  <Box ref={componentRef} sx={{ py: 2, px:10 }}>
+                  <Box ref={componentRef} sx={{ py: 2, px: 10 }}>
                      <Stack direction={"row"} gap={2} sx={{ mb: 3 }}>
                         <Stack direction={"row"} gap={2} sx={{ minWidth: 300 }}>
                            <Typography>*주문자 : </Typography>
@@ -116,7 +126,7 @@ const ManagerOrderPrint = () => {
                                        {dataPrint?.od_detail_data.reduce((accumulator, currentValue) => accumulator + currentValue.ot_prd_price, 0)}
                                     </TableCell>
                                  </TableRow>
-                                 <TableRow >
+                                 <TableRow>
                                     <TableCell colSpan={6} align="center">
                                        쿠폰 할인{" "}
                                     </TableCell>
@@ -172,7 +182,7 @@ const ManagerOrderPrint = () => {
                      </Box>
                      <Stack sx={{ mb: 3 }} gap={3}>
                         <Typography>[관리자 메모]</Typography>
-                        <TextField disabled sx={{ maxWidth: 600 }} size="small"  InputProps={{ sx: { borderRadius: 0 } }}></TextField>
+                        <TextField disabled sx={{ maxWidth: 600 }} size="small" InputProps={{ sx: { borderRadius: 0 } }}></TextField>
                      </Stack>
                   </Box>
                </Card>

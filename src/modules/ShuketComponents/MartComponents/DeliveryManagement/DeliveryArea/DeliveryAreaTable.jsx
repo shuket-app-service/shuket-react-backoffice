@@ -6,18 +6,21 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Box, Button, Card, CardContent, Checkbox, Divider, FormControl, FormControlLabel, IconButton, MenuItem, Pagination, Select, Stack, styled, TableFooter, TablePagination, Typography } from "@mui/material";
-import { filterLocate, headersLocate, tableLocate } from "./helper/locate";
-import { limitType, orderType } from "./helper/types";
-import { translate } from "../../../../../@crema/services/localization/translate";
-import { IoMdArrowDown, IoMdArrowUp } from "react-icons/io";
-import SwitchStatus from "../../../Common/SwitchStatus";
-import { RiSubtractFill } from "react-icons/ri";
-import { HiOutlinePlusSm } from "react-icons/hi";
+import { Box, Button, Card, CardContent, Checkbox, Divider, FormControl, MenuItem, Pagination, Select, Stack, styled, TableFooter, TablePagination, TextField, Typography } from "@mui/material";
+import { translate } from "@crema/services/localization/translate";
+import { filterLocate, headersLocate } from "./helper/locate";
+import { limitType } from "./helper/types";
+import "./style/index.css";
+import DeliveryAreaSetMulti from "./DeliveryAreaSetMulti";
+import { toast } from 'react-toastify';
+import { alertChooseAddress } from "./helper/alert";
 
-export default function ProductUnregisterTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
+export default function DeliveryAreaTable({ rows, dataFilter, changeDataFilterDirectly, pageCount, searchCount, handleChangePage, locale }) {
    const [headers, setHeaders] = useState([]);
+   const [dataEdit, setDataEdit] = useState(null);
    const [dataChecked, setDataChecked] = useState([]);
+   const [openMulti, setOpenMulti] = useState(false);
+
 
    useEffect(() => {
       if (locale.locale == "ko") {
@@ -26,6 +29,11 @@ export default function ProductUnregisterTable({ rows, dataFilter, changeDataFil
          setHeaders(headersLocate.en);
       }
    }, [locale]);
+
+   const handleEdit = (seq, delivery_fee) => {
+      console.log(seq, delivery_fee);
+      setDataEdit({ seq: seq, delivery_fee: delivery_fee });
+   };
 
    const handleClickAll = () => {
       if (!dataChecked.length) {
@@ -49,46 +57,37 @@ export default function ProductUnregisterTable({ rows, dataFilter, changeDataFil
       }
    };
 
+   const handleCloseMulti = () =>{
+      setOpenMulti(false)
+   }
+
+   const handleOpenSetMulti = () =>{
+      if(dataChecked.length === 0){
+         toast.error(translate(locale, alertChooseAddress))
+      }else{
+         setOpenMulti(true)
+      }
+   }
    return (
       <>
          <Box>
+            <DeliveryAreaSetMulti openMulti={openMulti} handleCloseMulti={handleCloseMulti} locale={locale}/>
             <TableContainer component={Paper}>
                <Card sx={{ borderRadius: 0 }}>
                   <CardContent>
                      <Stack sx={{ mt: 1 }} direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-                        <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
+                        <Stack direction="row" alignItems={"center"} gap={4}>
                            <Typography>
                               Total: <b>{searchCount}</b>
                            </Typography>
-
-                           <Typography> {translate(locale, filterLocate.orderBy)} </Typography>
                            <FormControl sx={{ m: 1, minWidth: 100 }}>
                               <Select
                                  size="small"
-                                 value={dataFilter.order_by}
+                                 value={dataFilter.per_page}
                                  onChange={(e) =>
                                     changeDataFilterDirectly({
                                        ...dataFilter,
-                                       order_by: e.target.value,
-                                    })
-                                 }
-                              >
-                                 {orderType.map((ele) => (
-                                    <MenuItem key={ele.value} value={ele.value}>
-                                       {translate(locale, ele.text)}
-                                    </MenuItem>
-                                 ))}
-                              </Select>
-                           </FormControl>
-                           <Typography>{translate(locale, filterLocate.limit)} </Typography>
-                           <FormControl sx={{ m: 1, minWidth: 100 }}>
-                              <Select
-                                 size="small"
-                                 value={dataFilter.limit}
-                                 onChange={(e) =>
-                                    changeDataFilterDirectly({
-                                       ...dataFilter,
-                                       limit: e.target.value,
+                                       per_page: e.target.value,
                                     })
                                  }
                               >
@@ -99,6 +98,8 @@ export default function ProductUnregisterTable({ rows, dataFilter, changeDataFil
                                  ))}
                               </Select>
                            </FormControl>
+                           <Typography>{translate(locale, filterLocate.limit)} </Typography>
+                           <Button variant="outlined" onClick={handleOpenSetMulti}> {translate(locale, filterLocate.btnSetMulti)}</Button>
                         </Stack>
 
                         <Pagination count={pageCount} page={dataFilter.page} onChange={handleChangePage} color="primary" variant="outlined" shape="rounded" />
@@ -122,43 +123,58 @@ export default function ProductUnregisterTable({ rows, dataFilter, changeDataFil
                            <TableCell>
                               <Checkbox onClick={() => handleChecked(row?.seq)} checked={dataChecked.findIndex((ele) => ele === row?.seq) !== -1 ? true : false}></Checkbox>
                            </TableCell>
-                           <TableCell align="left">{index + 1}</TableCell>
-                           <TableCell align="left">
-                              <img src={row?.images?.[0]?.image_uri} style={{ width: 150 }} />
-                           </TableCell>
-                           <TableCell align="left" sx={{ width: 300 }}>
-                              <Typography>
-                                 <span style={{ color: "#3A80D7" }}> {translate(locale, tableLocate.code)}</span>
-                                 <span> {row?.code}</span>
-                              </Typography>
-                              <Typography>
-                                 <span style={{ color: "#3A80D7" }}> {translate(locale, tableLocate.barcode)} </span>
-                                 <span> {row?.barcode}</span>
-                              </Typography>
+                           <TableCell align="center">{index + 1}</TableCell>
+                           <TableCell align="center">{row?.region_1depth_name}</TableCell>
+                           <TableCell align="center">
+                              {row?.region_2depth_name}
+                              <br />({row?.zone_no}){" "}
                            </TableCell>
                            <TableCell align="center">
-                              <Typography>{row?.name}</Typography>
+                              {row?.road_address_name}
+                              <br />
+                              {row?.address_name}
                            </TableCell>
                            <TableCell align="center">
-                              <Typography>{row?.category && row?.category}</Typography>
+                              <Table border={1}>
+                                 {row?.delivery_fee?.map((ele, index) => {
+                                    return (
+                                       <TableRow className={`${ele.class}`}>
+                                          <TableCell align="center" sx={{ width: 100 }}>
+                                             {ele?.name}
+                                          </TableCell>
+                                          <TableCell align="center" sx={{ width: 100 }}>
+                                             {dataEdit && dataEdit?.seq === row?.seq ? (
+                                                <TextField size="small" type="text" defaultValue={dataEdit?.delivery_fee[index]?.value_fee}></TextField>
+                                             ) : (
+                                                <b> {ele?.value_fee}</b>
+                                             )}
+                                          </TableCell>
+                                          <TableCell align="center" sx={{ width: 100 }}>
+                                             {dataEdit && dataEdit?.seq === row?.seq ? (
+                                                <TextField size="small" type="text" defaultValue={dataEdit?.delivery_fee[index]?.value_time}></TextField>
+                                             ) : (
+                                                <b> {ele?.value_time}</b>
+                                             )}
+                                          </TableCell>
+
+                                          <TableCell sx={{ width: 100 }} align="center">
+                                             {ele?.option_use ? "YES" : "NO"}
+                                          </TableCell>
+                                       </TableRow>
+                                    );
+                                 })}
+                              </Table>
                            </TableCell>
-                           <TableCell align="center">
-                              <Typography>{row?.category_sub && row?.category_sub}</Typography>
-                           </TableCell>
-                           <TableCell align="center">
-                              <Typography>{row?.list_price}</Typography>
-                           </TableCell>
-                           <TableCell align="center">
-                              <Typography>{row?.unit}</Typography>
-                           </TableCell>
-                           <TableCell align="center">
-                              <Typography>{row?.provider}</Typography>
-                           </TableCell>
+
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>
-                                 <Button variant="outlined" color="warning">
-                                    {translate(locale, filterLocate.btnRegister)}
-                                 </Button>
+                                 {dataEdit && dataEdit?.seq === row?.seq ? (
+                                    <Button variant="contained">{translate(locale, filterLocate.btnSave)}</Button>
+                                 ) : (
+                                    <Button variant="outlined" color="warning" onClick={() => handleEdit(row?.seq, row?.delivery_fee)}>
+                                       {translate(locale, filterLocate.btnEdit)}
+                                    </Button>
+                                 )}
                               </Stack>
                            </TableCell>
                         </TableRow>
@@ -168,7 +184,7 @@ export default function ProductUnregisterTable({ rows, dataFilter, changeDataFil
                <Divider />
                <Card sx={{ borderRadius: 0 }}>
                   <CardContent>
-                     <Stack sx={{ mt: 5 }} direction="row" justifyContent="end" alignItems="left" spacing={2}>
+                     <Stack sx={{ mt: 5 }} direction="row" justifyContent="end" alignItems="center" spacing={2}>
                         <Pagination count={pageCount} page={dataFilter.page} onChange={handleChangePage} color="primary" variant="outlined" shape="rounded" />
                      </Stack>
                   </CardContent>

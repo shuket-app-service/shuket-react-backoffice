@@ -1,0 +1,12 @@
+.category-default{
+    display: flex;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    background: #ffbf60;
+}
+
+.category-default p{
+    margin: auto !important;
+    color: #fff;
+}

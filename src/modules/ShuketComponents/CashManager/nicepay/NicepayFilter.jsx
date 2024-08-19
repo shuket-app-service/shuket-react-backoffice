@@ -137,7 +137,7 @@ const NicepayFilter = ({ dataFilter, locale }) => {
                      />
                   </LocalizationProvider>
                </Stack>
-               <Stack direction="row" alignItems="center" justifyContent={"right"} spacing={5}>
+               <Stack direction="row" alignItems="center"  spacing={5}>
                   <Button variant="contained">{translate(locale, filterLocate.btnSearch)}</Button>
                   <Button variant="outlined" color="inherit">
                      {translate(locale, filterLocate.btnReset)}

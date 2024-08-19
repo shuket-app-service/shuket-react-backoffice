@@ -52,7 +52,7 @@ export default function ManagerOrderTableGroup({ rows, dataFilter, changeDataFil
    }, [locale]);
 
    const gotoDetail = (code) => {
-      navigate(`/marts/manage-order-moa-service/detail?ord_code=${code}&mart_code=${dataFilter.search_mart}`);
+      navigate(`/marts/order/detail?ord_code=${code}&mart_code=${dataFilter.search_mart}`);
    };
 
    const gotoPrint = (code) => {
@@ -64,7 +64,12 @@ export default function ManagerOrderTableGroup({ rows, dataFilter, changeDataFil
          const data = rows.map((r) => r?.od_code);
          setDataChecked(data);
       } else {
-         setDataChecked([]);
+         if (dataChecked.length === rows.length) {
+            setDataChecked([]);
+         } else {
+            const data = rows.map((r) => r?.od_code);
+            setDataChecked(data);
+         }
       }
    };
    const handleChecked = (code) => {
@@ -174,7 +179,7 @@ export default function ManagerOrderTableGroup({ rows, dataFilter, changeDataFil
                                     <TableCell align="center" sx={{ minWidth: 150 }}>
                                        {row?.od_code}
                                        <Divider sx={{ my: 1 }} />
-                                       <Button size="small" sx={{ mt: 1 }} variant="outlined">
+                                       <Button size="small" sx={{ mt: 1 }} variant="outlined" onClick={() => gotoDetail(row?.od_code)}>
                                           {translate(locale, filterLocate.btnCart)}
                                        </Button>
                                     </TableCell>

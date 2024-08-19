@@ -5,10 +5,10 @@ import { useLocaleContext } from "@crema/context/AppContextProvider/LocaleContex
 import ManagerOrderInfo from "./ManagerOrderInfo";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getOrderDetail } from "../../../store/managerOrder/thunk";
 import AppLoader from "@crema/components/AppLoader";
+import { getOrderDetail } from "../../../../store/managerOrder/thunk";
 
-const ManagerOrderDetail = () => {
+const ManagerOrderDetailMart = () => {
    const { locale } = useLocaleContext();
    const [searchParams] = useSearchParams();
    const dispatch = useDispatch();
@@ -40,4 +40,4 @@ const ManagerOrderDetail = () => {
    );
 };
 
-export default ManagerOrderDetail;
+export default ManagerOrderDetailMart;
