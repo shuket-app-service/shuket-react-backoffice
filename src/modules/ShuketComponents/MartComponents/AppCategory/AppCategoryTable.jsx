@@ -84,7 +84,7 @@ export default function AppCategoryTable({ rows, dataFilter, changeDataFilterDir
                            <TableCell align="center">{row?.c_time} </TableCell>
 
                            <TableCell>
-                              <SwitchStatus status={row?.ac_use_flg} handleChangeStatus={() => {}}></SwitchStatus>
+                              <SwitchStatus status={row?.ac_use_flg === "A" ? true : false} handleChangeStatus={() => {}}></SwitchStatus>
                            </TableCell>
                            <TableCell align="center">
                               <Stack direction={"row"} gap={2} justifyContent={"center"}>

@@ -63,7 +63,7 @@ const AppDisplayEditTable = ({ locale, detail, handleDragEndCallback}) => {
                                        <img alt="" src={item.tmpl_smp_img} style={{ width: 60 }} />
                                     </TableCell>
                                     <TableCell align="center">
-                                       <SwitchStatus status={item.isActive ? "A" : "C"} handleChangeStatus={() => {}}></SwitchStatus>
+                                       <SwitchStatus status={item.isActive} handleChangeStatus={() => {}}></SwitchStatus>
                                     </TableCell>
                                     <TableCell align="center">
                                        <Stack direction="row" gap={2}>

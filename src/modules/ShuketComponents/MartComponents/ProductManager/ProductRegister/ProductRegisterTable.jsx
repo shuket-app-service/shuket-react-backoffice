@@ -224,7 +224,7 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                                        <HiOutlinePlusSm />
                                     </IconButton>
                                  </Stack>
-                                 <SwitchStatus status={row?.is_pro_stock ? "A" : "C"} handleChangeStatus={() => {}}></SwitchStatus>
+                                 <SwitchStatus status={row?.is_pro_stock} handleChangeStatus={() => {}}></SwitchStatus>
                               </Stack>
                            </TableCell>
                            <TableCell align="center" sx={{minWidth:180}}>

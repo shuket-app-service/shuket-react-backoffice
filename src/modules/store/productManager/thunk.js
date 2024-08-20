@@ -7,6 +7,7 @@ const GET_PRODUCT_UNREGISTER = "/product/search_product_unregistered_list";
 const SEARCH_PRODUCT_IMAGE = "/product/search_product_images"
 const VIEW_DETAIL_REGISTER = "/product/view_detail"
 const GET_PRODUCT_CATEGORY = "/product/get_product_categories"
+
 const GET_PRODUCT_PRICE = "/product_price/search_product"
 
 

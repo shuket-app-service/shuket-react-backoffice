@@ -32,7 +32,7 @@ const MainMenu = ({ locale, mainMenu, handleChangeStatus, handleChangeSortPositi
                                  <Button variant="outlined" onClick={()=>gotoDetail(ele.sc_code)}>{translate(locale, indexLocate.btnEdit)}</Button>
                                  <Button variant="outlined" color="error">{translate(locale, indexLocate.btnDelete)}</Button>
                               </Stack>
-                              <SwitchStatus status={ele.sc_status} handleChangeStatus={()=>handleChangeStatus(ele.sc_code, ele.sc_status)}></SwitchStatus>
+                              <SwitchStatus status={ele.sc_status === "A" ? true : false} handleChangeStatus={()=>handleChangeStatus(ele.sc_code, ele.sc_status)}></SwitchStatus>
                            </Stack>
                         </CardContent>
                      </Card>

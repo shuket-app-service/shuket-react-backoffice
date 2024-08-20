@@ -68,6 +68,17 @@ export default function ProductPriceTable({ rows, dataFilter, changeDataFilterDi
       }
    };
 
+   const handleChangeDataPrice = async (e, seq) => {
+      let newData = openSetPrice.map((ele)=> {
+         if(ele.seq === seq){
+            return {...ele,   [e.target.name]: e.target.type === "checkbox" ? e.target.checked : e.target.value}
+         }else{
+            return ele
+         }
+      })
+      setOpenSetPrice(newData)
+   };
+
    const handleSetPrice = (row) =>{
       setOpenSetPrice([row])
    }
@@ -86,7 +97,7 @@ export default function ProductPriceTable({ rows, dataFilter, changeDataFilterDi
    return (
       <>
          <Box>
-            <ProductPriceSet openSetPrice={openSetPrice} handleCloseSetPrice={handleCloseSetPrice} locale={locale}></ProductPriceSet>
+            <ProductPriceSet openSetPrice={openSetPrice} handleCloseSetPrice={handleCloseSetPrice} handleChangeDataPrice={handleChangeDataPrice} locale={locale}></ProductPriceSet>
             <TableContainer component={Paper}>
                <Card sx={{ borderRadius: 0 }}>
                   <CardContent>

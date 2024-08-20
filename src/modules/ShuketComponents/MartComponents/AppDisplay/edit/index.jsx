@@ -4,13 +4,16 @@ import { useLocaleContext } from "@crema/context/AppContextProvider/LocaleContex
 import { translate } from "../../../../../@crema/services/localization/translate";
 import { indexLocate } from "../helper/locate";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getAppScreenDetail } from "../../../../store/appBuilder/thunk";
+import { getAppScreenDetail } from "../../../../store/appDisplay/thunk";
 import { useDispatch } from "react-redux";
 import AppDisplayEditTable from "./AppDisplayEditTable";
 import AppDisplayEditScreen from "./AppDisplayEditScreen";
 import AppLoader from "@crema/components/AppLoader";
 import headerAppImg from "../images/header_app.png";
 import footerAppImg from "../images/footer_app.png";
+import AppDisplayAdd from "../add";
+import BackdropLoad from "../../../Common/BackdropLoad";
+import Type1 from "../add/template/Type1";
 
 const AppDisplayEdit = () => {
    const { locale } = useLocaleContext();
@@ -21,12 +24,16 @@ const AppDisplayEdit = () => {
 
    const dispatch = useDispatch();
    const [loading, setLoading] = useState(true);
+   const [backdropLoading, setBackdropLoading] = useState(false);
+
    const [detail, setDetail] = useState(null);
+   const [openAdd, setOpenAdd] = useState(false);
+   const [openAddTemplate, setOpenAddTemplate] = useState(false);
+   const [chooseTemplate, setChooseTemplate] = useState(null);
 
    useEffect(() => {
       dispatch(getAppScreenDetail(sc_code))
          .then((res) => {
-            console.log(res);
             setDetail(res.payload);
          })
          .catch((err) => {})
@@ -39,6 +46,33 @@ const AppDisplayEdit = () => {
    const gotoIndex = () => {
       navigate("/app-management/app-builder");
    };
+
+   const handleOpenAdd = () => {
+      setBackdropLoading(true);
+      setOpenAdd(true);
+   };
+   const handleCloseAdd = () => {
+      setOpenAdd(false);
+   };
+
+   const handleStopLoading = () => {
+      setBackdropLoading(false);
+   };
+
+   const HandleChooseTemplate = (code) => {
+      setChooseTemplate(code);
+   };
+
+   const handleOpenTemplate = () => {
+      setOpenAddTemplate(true);
+      setOpenAdd(false);
+      console.log(chooseTemplate);
+   };
+   const handleCloseTemplate = () => {
+      setOpenAddTemplate(false);
+      setOpenAdd(false);
+      setChooseTemplate(null);
+   };
    return (
       <>
          {" "}
@@ -46,10 +80,25 @@ const AppDisplayEdit = () => {
             <AppLoader />
          ) : (
             <Card sx={{ borderRadius: 0 }}>
+               {backdropLoading && <BackdropLoad backdropLoading={backdropLoading}></BackdropLoad>}
+               <Type1 open={chooseTemplate === "AP00000001" && openAddTemplate} handleCloseTemplate={handleCloseTemplate} sc_code={sc_code} locale={locale}></Type1>
+               <AppDisplayAdd
+                  openAdd={openAdd}
+                  handleCloseAdd={handleCloseAdd}
+                  HandleChooseTemplate={HandleChooseTemplate}
+                  handleOpenTemplate={handleOpenTemplate}
+                  backdropLoading={backdropLoading}
+                  handleStopLoading={handleStopLoading}
+                  locale={locale}
+               />
+
                <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2} sx={{ mx: 5, my: 4 }}>
                   <Typography>{translate(locale, indexLocate.titleEdit)} </Typography>
                   <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-                     <Button type="button" color="primary" variant="contained" onClick={gotoIndex}>
+                     <Button type="button" color="primary" variant="contained" onClick={handleOpenAdd}>
+                        {translate(locale, indexLocate.btnAdd)}
+                     </Button>
+                     <Button type="button" color="primary" variant="outlined" onClick={gotoIndex}>
                         {translate(locale, indexLocate.btnBack)}
                      </Button>
                   </Stack>
@@ -64,9 +113,9 @@ const AppDisplayEdit = () => {
                      <Paper elevation={4} sx={{ width: "30%" }}>
                         <img alt="" src={headerAppImg} />
                         <Stack gap={5} direction="row" sx={{ px: 5 }}>
-                           <Typography sx={{ fontWeight: "bold", fontSize:20, textDecorationLine:"underline", textDecorationColor:"#68BCB5" }}>{detail?.sc_label}</Typography>
-                           <Typography sx={{ fontWeight: "bold", fontSize:20 }}>배너전시</Typography>
-                           <Typography sx={{ fontWeight: "bold", fontSize:20 }}>쿠폰</Typography>
+                           <Typography sx={{ fontWeight: "bold", fontSize: 20, textDecorationLine: "underline", textDecorationColor: "#68BCB5" }}>{detail?.sc_label}</Typography>
+                           <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>배너전시</Typography>
+                           <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>쿠폰</Typography>
                         </Stack>
                         <Stack gap={5} sx={{ p: 5 }}>
                            {detail?.sc_detail_data.map((dt) => {

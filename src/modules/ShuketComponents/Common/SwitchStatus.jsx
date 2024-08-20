@@ -39,13 +39,13 @@ const Android12Switch = styled(Switch)(({ theme }) => ({
     margin: 2,
   },
 }));
-
-
+// status == "A" ? true : false
+// true / false
 export default function SwitchStatus({status, handleChangeStatus}) {
   return (
     <FormGroup>
        <Stack direction="row" spacing={1} alignItems="center">
-        <Android12Switch defaultChecked={status == "A" ? true : false} onChange={handleChangeStatus}/>
+        <Android12Switch defaultChecked={status} onChange={handleChangeStatus}/>
       </Stack>
     </FormGroup>
   );

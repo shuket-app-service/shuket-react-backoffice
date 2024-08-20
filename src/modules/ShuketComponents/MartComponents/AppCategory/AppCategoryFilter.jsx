@@ -3,14 +3,19 @@ import React, { useState } from "react";
 import { translate } from "../../../../@crema/services/localization/translate";
 import { filterLocate } from "./helper/locate";
 import { orderType, templateType } from "./helper/types";
+import { useNavigate } from "react-router-dom";
 
 const AppCategoryFilter = ({ dataFilter, changeDataFilterDirectly, locale }) => {
+   const navigate = useNavigate()
+   const gotoAdd = () =>{
+      navigate("/app-management/app-category-list/action?type=add")
+   }
    return (
       <Card sx={{ mb: 5, borderRadius: 1 }}>
          <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2} sx={{ mx: 5, my: 4 }}>
             <Typography> {translate(locale, filterLocate.title)}</Typography>
             <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-               <Button type="button" color="primary" variant="contained">
+               <Button type="button" color="primary" variant="contained" onClick={gotoAdd}>
                   {translate(locale, filterLocate.btnAdd)}
                </Button>
             </Stack>

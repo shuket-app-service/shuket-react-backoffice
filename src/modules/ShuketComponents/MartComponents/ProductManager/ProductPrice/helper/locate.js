@@ -18,7 +18,19 @@ export const modalSetLocate = {
    period:{
       kr:"기간사용",
       en:"Period of use"
-   }
+   },
+   setPeriod:{
+      kr:"기간설정",
+      en:"Set period"
+   },
+   startTime:{
+       kr:"시작 시간",
+      en:"Start time"
+   },
+   endTime:{
+      kr:"종료 시간",
+     en:"End time"
+  }
 
 }
 export const tableLocate = {

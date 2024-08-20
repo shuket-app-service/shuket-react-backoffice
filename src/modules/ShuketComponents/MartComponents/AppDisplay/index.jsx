@@ -4,7 +4,7 @@ import MainMenu from "./MainMenu";
 import SubMenu from "./SubMenu";
 import { useDispatch } from "react-redux";
 import AppLoader from "@crema/components/AppLoader";
-import { getScreenBuilder, saveSortScreen, updateAppScreenStatus } from "../../../store/appBuilder/thunk";
+import { getScreenBuilder, saveSortScreen, updateAppScreenStatus } from "../../../store/appDisplay/thunk";
 import { useLocaleContext } from "@crema/context/AppContextProvider/LocaleContextProvider";
 import { translate } from "../../../../@crema/services/localization/translate";
 import { indexLocate } from "./helper/locate";

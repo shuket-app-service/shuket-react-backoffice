@@ -29,6 +29,7 @@ import AppCategory from '../../../modules/ShuketComponents/MartComponents/AppCat
 import DeliveryArea from '../../../modules/ShuketComponents/MartComponents/DeliveryManagement/DeliveryArea';
 import ManagerOrderDetailMart from '../../../modules/ShuketComponents/MartComponents/ManagerOrder/detail';
 import ProductManagerPrice from '../../../modules/ShuketComponents/MartComponents/ProductManager/ProductPrice';
+import AppCategoryEditAdd from '../../../modules/ShuketComponents/MartComponents/AppCategory/AppCategoryEditAdd';
 
 const SalesCollection = React.lazy(() => import('../../../modules/ShuketComponents/SalesCollection'));
 
@@ -156,6 +157,11 @@ export const shuketConfigs = [
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
     path: '/app-management/app-category-list',
     element: <AppCategory />,
+  },
+  {
+    permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],
+    path: '/app-management/app-category-list/action',
+    element: <AppCategoryEditAdd />,
   },
   {
     permittedRole: [RoutePermittedRole.User, RoutePermittedRole.Admin],

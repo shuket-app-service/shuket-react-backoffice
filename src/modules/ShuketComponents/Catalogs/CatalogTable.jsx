@@ -46,7 +46,7 @@ export default function CatalogTable({ rows, dataFilter, pageCount, searchCount,
                            <TableCell align="center">{row?.c_time} </TableCell>
                            <TableCell align="center">{row?.c_admin}</TableCell>
                            <TableCell align="center">
-                              <SwitchStatus status={row?.catalog_status ? "A" : "C"} handleChangeStatus={() => {}}></SwitchStatus>
+                              <SwitchStatus status={row?.catalog_status === "A" ? true : false} handleChangeStatus={() => {}}></SwitchStatus>
                            </TableCell>
                         </TableRow>
                      ))}

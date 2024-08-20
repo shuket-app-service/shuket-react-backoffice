@@ -155,7 +155,7 @@ export default function ManagerImageTableWithBarcode({ rows, dataFilter, changeD
                                  <p>Update time: {row?.prd_img_mod_time}</p>
                               </TableCell>
                               <TableCell>
-                                 <SwitchStatus status={row?.prd_img_status} handleChangeStatus={() => {}}></SwitchStatus>
+                                 <SwitchStatus status={row?.prd_img_status === "A" ? true : false} handleChangeStatus={() => {}}></SwitchStatus>
                               </TableCell>
                               <TableCell>
                                  <MdOutlineModeEdit color="white" size={35} style={{ backgroundColor: "#F1C40F", padding: 5, cursor: "pointer" }} onClick={() => setCollapseData(row?.prd_img_code)} />
