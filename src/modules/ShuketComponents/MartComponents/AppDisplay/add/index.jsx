@@ -132,7 +132,7 @@ export default function AppDisplayAdd({ openAdd, handleCloseAdd, HandleChooseTem
                   {templateTypes &&
                      templateTypes?.map((ele) => (
                         <Stack direction="column" sx={{ width: "22%" }}>
-                           <FormControlLabel value={ele?.app_tmpl_code} control={<Radio defaultChecked={false} onChange={()=>HandleChooseTemplate(ele?.app_tmpl_code)}/>} label={ele?.app_tmpl_label} />
+                           <FormControlLabel value={ele?.app_tmpl_code} control={<Radio defaultChecked={false} onChange={()=>HandleChooseTemplate(ele?.app_tmpl_type)}/>} label={ele?.app_tmpl_label} />
 
                            <div className="image_template">
                               <img src={ele?.app_tmpl_img} />
@@ -143,7 +143,7 @@ export default function AppDisplayAdd({ openAdd, handleCloseAdd, HandleChooseTem
                <Divider sx={{ my: 5 }} />
                <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
                   <Button variant="contained" onClick={handleOpenTemplate}>{translate(locale, addLocate.btnSummit)}</Button>
-                  <Button color="inherit" onClick={handleClose}>
+                  <Button color="inherit" variant="outlined" onClick={handleClose}>
                      {translate(locale, addLocate.btnClose)}
                   </Button>
                </Stack>

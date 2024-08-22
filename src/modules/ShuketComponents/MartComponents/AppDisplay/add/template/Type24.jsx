@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { translate } from "@crema/services/localization/translate";
 import { Divider, FormControl, FormControlLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from "@mui/material";
-import { typeLocate } from "../helper/locate/type1";
-import { displayTimeType, slideTimeType, type } from "../helper/types/type1";
-import { inintialState } from "../helper/state/type1";
-import SwitchStatus from "../../../../Common/SwitchStatus";
+import { typeLocate } from "../helper/locate/type24";
+import { displayTimeType, type } from "../helper/types/type24";
+import { inintialState } from "../helper/state/type24";
 import AppDisplayBannerTable from "../AppDisplayBannerTable";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import moment from "moment";
 
-export default function Type1({ open, handleCloseTemplate, sc_code, locale }) {
+export default function Type24({ open, handleCloseTemplate, sc_code, locale }) {
    const [dataAdd, setDataAdd] = useState(inintialState);
    const handleChangeData = async (e) => {
       setDataAdd((preState) => ({
@@ -64,28 +62,11 @@ export default function Type1({ open, handleCloseTemplate, sc_code, locale }) {
 
                   <Stack direction={"row"} alignItems={"center"} gap={5}>
                      <Typography sx={{ minWidth: 200 }}>{translate(locale, typeLocate.name)}</Typography>
-                     <SwitchStatus status={dataAdd?.option_title_display} handleChangeStatus={() => {}}></SwitchStatus>
                      <TextField size="small" type="text" value={dataAdd?.title} name="title" onChange={(e) => handleChangeData(e)}></TextField>
                   </Stack>
                   <Stack direction={"row"} alignItems={"center"} gap={5}>
-                     <Typography sx={{ minWidth: 200 }}>{translate(locale, typeLocate.style)}</Typography>
-                     <SwitchStatus status={dataAdd?.option_style_display} handleChangeStatus={() => {}}></SwitchStatus>
-                  </Stack>
-                  <Stack direction={"row"} alignItems={"center"} gap={5}>
-                     <Typography sx={{ minWidth: 200 }}>{translate(locale, typeLocate.banner)}</Typography>
-                     <SwitchStatus status={dataAdd?.option_banner} handleChangeStatus={() => {}}></SwitchStatus>
-                  </Stack>
-                  <Stack direction={"row"} alignItems={"center"} gap={5}>
-                     <Typography sx={{ minWidth: 200 }}>{translate(locale, typeLocate.slide)}</Typography>
-                     <FormControl sx={{ m: 1, minWidth: 200 }}>
-                        <Select size="small" value={dataAdd.time_slide} name="time_slide" onChange={(e) => handleChangeData(e)}>
-                           {slideTimeType.map((ele) => (
-                              <MenuItem key={ele} value={ele}>
-                                 {ele}
-                              </MenuItem>
-                           ))}
-                        </Select>
-                     </FormControl>
+                     <Typography sx={{ minWidth: 200 }}>{translate(locale, typeLocate.phone)}</Typography>
+                     <TextField size="small" type="text" value={dataAdd?.phone} name="title" onChange={(e) => handleChangeData(e)}></TextField>
                   </Stack>
                   <AppDisplayBannerTable optionName={false} locale={locale} />
                   <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>

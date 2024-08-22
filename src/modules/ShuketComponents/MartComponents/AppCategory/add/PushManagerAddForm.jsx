@@ -64,7 +64,6 @@ const AppCategoryAddForm = ({ locale }) => {
    };
 
    const handleChangeData = async (e) => {
-      console.log(e);
       setDataAdd((preState) => ({
          ...preState,
          [e.target.name]: e.target.type === "checkbox" ? e.target.checked : e.target.value,

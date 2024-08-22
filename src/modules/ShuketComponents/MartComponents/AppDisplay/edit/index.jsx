@@ -14,6 +14,9 @@ import footerAppImg from "../images/footer_app.png";
 import AppDisplayAdd from "../add";
 import BackdropLoad from "../../../Common/BackdropLoad";
 import Type1 from "../add/template/Type1";
+import Type24 from "../add/template/Type24";
+import Type32 from "../add/template/Type32";
+import Type38 from "../add/template/Type38";
 
 const AppDisplayEdit = () => {
    const { locale } = useLocaleContext();
@@ -81,7 +84,12 @@ const AppDisplayEdit = () => {
          ) : (
             <Card sx={{ borderRadius: 0 }}>
                {backdropLoading && <BackdropLoad backdropLoading={backdropLoading}></BackdropLoad>}
-               <Type1 open={chooseTemplate === "AP00000001" && openAddTemplate} handleCloseTemplate={handleCloseTemplate} sc_code={sc_code} locale={locale}></Type1>
+               {/* list type */}
+               <Type1 open={chooseTemplate == 1 && openAddTemplate} handleCloseTemplate={handleCloseTemplate} sc_code={sc_code} locale={locale}></Type1>
+               <Type24 open={chooseTemplate == 24 && openAddTemplate} handleCloseTemplate={handleCloseTemplate} sc_code={sc_code} locale={locale}></Type24>
+               <Type32 open={chooseTemplate == 32 && openAddTemplate} handleCloseTemplate={handleCloseTemplate} sc_code={sc_code} locale={locale}></Type32>
+               <Type38 open={chooseTemplate == 38 && openAddTemplate} handleCloseTemplate={handleCloseTemplate} sc_code={sc_code} locale={locale}></Type38>
+
                <AppDisplayAdd
                   openAdd={openAdd}
                   handleCloseAdd={handleCloseAdd}

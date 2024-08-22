@@ -20,18 +20,10 @@ export const typeLocate = {
        kr: "Name",
        en: "Name",
     },
-    style: {
-       kr: "Style Options",
-       en: "Style Options",
-    },
-    banner: {
-       kr: "Banner  Options",
-       en: "Banner  Options",
-    },
-    slide: {
-       kr: "Set automatic slide timing",
-       en: "Set automatic slide timing",
-    },
+    phone: {
+      kr: "Number phone",
+      en: "Number phone",
+   },
     btnSave: {
       kr: "Save",
       en: "Save",

@@ -19,9 +19,12 @@ import Type17 from "./template/Type17.jsx";
 import Type20 from "./template/Type20.jsx";
 import Type21 from "./template/Type21.jsx";
 import Type16 from "./template/Type16.jsx";
+import Type40 from "../images/type40.png";
 
 const AppDisplayEditScreen = ({ detail }) => {
-   return detail?.tmpl_type === "38" ? (
+   return detail?.tmpl_type === "40" ? (
+      <img style={{ width: "100%" }} src={Type40} alt="" />
+   ) : detail?.tmpl_type === "38" ? (
       <Type38 dataApp={detail?.data_app}></Type38>
    ) : detail?.tmpl_type === "31" ? (
       <Type31 dataApp={detail?.data_app}></Type31>

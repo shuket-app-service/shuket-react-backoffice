@@ -21,8 +21,39 @@ export const addLocate = {
    },
 };
 
-
+export const bannerTableLocate = {
+   btnRemove: {
+      kr: "Remove",
+      en: "Remove",
+   },
+   btnSelect: {
+      kr: "Select",
+      en: "Select",
+   },
+   imgCate: {
+      kr: "Image Cate",
+      en: "Image Cate",
+   },
+   imgName: {
+      kr: "Image Name",
+      en: "Image Name",
+   },
+   regDate: {
+      kr: "Register date",
+      en: "Register date",
+   },
+};
 export const headersBannerLocate = {
    kr: ["No", "Image", "Image", "Resolution", "Log info", "Selected"],
    en: ["No", "Image", "Image", "Resolution", "Log info", "Selected"],
+};
+
+export const headersBannerSelectLocate = {
+   kr: ["","No", "Image", "Image", "Destrination screen", "Method"],
+   en: ["","No", "Image", "Image", "Destrination screen", "Method"],
+};
+
+export const headersBannerSelectNameLocate = {
+   kr: ["","No", "Image", "Image", "Name", "Destrination screen", "Method"],
+   en: ["","No", "Image", "Image", "Name", "Destrination screen", "Method"],
 };

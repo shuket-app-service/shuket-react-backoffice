@@ -145,10 +145,10 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                               <Checkbox onClick={() => handleChecked(row?.seq)} checked={dataChecked.findIndex((ele) => ele === row?.seq) !== -1 ? true : false}></Checkbox>
                            </TableCell>
                            <TableCell align="left">{index + 1}</TableCell>
-                           <TableCell align="left">
-                              <img src={row?.images?.[0]?.thumb} style={{ width: 150, cursor: "pointer" }} onClick={() => handleSetDetail(row)} />
+                           <TableCell align="left" sx={{ minWidth: 150 }}>
+                              <img src={row?.images?.[0]?.thumb} style={{ width: "100%", cursor: "pointer" }} onClick={() => handleSetDetail(row)} />
                            </TableCell>
-                           <TableCell align="left" sx={{ width: 300 }}>
+                           <TableCell align="left" sx={{ maxWidth: 220 }}>
                               <Typography>
                                  <span style={{ color: "#3A80D7" }}> {translate(locale, tableLocate.code)}</span>
                                  <span> {row?.code}</span>
@@ -171,10 +171,10 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                               </Typography>
                               <Typography>
                                  <span style={{ color: "#3A80D7" }}> {translate(locale, tableLocate.tags)}</span>
-                                 <span> {row?.tags}</span>
+                                 <small> {row?.tags}</small>
                               </Typography>
                            </TableCell>
-                           <TableCell align="center" sx={{minWidth:150}}>
+                           <TableCell align="center" sx={{ minWidth: 150 }}>
                               <Typography>{row?.sale_price ? <s style={{ color: "gray" }}>{row?.list_price} 원</s> : <p>{row?.list_price} 원</p>}</Typography>
                               {row?.sale_price && (
                                  <Typography>
@@ -186,7 +186,7 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                               {row?.sale_price && <Typography>({row?.sale_title})</Typography>}
 
                               {row?.price_updown === "U" ? (
-                                 <div style={{ color: "green", backgroundColor: "#DCF2F1", padding: 5 }}>
+                                 <div style={{ color: "green", backgroundColor: "#DCF2F1", padding: 2 }}>
                                     <Typography>{row?.price_show} 원</Typography>
                                     <Typography>
                                        <IoMdArrowUp />
@@ -194,7 +194,7 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                                     </Typography>
                                  </div>
                               ) : row?.price_updown === "D" ? (
-                                 <div style={{ color: "red", backgroundColor: "#DCF2F1", padding: 5 }}>
+                                 <div style={{ color: "red", backgroundColor: "#DCF2F1", padding: 2 }}>
                                     <Typography>{row?.price_show} 원</Typography>
                                     <Typography>
                                        <IoMdArrowDown />
@@ -209,7 +209,7 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                                  {row?.is_pro_stock && row?.min_stock >= row?.value_stock ? "OUT OF STOCK" : ""}
                               </Typography>
                            </TableCell>
-                           <TableCell align="center" sx={{minWidth:180}}>
+                           <TableCell align="center" sx={{ minWidth: 150 }}>
                               <Typography>{row?.date_sync_stock}</Typography>
                               <Typography>{row?.time_sync_stock ? row?.time_sync_stock : "--"}</Typography>
                            </TableCell>
@@ -227,7 +227,7 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                                  <SwitchStatus status={row?.is_pro_stock} handleChangeStatus={() => {}}></SwitchStatus>
                               </Stack>
                            </TableCell>
-                           <TableCell align="center" sx={{minWidth:180}}>
+                           <TableCell align="center" sx={{ minWidth: 160 }}>
                               <Typography>
                                  <text style={{ color: "#3A80D7" }}>{translate(locale, tableLocate.isMax)}</text> {row?.is_pro_maxqty}
                               </Typography>
@@ -252,7 +252,7 @@ export default function ProductRegisterTable({ rows, dataFilter, changeDataFilte
                                  Edit Min/Max
                               </Button>
                            </TableCell>
-                           <TableCell align="center" sx={{minWidth:150}}>
+                           <TableCell align="center" sx={{ minWidth: 150 }}>
                               <Typography> {row?.create_time}</Typography>
                               <small>
                                  {" "}
